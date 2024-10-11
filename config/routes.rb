@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reviews/index'
   get 'home/top'
   get 'users/index'
   get 'items/index'
