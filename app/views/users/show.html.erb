@@ -1,0 +1,17 @@
+<h1><%=@user.name%>様の詳細情報</h1>
+<p>ユーザー名:
+<%=@user.name%>
+</p>
+<p>email:
+<%=@user.email%>
+</p>
+<p>パスワード:
+<%=@user.password%>
+</p>
+<p>住所:
+<%=@user.address%>
+</p>
+
+<%=link_to("一覧へ","/users/index")%>
+<%=link_to("編集","/users/#{@user.id}/edit")%>
+<%=link_to("削除","/users/#{@user.id}/destroy")%>

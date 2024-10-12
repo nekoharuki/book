@@ -1,2 +1,9 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>ユーザー一覧</h1>
+
+<%@users.each do |user|%>
+
+<%=link_to(user.name,"/users/#{user.id}")%>
+<br>
+<%end%>
+<br>
+<%=link_to("新規登録","/users/new")%>

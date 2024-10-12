@@ -1,4 +1,4 @@
-<h1>ユーザー登録</h1>
+<h1>ユーザー情報登録</h1>
 
 <%=form_tag("/users/create") do%>
 
@@ -20,3 +20,5 @@
     </p>
     <input type="submit" value="登録">
     <%end%>
+<br>
+<%=link_to("一覧へ","/users/index")%>

@@ -1,0 +1,24 @@
+<h1>ユーザー情報編集</h1>
+
+<%=form_tag("/users/#{@user.id}/update") do%>
+
+    <p>
+        <label for="name">名前:</label>
+        <input type="text" name="name" id="name" title="名前を入力してください" placeholder="名前" value="<%=@user.name%>" required>
+    </p>
+    <p>
+        <label for="email">email:</label>
+        <input type="email" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%=@user.email%>" required>
+    </p>
+    <p>
+        <label for="password">パスワード:</label>
+        <input type="password" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード" value="<%=@user.password%>" required>
+    </p>
+    <p>
+        <label for="address">住所:</label>
+        <input type="text" name="address" id="address" title="住所を入力してください" placeholder="住所" value="<%=@user.address%>" required>
+    </p>
+    <input type="submit" value="登録">
+    <%end%>
+<br>
+<%=link_to("一覧へ","/users/index")%>
