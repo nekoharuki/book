@@ -1,0 +1,27 @@
+<h1>出品登録</h1>
+
+<%=form_tag("/items/create") do%>
+    <p>タイトル:
+        <input type="text" name="name" id="name" required>
+    </p>
+    <p>作者:
+    <input type="text" name="author" id="author" required>
+    </p>
+    <p>出版社:
+    <input type="text" name="publisher" id="publisher" required>
+    </p>
+    <p>内容:
+    <input type="text" name="content" id="content" required>
+    </p>
+    <p>状態:
+    <input type="text" name="situation" id="situation" required>
+    </p>
+    <p>カテゴリー:
+    <input type="text" name="category" id="category" required>
+    </p>
+    <p>画像:
+    <input type="text" name="image" id="image" required>
+    </p>
+    <input type="submit" value="投稿" >
+
+<%end%>

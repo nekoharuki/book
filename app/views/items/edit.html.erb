@@ -1,0 +1,27 @@
+<h1>出品編集</h1>
+
+<%=form_tag("/items/#{@item.id}/update") do%>
+    <p>タイトル:
+        <input type="text" name="name" id="name" value="<%=@item.name%>" required>
+    </p>
+    <p>作者:
+    <input type="text" name="author" id="author" value="<%=@item.author%>" required>
+    </p>
+    <p>出版社:
+    <input type="text" name="publisher" id="publisher" value="<%=@item.publisher%>" required>
+    </p>
+    <p>内容:
+    <input type="text" name="content" id="content" value="<%=@item.content%>" required>
+    </p>
+    <p>状態:
+    <input type="text" name="situation" id="situation" value="<%=@item.situation%>" required>
+    </p>
+    <p>カテゴリー:
+    <input type="text" name="category" id="category" value="<%=@item.category%>" required>
+    </p>
+    <p>画像:
+    <input type="text" name="image" id="image" value="<%=@item.image%>" required>
+    </p>
+    <input type="submit" value="投稿" >
+
+<%end%>
