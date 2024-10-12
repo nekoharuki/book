@@ -1,5 +1,7 @@
 <h1>ユーザー登録</h1>
 
+<%=form_tag("/users/create") do%>
+
     <p>
         <label for="name">名前:</label>
         <input type="text" name="name" id="name" title="名前を入力してください" placeholder="名前" required>
@@ -16,3 +18,5 @@
         <label for="address">住所:</label>
         <input type="text" name="address" id="address" title="住所を入力してください" placeholder="住所" required>
     </p>
+    <input type="submit" value="登録">
+    <%end%>

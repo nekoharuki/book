@@ -2,25 +2,25 @@
 
 <%=form_tag("/items/#{@item.id}/update") do%>
     <p>タイトル:
-        <input type="text" name="name" id="name" value="<%=@item.name%>" required>
+        <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル" value="<%=@item.name%>" required>
     </p>
     <p>作者:
-    <input type="text" name="author" id="author" value="<%=@item.author%>" required>
+    <input type="text" name="author" id="author" title="作者を入力してください" placeholder="作者" value="<%=@item.author%>" required>
     </p>
     <p>出版社:
-    <input type="text" name="publisher" id="publisher" value="<%=@item.publisher%>" required>
+    <input type="text" name="publisher" id="publisher" title="出版社を入力してください" placeholder="出版社" value="<%=@item.publisher%>" required>
     </p>
     <p>内容:
-    <input type="text" name="content" id="content" value="<%=@item.content%>" required>
+    <input type="text" name="content" id="content" title="本の内容を入力してください" placeholder="本の内容" value="<%=@item.content%>" required>
     </p>
     <p>状態:
-    <input type="text" name="situation" id="situation" value="<%=@item.situation%>" required>
+    <input type="text" name="situation" id="situation" title="本の状態を入力してください" placeholder="本の状態" value="<%=@item.situation%>" required>
     </p>
     <p>カテゴリー:
-    <input type="text" name="category" id="category" value="<%=@item.category%>" required>
+    <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="カテゴリー" value="<%=@item.category%>" required>
     </p>
     <p>画像:
-    <input type="text" name="image" id="image" value="<%=@item.image%>" required>
+    <input type="text" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" required>
     </p>
     <input type="submit" value="投稿" >
 

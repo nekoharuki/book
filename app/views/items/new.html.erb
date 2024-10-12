@@ -1,28 +1,35 @@
 <h1>出品登録</h1>
 
 <%=form_tag("/items/create") do%>
-    <p>タイトル:
-        <input type="text" name="name" id="name" required>
+    <p>
+        <label for="name">タイトル:</label>
+        <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル"  required>
     </p>
-    <p>作者:
-    <input type="text" name="author" id="author" required>
+    <p>
+        <label for="author">作者:</label>
+        <input type="text" name="author" id="author" title="作者を入力してください" placeholder="作者"  required>
     </p>
-    <p>出版社:
-    <input type="text" name="publisher" id="publisher" required>
+    <p>
+        <label for="publisher">出版社:</label>
+        <input type="text" name="publisher" id="publisher" title="出版社を入力してください" placeholder="出版社"  required>
     </p>
-    <p>内容:
-    <input type="text" name="content" id="content" required>
+    <p>
+        <label for="content">内容:</label>
+        <input type="text" name="content" id="content" title="本の内容を入力してください" placeholder="本の内容"  required>
     </p>
-    <p>状態:
-    <input type="text" name="situation" id="situation" required>
+    <p>
+        <label for="situation">状態:</label>
+        <input type="text" name="situation" id="situation" title="本の状態を入力してください" placeholder="本の状態"  required>
     </p>
-    <p>カテゴリー:
-    <input type="text" name="category" id="category" required>
+    <p>
+        <label for="category">カテゴリー:</label>
+        <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="カテゴリー"  required>
     </p>
-    <p>画像:
-    <input type="text" name="image" id="image" required>
+    <p>
+        <label for="image">画像:</label>
+        <input type="text" name="image" id="image" title="画像を入力してください" placeholder="画像"  required>
     </p>
-    <input type="submit" value="投稿" >
+        <input type="submit" value="投稿" >
 
 <%end%>
 <br>
