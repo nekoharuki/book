@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
 
   def show
     @item=Item.find_by(id: params[:id]);
-    @seller=User.find_by(id: @item.user_id)
   end
   def new
   end
@@ -20,7 +19,7 @@ class ItemsController < ApplicationController
     situation: params[:situation],
     category: params[:category],
     image: params[:image],
-    user_id: session[:user_id]
+    user_id: @current_user.id
     )
     if @item.save
       flash[:notice]="登録できました"

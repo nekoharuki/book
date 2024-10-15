@@ -6,5 +6,10 @@ class Item < ApplicationRecord
   validates :situation, {presence: true}
   validates :category, {presence: true}
   validates :image, {presence: true}
+  validates :user_id, {presence: true}
+
+  def user
+    return User.find_by(id: self.user_id)
+  end
 
 end
