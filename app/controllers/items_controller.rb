@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+
+  before_action :please_login,{only: [:edit,:create,:new,:update,:destroy,:show,:index]}
   def index
     @items=Item.all;
   end
@@ -8,6 +10,7 @@ class ItemsController < ApplicationController
   end
   def new
   end
+
   def create
     @item=Item.new(name: params[:name],
     author: params[:author],
