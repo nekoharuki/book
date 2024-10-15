@@ -8,12 +8,23 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <% if session[:user_id] %>
+      <%= link_to "出品", "/items/new" %>
+      <%= link_to "ログアウト", "/logout" %>
+      <%= link_to "ユーザー情報詳細", "/users/#{session[:user_id]}" %>
+      <%= link_to "商品一覧", "/items/index" %>
+    <% else %>
+      <%= link_to "ログイン", "/login" %>
+      <%= link_to "新規登録", "/users/new" %>
+      <%= link_to "ホーム", "/" %>
+    <% end %>
   </head>
 
   <body>
-    <%if flash[:notice]%>
-    <%=flash[:notice]%>
-    <%end%>
+    <% if flash[:notice] %>
+      <%= flash[:notice] %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

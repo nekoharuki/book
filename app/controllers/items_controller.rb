@@ -15,7 +15,8 @@ class ItemsController < ApplicationController
     content: params[:content],
     situation: params[:situation],
     category: params[:category],
-    image: params[:image]
+    image: params[:image],
+    user_id: session[:user_id]
     )
     if @item.save
       flash[:notice]="登録できました"
