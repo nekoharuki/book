@@ -11,6 +11,7 @@
 
     <% if session[:user_id] %>
       <%= link_to "出品", "/items/new" %>
+      <%= link_to "ユーザー一覧", "/users/index" %>
       <%= link_to "ログアウト", "/logout" %>
       <%= link_to "ユーザー情報詳細", "/users/#{session[:user_id]}" %>
       <%= link_to "商品一覧", "/items/index" %>

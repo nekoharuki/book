@@ -13,5 +13,8 @@
 </p>
 
 <%=link_to("一覧へ","/users/index")%>
+
+<%if @current_user.id==@user.id%>
 <%=link_to("編集","/users/#{@user.id}/edit")%>
 <%=link_to("削除","/users/#{@user.id}/destroy")%>
+<%end%>

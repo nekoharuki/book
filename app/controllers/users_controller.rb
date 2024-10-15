@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :please_login,{only: [:edit,:logout,:update,:destroy,:show,:index]}
   before_action :login_now,{only: [:login,:login_form,:create,:new]}
+  before_action :real_user,{only: [:edit,:update,:destroy,:show]}
 
   def index
     @users=User.all

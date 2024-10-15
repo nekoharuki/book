@@ -23,6 +23,9 @@
 <p>カテゴリー:
 <%=@item.category%>
 </p>
+<p>出品者:
+<%=link_to(@seller.name,"/users/#{@seller.id}")%>
+</p>
 
 <p>画像:
 <%=@item.image%>

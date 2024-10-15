@@ -19,4 +19,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def real_user
+    @user=User.find_by(id: params[:id])
+    if @current_user.id!=@user.id
+      flash[:notice]="あなたはそのページに行けません"
+      redirect_to("/items/index")
+    end
+  end
+
 end

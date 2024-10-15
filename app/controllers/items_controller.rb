@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
   def show
     @item=Item.find_by(id: params[:id]);
+    @seller=User.find_by(id: @item.user_id)
   end
   def new
   end
