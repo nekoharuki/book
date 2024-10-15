@@ -1,0 +1,9 @@
+<h1><%=@current_user.name%>様の出品一覧</h1>
+<%@myitems.each do |item|%>
+
+<%=link_to(item.name,"/items/#{item.id}")%>
+<br>
+<%end%>
+<br>
+
+<%= link_to("出品", "/items/new") %>

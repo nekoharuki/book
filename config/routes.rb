@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "items/new" => "items#new"
   post "items/create" => "items#create"
   get "items/:id/edit" => "items#edit"
+  get "items/:id/myitems" => "items#myitems"
   post "items/:id/update" => "items#update"
   get "items/:id/destroy" => "items#destroy"
 

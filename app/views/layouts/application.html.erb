@@ -13,8 +13,9 @@
       <%= link_to "出品", "/items/new" %>
       <%= link_to "ユーザー一覧", "/users/index" %>
       <%= link_to "ログアウト", "/logout" %>
-      <%= link_to "ユーザー情報詳細", "/users/#{session[:user_id]}" %>
+      <%= link_to "ユーザー情報詳細", "/users/#{@current_user.id}" %>
       <%= link_to "商品一覧", "/items/index" %>
+      <%= link_to "出品一覧", "/items/#{@current_user.id}/myitems" %>
     <% else %>
       <%= link_to "ログイン", "/login" %>
       <%= link_to "新規登録", "/users/new" %>
