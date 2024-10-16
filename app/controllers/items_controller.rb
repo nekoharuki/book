@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :please_login,{only: [:edit,:create,:new,:update,:destroy,:show,:index]}
+  before_action :real_item,{only: [:edit,:update,:destroy]}
+
   def index
     @items=Item.all;
   end
@@ -61,5 +63,13 @@ def destroy
   else
     render("items/show")
   end
+end
+
+def category
+  @category_name=params[:category]
+  @items=Item.where(category: @category_name)
+end
+def categorize
+  @categorys = Item.select(:category).distinct.pluck(:category)
 end
 end

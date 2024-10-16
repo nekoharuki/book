@@ -1,0 +1,10 @@
+<h1><%=@category_name%></h1>
+
+<%@items.each do |item|%>
+
+<%=link_to(item.name,"/items/#{item.id}")%>
+<br>
+<%end%>
+<br>
+
+<%= link_to("出品", "/items/new") %>

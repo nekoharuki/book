@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
-
-  before_action :please_login,{only: [:edit,:logout,:update,:destroy,:show,:index]}
-  before_action :login_now,{only: [:login,:login_form,:create,:new]}
-  before_action :real_user,{only: [:edit,:update,:destroy,:show]}
+  before_action :please_login, {only: [:edit, :logout, :update, :destroy, :show, :index]}
+  before_action :login_now, {only: [:login, :login_form, :create, :new]}
+  before_action :real_user, {only: [:edit, :update, :destroy, :show]}
 
   def index
-    @users=User.all
+    @users = User.all
   end
+
   def new
   end
 
   def create
-    @user=User.new(name: params[:name],email: params[:email],address: params[:address],password: params[:password])
+    @user = User.new(name: params[:name], email: params[:email], address: params[:address], password: params[:password])
     if @user.save
-      session[:user_id]=@user.id
-      flash[:notice]="ユーザー登録完了しました"
+      session[:user_id] = @user.id
+      flash[:notice] = "ユーザー登録完了しました"
       redirect_to("/users/index")
     else
       render("users/new")
@@ -22,17 +22,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user=User.find_by(id: params[:id]);
+    @user = User.find_by(id: params[:id])
   end
 
   def update
-    @user=User.find_by(id: params[:id])
-    @user.name=params[:name]
-    @user.email=params[:email]
-    @user.password=params[:password]
-    @user.address=params[:address]
+    @user = User.find_by(id: params[:id])
+    @user.name = params[:name]
+    @user.email = params[:email]
+    @user.password = params[:password]
+    @user.address = params[:address]
     if @user.save
-      flash[:notice]="ユーザー情報編集できました"
+      flash[:notice] = "ユーザー情報編集できました"
       redirect_to("/users/index")
     else
       render("users/edit")
@@ -40,20 +40,22 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user=User.find_by(id: params[:id]);
+    @user = User.find_by(id: params[:id])
     if @user.destroy
-      flash[:notice]="ユーザー情報削除できました"
+      flash[:notice] = "ユーザー情報削除できました"
       redirect_to("/users/index")
     end
   end
+
   def show
-    @user=User.find_by(id: params[:id]);
+    @user = User.find_by(id: params[:id])
   end
+
   def login
-    @user=User.find_by(email: params[:email],password: params[:password])
-    if @user
-      session[:user_id]=@user.id
-      flash[:notice]="ログインできました"
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      flash[:notice] = "ログインできました"
       redirect_to("/items/index")
     else
       render("users/login_form")
@@ -61,12 +63,11 @@ class UsersController < ApplicationController
   end
 
   def logout
-    session[:user_id]=nil;
-    flash[:notice]="ログアウトしました"
-    redirect_to("/login");
+    session[:user_id] = nil
+    flash[:notice] = "ログアウトしました"
+    redirect_to("/login")
   end
 
   def login_form
   end
-
 end
