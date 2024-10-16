@@ -10,17 +10,17 @@
     <%= javascript_importmap_tags %>
 
     <% if session[:user_id] %>
+      <%= link_to "商品一覧", "/items/index" %>
+      <%= link_to "出品一覧", "/users/#{@current_user.id}/myitems" %>
       <%= link_to "出品", "/items/new" %>
+      <%= link_to "カテゴリー", "/items/categorize" %>
       <%= link_to "ユーザー一覧", "/users/index" %>
       <%= link_to "ユーザー情報詳細", "/users/#{@current_user.id}" %>
-      <%= link_to "商品一覧", "/items/index" %>
-      <%= link_to "出品一覧", "/items/#{@current_user.id}/myitems" %>
-      <%= link_to "カテゴリー", "/items/categorize" %>
       <%= link_to "ログアウト","/logout" %>
     <% else %>
+      <%= link_to "ホーム", "/" %>
       <%= link_to "ログイン", "/login" %>
       <%= link_to "新規登録", "/users/new" %>
-      <%= link_to "ホーム", "/" %>
     <% end %>
   </head>
 

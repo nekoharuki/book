@@ -13,10 +13,6 @@ class ItemsController < ApplicationController
   def new
   end
 
-  def myitems
-    @myitems=Item.where(user_id: @current_user.id)
-  end
-
   def create
     @item=Item.new(name: params[:name],
     author: params[:author],

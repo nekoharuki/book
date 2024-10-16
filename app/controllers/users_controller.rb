@@ -70,4 +70,9 @@ class UsersController < ApplicationController
 
   def login_form
   end
+  def myitems
+    @items=Item.where(user_id: params[:id])
+    @user=User.find_by(id:params[:id])
+  end
+
 end
