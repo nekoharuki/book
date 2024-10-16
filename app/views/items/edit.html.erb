@@ -22,14 +22,10 @@
         <label for="situation">状態:</label>
         <input type="text" name="situation" id="situation" title="状態を入力してください" placeholder="状態" value="<%=@item.situation%>" required>
     </p>
-<div>
-<label for="category" class="form-label">カテゴリー:</label>
-<select class="form-select" name="category" id="category">
-  <option value="python" <%= "selected" if @item.category == "python" %> >python</option>
-  <option value="docker" <%= "selected" if @item.category == "docker" %> >docker</option>
-  <option value="AWS" <%= "selected" if @item.category == "AWS" %> >AWS</option>
-</select>
-</div>
+    <p>
+        <label for="category">カテゴリー:</label>
+        <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="状態" value="<%=@item.category%>" required>
+    </p>
     <p>
         <label for="image">画像:</label>
         <input type="text" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" required>
@@ -39,5 +35,3 @@
 <%end%>
 <br>
 <%= link_to("出品詳細へ","/items/#{@item.id}") %>
-
-<%= link_to("一覧へ","/items/index") %>

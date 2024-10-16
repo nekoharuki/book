@@ -9,7 +9,6 @@
 <%=@user.address%>
 </p>
 
-<%=link_to("一覧へ","/users/index")%>
 
 <%if @current_user.id==@user.id%>
 <%=link_to("編集","/users/#{@user.id}/edit")%>

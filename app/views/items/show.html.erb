@@ -31,7 +31,6 @@
 <%=@item.image%>
 </p>
 
-<%= link_to("一覧へ","/items/index") %>
 
 <%if @current_user.id==@item.user.id%>
 <%= link_to("編集", "/items/#{@item.id}/edit") %>
