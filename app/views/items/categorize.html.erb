@@ -1,10 +1,7 @@
-<h1>ppp</h1>
+<h1>カテゴリー一覧</h1>
 
 <%@categorys.each do |category|%>
 
 <%=link_to(category,"/items/category/#{category}")%>
 <br>
 <%end%>
-<br>
-
-<%= link_to("出品", "/items/new") %>
