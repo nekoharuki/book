@@ -1,4 +1,4 @@
-<h1><%=@item.name%>の詳細ページ</h1>
+<h1>本当に削除しますか?</h1>
 
 <p>タイトル:
 <%=@item.name%>
@@ -31,8 +31,9 @@
 <%=@item.image%>
 </p>
 
-
-<% if @current_user.id == @item.user.id %>
-<%= link_to("編集", "/items/#{@item.id}/edit") %>
-<%= link_to("削除","/items/#{@item.id}/destroy_form") %>
-<% end %>
+<%=link_to("詳細へ","/items/#{@item.id}")%>
+<br>
+<br>
+<%=form_tag("/items/#{@item.id}/destroy") do%>
+<input type="submit" value="削除する">
+<%end%>

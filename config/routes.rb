@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get "items/category/:category" => "items#category"
   get "items/:id/edit" => "items#edit"
   post "items/:id/update" => "items#update"
-  get "items/:id/destroy" => "items#destroy"
+  get "items/:id/destroy_form" => "items#destroy_form"
+  post "items/:id/destroy" => "items#destroy"
 
   get "users/index" => "users#index"
   get "users/new" => "users#new"
@@ -15,7 +16,8 @@ Rails.application.routes.draw do
   get "users/:id/myitems" => "users#myitems"
   get "users/:id/edit" => "users#edit"
   post "users/:id/update" => "users#update"
-  get "users/:id/destroy" => "users#destroy"
+  get "users/:id/destroy_form" => "users#destroy_form"
+  post "users/:id/destroy" => "users#destroy"
 
   get "login" => "users#login_form"
   post "login" => "users#login"
