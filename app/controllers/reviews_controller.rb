@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :review_not, only: [:edit, :update, :destroy]
   def create
     @review=Review.new(point: params[:point],comment: params[:comment],user_id: @current_user.id,item_id: params[:item_id])
     if @review.save
@@ -27,4 +28,12 @@ class ReviewsController < ApplicationController
       redirect_to("/items/#{@review.item_id}")
     end
   end
+
+  def review_not
+    @review=Review.find_by(id: params[:id])
+    if @review.user_id!=@current_user.id
+      flash[:notice]="あなたはそのページには行けません"
+      redirect_to("/items/#{@review.item_id}")
+  end
+end
 end

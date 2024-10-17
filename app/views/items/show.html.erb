@@ -47,8 +47,10 @@
         コメント:
         <%=review.comment%>
     </p>
+<%if review.user_id==@current_user.id%>
 <%=link_to("編集","/reviews/#{review.item_id}/#{review.id}/edit")%>
-<%= link_to("削除", "/reviews/#{review.item_id}/#{review.id}/destroy", data: { turbo_method: "post" }) %>    
+<%= link_to("削除", "/reviews/#{review.item_id}/#{review.id}/destroy", data: { turbo_method: "post" }) %> 
+<%end%>
 <%end%>
 
 <%=form_tag("/reviews/#{@item.id}/create") do%>
