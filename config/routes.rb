@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   get "login" => "users#login_form"
   post "login" => "users#login"
-  get "logout" => "users#logout"
+  post "logout" => "users#logout"
 
   get "users/:id" => "users#show"
   get "items/:id" => "items#show"
