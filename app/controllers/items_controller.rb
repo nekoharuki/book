@@ -75,4 +75,7 @@ class ItemsController < ApplicationController
     @categorize = Item.select(:category).distinct.pluck(:category)
   end
 
+  def like
+    @likes=Like.where(user_id: @current_user.id)
+  end
 end

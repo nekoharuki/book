@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  post "likes/create/:item_id/:user_id" => "likes#create"
+  post "likes/destroy/:item_id/:user_id" => "likes#destroy"
 
   get "items/index" => "items#index"
+  get "items/like" => "items#like"
   get "items/new" => "items#new"
   post "items/create" => "items#create"
   get "items/categorize" => "items#categorize"
