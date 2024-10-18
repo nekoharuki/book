@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
 
-  before_action :please_login, only: [:edit, :create, :new, :update, :destroy, :show, :index]
-  before_action :real_item, only: [:edit, :update, :destroy]
+  before_action :please_login, only: [:edit, :create, :new, :update, :destroy, :show, :index,:category,:categorize,:like]
+  before_action :real_item, only: [:edit, :update, :destroy,:destroy_form]
+  before_action :category_not, only: [:category]
 
   def index
     @items = Item.all
@@ -78,5 +79,19 @@ class ItemsController < ApplicationController
 
   def like
     @likes=Like.where(user_id: @current_user.id)
+  end
+
+  def category_not
+    flag=0;
+    categories = Item.pluck(:category)
+     categories.each do |category|
+      if category == params[:category]
+        flag=1;
+      end
+    end
+      if flag==0
+        flash[:notice] = "そのカテゴリーはありません"
+        redirect_to("/items/categorize");
+      end
   end
 end

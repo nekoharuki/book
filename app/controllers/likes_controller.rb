@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-  before_action :user_not, only: [:create, :destroy]
   before_action :like_not, only: [:create, :destroy]
 
   def create
@@ -24,14 +23,11 @@ class LikesController < ApplicationController
     end
   end
 
-  def user_not
+  def like_not
     if @current_user.id != params[:user_id].to_i
       flash[:notice] = "いいねできません"
       redirect_to("/items/index")
     end
-  end
-
-  def like_not
     @items=Item.where(user_id: params[:user_id])
     @items.each do |item|
       if item.id==params[:item_id].to_i
