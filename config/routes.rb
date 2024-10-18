@@ -12,20 +12,22 @@ Rails.application.routes.draw do
   get "items/like" => "items#like"
   get "items/new" => "items#new"
   post "items/create" => "items#create"
+
   get "items/categorize" => "items#categorize"
   get "items/category/:category" => "items#category"
+
   get "items/:id/edit" => "items#edit"
   post "items/:id/update" => "items#update"
-  get "items/:id/destroy_form" => "items#destroy_form"
+  get "items/:id/destroy" => "items#destroy_form"
   post "items/:id/destroy" => "items#destroy"
 
   get "users/index" => "users#index"
   get "users/new" => "users#new"
   post "users/create" => "users#create"
-  get "users/:id/myitems" => "users#myitems"
+  get "users/:id/items" => "users#user_items"
   get "users/:id/edit" => "users#edit"
   post "users/:id/update" => "users#update"
-  get "users/:id/destroy_form" => "users#destroy_form"
+  get "users/:id/destroy" => "users#destroy_form"
   post "users/:id/destroy" => "users#destroy"
 
   get "login" => "users#login_form"
