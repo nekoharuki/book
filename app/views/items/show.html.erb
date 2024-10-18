@@ -23,6 +23,7 @@
 <p>カテゴリー:
 <%=link_to(@item.category,"/items/category/#{@item.category}")%>
 </p>
+
 <p>出品者:
     <%=link_to(@item.user.name,"/users/#{@item.user.id}/myitems")%>
 </p>
@@ -32,35 +33,39 @@
 </p>
 
 <% if @current_user.id == @item.user.id %>
-<%= link_to("編集", "/items/#{@item.id}/edit") %>
-<%= link_to("削除","/items/#{@item.id}/destroy_form") %>
+    <%= link_to("編集", "/items/#{@item.id}/edit") %>
+    <%= link_to("削除","/items/#{@item.id}/destroy_form") %>
 <% end %>
 
 
 
 <h2>評価</h2>
 <%@reviews.each do |review|%>
-<p>
-    評価: <%=review.point%>
-</p>
+    <p>
+        評価: <%=review.point%>
+    </p>
     <p>
         コメント:
         <%=review.comment%>
     </p>
-<%if review.user_id==@current_user.id%>
-<%=link_to("編集","/reviews/#{review.item_id}/#{review.id}/edit")%>
-<%= link_to("削除", "/reviews/#{review.item_id}/#{review.id}/destroy", data: { turbo_method: "post" }) %> 
-<%end%>
+    <%if review.user_id==@current_user.id%>
+        <%=link_to("編集","/reviews/#{review.item_id}/#{review.id}/edit")%>
+        <%= link_to("削除", "/reviews/#{review.item_id}/#{review.id}/destroy", data: { turbo_method: "post" }) %> 
+    <%end%>
 <%end%>
 
-<%=form_tag("/reviews/#{@item.id}/create") do%>
-<p>
-    <label for="point">評価:</label>
-    <input type="number" id="point" name="point">
-</p>
+<% if @item.user_id!=@current_user.id %>
+
+    <%=form_tag("/reviews/#{@item.id}/create") do%>
+    <p>
+        <label for="point">評価:</label>
+        <input type="number" id="point" name="point">
+    </p>
     <p>
         <label for="comment">コメント:</label>
         <textarea id="comment" name="comment" rows="4" cols="50" placeholder="コメントを入力してください"></textarea>
     </p>
-<input type="submit" value="投稿">
+    <input type="submit" value="投稿">
+    <%end%>
+
 <%end%>

@@ -1,13 +1,14 @@
 <h1>ログイン</h1>
 
-<%=form_tag("/login") do%>
-    <p>
-        <label for="email">Eメール:</label>
-        <input type="email" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス"  required>
-    </p>
-    <p>
-        <label for="password">パスワード:</label>
-        <input type="password" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード"  required>
-    </p>
-    <input type="submit" value="ログイン">
-<%end%>
+<%= form_tag("/login") do %>
+  <%= csrf_meta_tags %>
+  <p>
+    <label for="email">Eメール:</label>
+    <input type="email" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" required>
+  </p>
+  <p>
+    <label for="password">パスワード:</label>
+    <input type="password" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード" required>
+  </p>
+  <input type="submit" value="ログイン">
+<% end %>

@@ -6,4 +6,8 @@ class User < ApplicationRecord
   validates :email, {presence: true}
   validates :address, {presence: true}
 
+  def items
+    return Item.where(user_id: self.id)
+  end
+
 end
