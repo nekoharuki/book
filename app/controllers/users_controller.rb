@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
   end
 
   def create
@@ -40,6 +41,7 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー情報編集できました"
       redirect_to("/users/index")
     else
+      flash[:alert]="ユーザー情報編集できませんでした"
       render("users/edit")
     end
   end
@@ -50,9 +52,14 @@ class UsersController < ApplicationController
       session[:user_id] = nil
       @user.destroy
       flash[:notice] = "ユーザー情報削除できました"
-      redirect_to("/")
+      redirect_to("/login")
+    else
+      flash[:alert]="ユーザー情報削除できませんでした"
+      redirect_to("/users/index")
     end
   end
+
+
   def destroy_form
     @user = User.find_by(id: params[:id])
   end

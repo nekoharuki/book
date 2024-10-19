@@ -16,7 +16,7 @@
     </p>
     <p>
         <label for="content">内容:</label>
-        <textarea id="content" name="content" rows="4" cols="50" placeholder="内容を入力してください" required><%=@item.content%></textarea>
+        <textarea id="content" name="content" rows="4" cols="50" minlength="30" maxlength="500" placeholder="内容を入力してください" required><%=@item.content%></textarea>
     </p>
     <p>
         <label for="situation">状態:</label>

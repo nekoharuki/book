@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @item = Item.new
   end
 
   def create
@@ -71,6 +72,9 @@ class ItemsController < ApplicationController
     if @item.destroy
       flash[:notice] = "削除できました"
       redirect_to("/items/index")
+    else
+      flash[:alert]="削除できませんでした"
+      redirect_to("/items/destroy_form")
     end
   end
 

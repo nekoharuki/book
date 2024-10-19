@@ -12,13 +12,13 @@
     </p>
     <p>
         <label for="password">パスワード:</label>
-        <input type="password" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード"  required>
+        <input type="password" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード" minlength="5" maxlength="10" required>
     </p>
     <p>
         <label for="address">住所:</label>
         <input type="text" name="address" id="address" title="住所を入力してください" placeholder="住所" value="<%=@user.address%>" required>
     </p>
     <input type="submit" value="登録">
-    <%end%>
+<%end%>
 <br>
 <%=link_to("ユーザー情報へ","/users/#{@user.id}")%>

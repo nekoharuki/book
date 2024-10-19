@@ -1,34 +1,33 @@
 <h1>出品登録</h1>
 
-<%= form_tag("/items/create",method: :post) do %>
-    <p>
-        <label for="name">タイトル:</label>
-        <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル" value="<%=@item.name%>"  required>
-    </p>
-    <p>
-        <label for="author">作者:</label>
-        <input type="text" name="author" id="author" title="作者を入力してください" placeholder="作者" value="<%=@item.author%>"  required>
-    </p>
-    <p>
-        <label for="publisher">出版社:</label>
-        <input type="text" name="publisher" id="publisher" title="出版社を入力してください" placeholder="出版社" value="<%=@item.publisher%>" required>
-    </p>
-    <p>
-        <label for="content">内容:</label>
-        <textarea id="content" name="content" rows="4" cols="50" placeholder="内容を入力してください" required><%=@item.content%></textarea>
-    </p>
-    <p>
-        <label for="situation">状態:</label>
-        <input type="text" name="situation" id="situation" title="状態を入力してください" placeholder="状態" value="<%=@item.situation%>" required>
-    </p>
-    <p>
-        <label for="category">カテゴリー:</label>
-        <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="状態" value="<%=@item.category%>" required>
-    </p>
-    <p>
-        <label for="image">画像:</label>
-        <input type="text" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" required>
-    </p>
-        <input type="submit" value="投稿" >
-
+<%= form_tag("/items/create", method: :post) do %>
+  <p>
+    <label for="name">タイトル:</label>
+    <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル" value="<%= @item.name %>" required>
+  </p>
+  <p>
+    <label for="author">作者:</label>
+    <input type="text" name="author" id="author" title="作者を入力してください" placeholder="作者" value="<%= @item.author %>" required>
+  </p>
+  <p>
+    <label for="publisher">出版社:</label>
+    <input type="text" name="publisher" id="publisher" title="出版社を入力してください" placeholder="出版社" value="<%= @item.publisher %>" required>
+  </p>
+  <p>
+    <label for="content">内容:</label>
+    <textarea id="content" name="content" rows="4" cols="50" placeholder="内容を入力してください" minlength="30" maxlength="500" required><%= @item.content %></textarea>
+  </p>
+  <p>
+    <label for="situation">状態:</label>
+    <input type="text" name="situation" id="situation" title="状態を入力してください" placeholder="状態" value="<%= @item.situation %>" required>
+  </p>
+  <p>
+    <label for="category">カテゴリー:</label>
+    <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="カテゴリー" value="<%= @item.category %>" required>
+  </p>
+  <p>
+    <label for="image">画像:</label>
+    <input type="text" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%= @item.image %>" required>
+  </p>
+  <input type="submit" value="投稿">
 <% end %>
