@@ -1,15 +1,17 @@
 <h1>本当に削除していいですか？</h1>
+
 <p>ユーザー名:
-<%=@user.name%>
+  <%= @user.name %>
 </p>
+
 <p>Eメール:
-<%=@user.email%>
+  <%= @user.email %>
 </p>
+
 <p>住所:
-<%=@user.address%>
+  <%= @user.address %>
 </p>
 
-
-<%=form_tag("/users/#{@user.id}/destroy") do%>
-<input type="submit" value="削除する">
-<%end%>
+<%= form_tag("/users/#{@user.id}/destroy", method: :post) do %>
+  <input type="submit" value="削除する">
+<% end %>

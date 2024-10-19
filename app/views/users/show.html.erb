@@ -1,17 +1,18 @@
-<h1><%=@user.name%>様の詳細情報</h1>
+<h1><%= @user.name %>様の詳細情報</h1>
+
 <p>ユーザー名:
-<%=@user.name%>
+  <%= @user.name %>
 </p>
+
 <p>Eメール:
-<%=@user.email%>
+  <%= @user.email %>
 </p>
+
 <p>住所:
-<%=@user.address%>
+  <%= @user.address %>
 </p>
 
-
-<%if @current_user.id==@user.id%>
-<%=link_to("編集","/users/#{@user.id}/edit")%>
-<%=link_to("削除", "/users/#{@user.id}/destroy")%>
-
-<%end%>
+<% if @current_user.id == @user.id %>
+  <%= link_to("編集", "/users/#{@user.id}/edit") %>
+  <%= link_to("削除", "/users/#{@user.id}/destroy") %>
+<% end %>

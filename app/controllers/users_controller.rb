@@ -17,6 +17,11 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー登録完了しました"
       redirect_to("/items/index")
     else
+      @name=params[:name]
+      @email=params[:email]
+      @address=params[:address]
+      @password=params[:password]
+      flash[:alert]="ユーザー登録できませんでした"
       render("users/new")
     end
   end
