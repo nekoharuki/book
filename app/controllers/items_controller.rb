@@ -84,7 +84,7 @@ class ItemsController < ApplicationController
   def category_not
     flag=0;
     categories = Item.pluck(:category)
-     categories.each do |category|
+    categories.each do |category|
       if category == params[:category]
         flag=1;
       end

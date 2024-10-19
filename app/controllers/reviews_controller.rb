@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :please_login,only:[:create,:update,:destroy,:edit]
   before_action :review_not, only: [:edit, :update, :destroy]
   before_action :create_not, only: [:create]
 
@@ -35,7 +36,7 @@ class ReviewsController < ApplicationController
     review=Review.find_by(id: params[:id])
     if review.user_id!=@current_user.id
       flash[:notice]="あなたはそのページには行けません"
-      redirect_to("/items/#{@review.item_id}")
+      redirect_to("/items/#{review.item_id}")
   end
 end
 
@@ -44,7 +45,7 @@ def create_not
   items.each do |item|
     if item.id==params[:item_id].to_i
       flash[:notice]="レビューを投稿できません"
-      redirect_to("/items/index");
+      redirect_to("/items/#{params[:item_id]}");
     end
   end
 end

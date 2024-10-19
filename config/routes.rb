@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  post "likes/create/:item_id/:user_id" => "likes#create"
-  post "likes/destroy/:item_id/:user_id" => "likes#destroy"
+  post "likes/:item_id/:user_id/create" => "likes#create"
+  post "likes/:item_id/:user_id/destroy" => "likes#destroy"
 
   post "reviews/:item_id/create" => "reviews#create"
   get "reviews/:item_id/:id/edit" => "reviews#edit"

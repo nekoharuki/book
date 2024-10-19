@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_action :please_login,only:[:create,:destroy]
   before_action :like_not, only: [:create, :destroy]
 
   def create
