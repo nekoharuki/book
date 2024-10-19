@@ -1,6 +1,6 @@
 <h1>出品編集</h1>
 
-<%=form_tag("/items/#{@item.id}/update") do%>
+<%= form_tag("/items/#{@item.id}/update",method: :post) do %>
 
     <p>
         <label for="name">タイトル:</label>
@@ -32,4 +32,4 @@
     </p>
         <input type="submit" value="投稿" >
 
-<%end%>
+<% end %>

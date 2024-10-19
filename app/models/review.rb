@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
-  validates :point, {presence: true}
-  validates :comment, {presence: true}
+  validates :point, {presence: true,length:{maximum:5,minimum:1}}
+  validates :comment, {presence: true,length:{maximum:100,minimum:20}}
   validates :user_id, {presence: true}
   validates :item_id, {presence: true}
 

@@ -27,10 +27,19 @@ class ItemsController < ApplicationController
       image: params[:image],
       user_id: @current_user.id
     )
+    @item.name = params[:name]
+    @item.author = params[:author]
+    @item.publisher = params[:publisher]
+    @item.content = params[:content]
+    @item.situation = params[:situation]
+    @item.category = params[:category]
+    @item.image = params[:image]
+
     if @item.save
       flash[:notice] = "登録できました"
       redirect_to("/items/index")
     else
+      flash[:alert] = "登録できませんでした"
       render("items/new")
     end
   end
@@ -52,6 +61,7 @@ class ItemsController < ApplicationController
       flash[:notice] = "編集できました"
       redirect_to("/items/index")
     else
+      flash[:alert] = "編集できませんでした"
       render("items/edit")
     end
   end

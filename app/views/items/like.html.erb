@@ -1,8 +1,8 @@
 <h1>いいねした商品一覧</h1>
 <%@likes.each do |like|%>
-<%item=Item.find_by(id: like.item_id)%>
+    <%item=Item.find_by(id: like.item_id)%>
 
-<%=link_to(item.name,"/items/#{item.id}")%>
+    <%=link_to(item.name,"/items/#{item.id}")%>
 
-<br>
+    <br>
 <%end%>

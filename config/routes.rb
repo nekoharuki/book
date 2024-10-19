@@ -35,5 +35,6 @@ Rails.application.routes.draw do
   get "users/:id" => "users#show"
   get "items/:id" => "items#show"
 
+  get "/about" => "home#about"
   get "/" => "home#top"
 end

@@ -8,6 +8,11 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:notice]="レビューできました"
       redirect_to("/items/#{@review.item_id}")
+    else
+      flash[:alert]="レビューできませんでした"
+      @point= params[:point]
+      @comment= params[:comment]
+      render("items/show")
     end
   end
 
@@ -22,8 +27,14 @@ class ReviewsController < ApplicationController
     if @review.save
       flash[:notice]="レビュー編集できました"
       redirect_to("/items/#{@review.item_id}")
+    else
+      flash[:alert]="レビュー編集できませんでした"
+      @point= params[:point]
+      @comment= params[:comment]
+      render("items/show")
     end
   end
+
   def destroy
     @review=Review.find_by(id: params[:id])
     if @review.destroy
@@ -37,8 +48,8 @@ class ReviewsController < ApplicationController
     if review.user_id!=@current_user.id
       flash[:notice]="あなたはそのページには行けません"
       redirect_to("/items/#{review.item_id}")
+    end
   end
-end
 
 def create_not
   items=Item.where(user_id: @current_user.id)

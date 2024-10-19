@@ -1,39 +1,40 @@
 <h1>本当に削除しますか?</h1>
 
 <p>タイトル:
-<%=@item.name%>
+  <%= @item.name %>
 </p>
 
 <p>作者:
-<%=@item.author%>
+  <%= @item.author %>
 </p>
 
 <p>出版社:
-<%=@item.publisher%>
+  <%= @item.publisher %>
 </p>
 
 <p>内容:
-<%=@item.content%>
+  <%= @item.content %>
 </p>
 
 <p>状態:
-<%=@item.situation%>
+  <%= @item.situation %>
 </p>
 
 <p>カテゴリー:
-<%=link_to(@item.category,"/items/category/#{@item.category}")%>
+  <%= link_to(@item.category, "/items/category/#{@item.category}") %>
 </p>
+
 <p>出品者:
-    <%=link_to(@item.user.name,"/users/#{@item.user.id}/myitems")%>
+  <%= link_to(@item.user.name, "/users/#{@item.user.id}/items") %>
 </p>
 
 <p>画像:
-<%=@item.image%>
+  <%= @item.image %>
 </p>
 
-<%=link_to("詳細へ","/items/#{@item.id}")%>
+<%= link_to("詳細へ", "/items/#{@item.id}") %>
 <br>
 <br>
-<%=form_tag("/items/#{@item.id}/destroy") do%>
-<input type="submit" value="削除する">
-<%end%>
+<%= form_tag("/items/#{@item.id}/destroy", method: :post) do %>
+  <input type="submit" value="削除する">
+<% end %>

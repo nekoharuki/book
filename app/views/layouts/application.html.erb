@@ -19,6 +19,7 @@
       <%= link_to("ログアウト", "/logout", data: { turbo_method: "post" }) %>
       <% else %>
       <%= link_to("ホーム", "/") %>
+      <%= link_to("アプリの説明", "/about") %>
       <%= link_to("ログイン", "/login") %>
       <%= link_to("新規登録", "/users/new") %>
     <% end %>
@@ -29,6 +30,9 @@
     <br>
     <% if flash[:notice] %>
       <%= flash[:notice] %>
+    <% end %>
+    <% if flash[:alert] %>
+      <%= flash[:alert] %>
     <% end %>
     <%= yield %>
   </body>

@@ -62,6 +62,9 @@ class UsersController < ApplicationController
       flash[:notice] = "ログインできました"
       redirect_to("/items/index")
     else
+      flash[:alert]="メールアドレスまたはパスワードが間違っています"
+      @email=params[:email]
+      @password=params[:password]
       render("users/login_form")
     end
   end

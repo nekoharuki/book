@@ -1,71 +1,40 @@
-<h1><%=@item.name%>の詳細ページ</h1>
+<h1><%= @item.name %>の詳細ページ</h1>
 
 <p>タイトル:
-<%=@item.name%>
+  <%= @item.name %>
 </p>
 
 <p>作者:
-<%=@item.author%>
+  <%= @item.author %>
 </p>
 
 <p>出版社:
-<%=@item.publisher%>
+  <%= @item.publisher %>
 </p>
 
 <p>内容:
-<%=@item.content%>
+  <%= @item.content %>
 </p>
 
 <p>状態:
-<%=@item.situation%>
+  <%= @item.situation %>
 </p>
 
 <p>カテゴリー:
-<%=link_to(@item.category,"/items/category/#{@item.category}")%>
+  <%= link_to(@item.category, "/items/category/#{@item.category}") %>
 </p>
 
 <p>出品者:
-    <%=link_to(@item.user.name,"/users/#{@item.user.id}/items")%>
+  <%= link_to(@item.user.name, "/users/#{@item.user.id}/items") %>
 </p>
 
 <p>画像:
-<%=@item.image%>
+  <%= @item.image %>
 </p>
 
 <% if @current_user.id == @item.user.id %>
-    <%= link_to("編集", "/items/#{@item.id}/edit") %>
-    <%= link_to("削除","/items/#{@item.id}/destroy") %>
+  <%= link_to("編集", "/items/#{@item.id}/edit") %>
+  <%= link_to("削除", "/items/#{@item.id}/destroy") %>
 <% end %>
 
-
-
-<h2>評価</h2>
-<%@reviews.each do |review|%>
-    <p>
-        評価: <%=review.point%>
-    </p>
-    <p>
-        コメント:
-        <%=review.comment%>
-    </p>
-    <%if review.user_id==@current_user.id%>
-        <%=link_to("編集","/reviews/#{review.item_id}/#{review.id}/edit")%>
-        <%= link_to("削除", "/reviews/#{review.item_id}/#{review.id}/destroy", data: { turbo_method: "post" }) %> 
-    <%end%>
-<%end%>
-
-<% if @item.user_id!=@current_user.id %>
-
-    <%=form_tag("/reviews/#{@item.id}/create") do%>
-    <p>
-        <label for="point">評価:</label>
-        <input type="number" id="point" name="point" required max="10" min="1">
-    </p>
-    <p>
-        <label for="comment">コメント:</label>
-        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="コメントを入力してください" required></textarea>
-    </p>
-    <input type="submit" value="投稿">
-    <%end%>
-
-<%end%>
+<%= render ("reviews/items_show") %>
