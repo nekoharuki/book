@@ -49,8 +49,11 @@
     </p>
     <p>
         <label for="image">画像:</label>
+        <%= image_tag @item.image.url if @item.image? %>
+        <br>
         <input type="file" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" required>
     </p>
+    <br>
         <input type="submit" value="投稿" >
 
 <% end %>

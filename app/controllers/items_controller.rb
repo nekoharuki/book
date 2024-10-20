@@ -62,11 +62,16 @@ class ItemsController < ApplicationController
     @item.content = params[:content]
     @item.situation = params[:situation]
     @item.category = params[:category]
-    @item.image = params[:image],
     @item.help_point = params[:help_point],
     @item.recommend_point = params[:recommend_point],
     @item.learn_point = params[:learn_point]
+
+    image_url = @item.image.url
+    @item.image = params[:image]
+
     if @item.save
+      public_id = image_url.split('/').last.split('.').first
+      Cloudinary::Uploader.destroy(public_id)
       flash[:notice] = "編集できました"
       redirect_to("/items/index")
     else

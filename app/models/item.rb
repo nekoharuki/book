@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   validates :situation, {presence: true}
   validates :category, {presence: true}
   validates :user_id, {presence: true}
+  validates :image, {presence: true}
 
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy
