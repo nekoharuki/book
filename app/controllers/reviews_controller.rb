@@ -7,12 +7,12 @@ class ReviewsController < ApplicationController
     @review=Review.new(point: params[:point],comment: params[:comment],user_id: @current_user.id,item_id: params[:item_id])
     if @review.save
       flash[:notice]="レビューできました"
-      redirect_to("/items/#{@review.item_id}")
+      redirect_to("/items/#{@review.item_id}") and return
     else
       flash[:alert]="レビューできませんでした"
       @point= params[:point]
       @comment= params[:comment]
-      render("items/show")
+      render("items/show") and return
     end
   end
 
@@ -26,12 +26,12 @@ class ReviewsController < ApplicationController
     @review.comment=params[:comment]
     if @review.save
       flash[:notice]="レビュー編集できました"
-      redirect_to("/items/#{@review.item_id}")
+      redirect_to("/items/#{@review.item_id}") and return
     else
       flash[:alert]="レビュー編集できませんでした"
       @point= params[:point]
       @comment= params[:comment]
-      render("items/show")
+      render("items/show") and return
     end
   end
 
@@ -39,7 +39,7 @@ class ReviewsController < ApplicationController
     @review=Review.find_by(id: params[:id])
     if @review.destroy
       flash[:notice]="レビューを削除できました"
-      redirect_to("/items/#{@review.item_id}")
+      redirect_to("/items/#{@review.item_id}") and return
     end
   end
 
@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
     review=Review.find_by(id: params[:id])
     if review.user_id!=@current_user.id
       flash[:notice]="あなたはそのページには行けません"
-      redirect_to("/items/#{review.item_id}")
+      redirect_to("/items/#{review.item_id}") and return
     end
   end
 
@@ -56,7 +56,7 @@ def create_not
   items.each do |item|
     if item.id==params[:item_id].to_i
       flash[:notice]="レビューを投稿できません"
-      redirect_to("/items/#{params[:item_id]}");
+      redirect_to("/items/#{params[:item_id]}") and return
     end
   end
 end
