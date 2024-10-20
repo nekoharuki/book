@@ -24,8 +24,22 @@
       <option value="普通">普通</option>
       <option value="悪い">悪い</option>
     </select>
-  </div> 
+  </div>
 
+  <p>
+    <label for="recommend_point">おすすめ度:</label>
+    <input type="range" name="recommend_point" id="recommend_point" min="1" max="5" value="<%= @item.recommend_point %>" required>
+  </p>
+
+  <p>
+    <label for="help_point">役に立った度:</label>
+    <input type="range" name="help_point" id="help_point" min="1" max="5" value="<%= @item.help_point %>" required>
+  </p>
+
+  <p>
+    <label for="learn_point">学びになった度:</label>
+    <input type="range" name="learn_point" id="learn_point" min="1" max="5" value="<%= @item.learn_point %>" required>
+  </p>
   <p>
     <label for="category">カテゴリー:</label>
     <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="カテゴリー" value="<%= @item.category %>" required>

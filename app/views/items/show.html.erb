@@ -20,6 +20,18 @@
   <%= @item.situation %>
 </p>
 
+<p>おすすめ度:
+  <%= @item.recommend_point %>点
+</p>
+
+<p>役に立った度:
+  <%= @item.help_point %>点
+</p>
+
+<p>学びになった度:
+  <%= @item.learn_point %>点
+</p>
+
 <p>カテゴリー:
   <%= link_to(@item.category, "/items/category/#{@item.category}") %>
 </p>

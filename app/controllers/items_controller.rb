@@ -26,6 +26,9 @@ class ItemsController < ApplicationController
       situation: params[:situation],
       category: params[:category],
       image: params[:image],
+      help_point: params[:help_point],
+      recommend_point: params[:recommend_point],
+      learn_point: params[:learn_point],
       user_id: @current_user.id
     )
     @item.name = params[:name]
@@ -35,7 +38,9 @@ class ItemsController < ApplicationController
     @item.situation = params[:situation]
     @item.category = params[:category]
     @item.image = params[:image]
-
+    @item.help_point = params[:help_point],
+    @item.recommend_point = params[:recommend_point],
+    @item.learn_point = params[:learn_point],
     if @item.save
       flash[:notice] = "登録できました"
       redirect_to("/items/index")
@@ -57,7 +62,10 @@ class ItemsController < ApplicationController
     @item.content = params[:content]
     @item.situation = params[:situation]
     @item.category = params[:category]
-    @item.image = params[:image]
+    @item.image = params[:image],
+    @item.help_point = params[:help_point],
+    @item.recommend_point = params[:recommend_point],
+    @item.learn_point = params[:learn_point]
     if @item.save
       flash[:notice] = "編集できました"
       redirect_to("/items/index")
