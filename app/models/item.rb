@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
+  mount_uploader :image, ImageUploader
   validates :name, {presence: true}
   validates :author, {presence: true}
   validates :publisher, {presence: true}
   validates :content, {presence: true,length:{maximum:500,minimum:30}}
   validates :situation, {presence: true}
   validates :category, {presence: true}
-  validates :image, {presence: true}
   validates :user_id, {presence: true}
 
   has_many :likes, dependent: :destroy

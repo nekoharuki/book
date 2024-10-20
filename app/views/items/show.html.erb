@@ -41,8 +41,7 @@
 </p>
 
 <p>画像:
-  <%= @item.image %>
-</p>
+<%= image_tag @item.image.url if @item.image? %></p>
 
 <% if @current_user.id == @item.user.id %>
   <%= link_to("編集", "/items/#{@item.id}/edit") %>

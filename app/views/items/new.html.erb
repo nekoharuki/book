@@ -1,6 +1,6 @@
 <h1>出品登録</h1>
 
-<%= form_tag("/items/create", method: :post) do %>
+<%= form_tag("/items/create",{multipart: true}) do %>
   <p>
     <label for="name">タイトル:</label>
     <input type="text" name="name" id="name" title="タイトルを入力してください" placeholder="タイトル" value="<%= @item.name %>" required>
@@ -46,7 +46,7 @@
   </p>
   <p>
     <label for="image">画像:</label>
-    <input type="text" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%= @item.image %>" required>
+    <input type="file" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%= @item.image %>" required>
   </p>
   <input type="submit" value="投稿">
 <% end %>

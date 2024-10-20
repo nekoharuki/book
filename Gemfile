@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.3.4"
 
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.4"
 
@@ -44,6 +45,11 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+
+gem 'cloudinary'
+
+gem 'carrierwave'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -54,8 +60,10 @@ gem "bootsnap", require: false
 
 # 既存のgem定義の下に以下を追加
 gem 'mutex_m'
+
 gem 'bigdecimal'
 
+gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
