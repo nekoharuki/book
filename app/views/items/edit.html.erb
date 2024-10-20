@@ -18,10 +18,16 @@
         <label for="content">内容:</label>
         <textarea id="content" name="content" rows="4" cols="50" minlength="30" maxlength="500" placeholder="内容を入力してください" required><%=@item.content%></textarea>
     </p>
-    <p>
-        <label for="situation">状態:</label>
-        <input type="text" name="situation" id="situation" title="状態を入力してください" placeholder="状態" value="<%=@item.situation%>" required>
-    </p>
+
+  <div>
+    <label for="situation">状態</label>
+    <select name="situation" id="situation">
+      <option <%= "selected" if @item.situation=="良い" %> value="良い">良い</option>
+      <option <%= "selected" if @item.situation=="普通" %> value="普通">普通</option>
+      <option <%= "selected" if @item.situation=="悪い" %> value="悪い">悪い</option>
+    </select>
+  </div> 
+
     <p>
         <label for="category">カテゴリー:</label>
         <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="状態" value="<%=@item.category%>" required>
