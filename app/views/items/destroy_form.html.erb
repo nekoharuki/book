@@ -29,7 +29,7 @@
 </p>
 
 <p>画像:
-  <%= @item.image %>
+<%= image_tag @item.image.url if @item.image? %></p>
 </p>
 
 <%= link_to("詳細へ", "/items/#{@item.id}") %>
