@@ -4,11 +4,11 @@
 
     <p>
         <label for="name">名前:</label>
-        <input type="text" name="name" id="name" title="名前を入力してください" placeholder="名前" value="<%=@user.name%>" required>
+        <input type="text" name="name" id="name" title="名前を入力してください" maxlength="20" placeholder="名前" value="<%=@user.name%>" required>
     </p>
     <p>
         <label for="email">Eメール:</label>
-        <input type="email" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%=@user.email%>" required>
+        <input type="email" name="email" id="email" title="メールアドレスを入力してください" max="20" placeholder="メールアドレス" value="<%=@user.email%>" required>
     </p>
     <p>
         <label for="password">パスワード:</label>
@@ -16,7 +16,7 @@
     </p>
     <p>
         <label for="address">住所:</label>
-        <input type="text" name="address" id="address" title="住所を入力してください" placeholder="住所" value="<%=@user.address%>" required>
+        <input type="text" name="address" id="address" title="住所を入力してください" maxlength="20" placeholder="住所" value="<%=@user.address%>" required>
     </p>
     <input type="submit" value="登録">
 <%end%>
