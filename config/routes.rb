@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "reviews/:item_id/:id/update" => "reviews#update"
   post "reviews/:item_id/:id/destroy" => "reviews#destroy"
 
+  get "items/:item_id/user_items" => "items#user_items"
   get "items/index" => "items#index"
   get "items/like" => "items#like"
   get "items/new" => "items#new"
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   post "items/:id/update" => "items#update"
   get "items/:id/destroy" => "items#destroy_form"
   post "items/:id/destroy" => "items#destroy"
+  post "items/:my_item_id/:other_item_id/trade" => "items#trade"
+
 
   get "users/index" => "users#index"
   get "users/new" => "users#new"

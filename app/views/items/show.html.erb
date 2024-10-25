@@ -46,6 +46,10 @@
 <% if @current_user.id == @item.user.id %>
   <%= link_to("編集", "/items/#{@item.id}/edit") %>
   <%= link_to("削除", "/items/#{@item.id}/destroy") %>
+<%else%>
+<%=link_to("この商品と物々交換する","/items/#{@item.id}/user_items")%>
 <% end %>
 
 <%= render ("reviews/items_show") %>
+
+<%= render ("items/trades") %>

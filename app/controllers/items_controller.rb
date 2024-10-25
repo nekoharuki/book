@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find_by(id: params[:id])
     @reviews=Review.where(item_id: @item.id)
+    @trades=Trade.where(sell_item_id: @item.id)
   end
 
   def new
@@ -31,16 +32,7 @@ class ItemsController < ApplicationController
       learn_point: params[:learn_point],
       user_id: @current_user.id
     )
-    @item.name = params[:name]
-    @item.author = params[:author]
-    @item.publisher = params[:publisher]
-    @item.content = params[:content]
-    @item.situation = params[:situation]
-    @item.category = params[:category]
-    @item.image = params[:image]
-    @item.help_point = params[:help_point],
-    @item.recommend_point = params[:recommend_point],
-    @item.learn_point = params[:learn_point],
+
     if @item.save
       flash[:notice] = "登録できました"
       redirect_to("/items/index")
@@ -120,5 +112,19 @@ class ItemsController < ApplicationController
         flash[:notice] = "そのカテゴリーはありません"
         redirect_to("/items/categorize");
       end
+  end
+
+  def user_items
+    @items=Item.where(user_id: @current_user.id);
+    @other_item=Item.find_by(id: params[:item_id])
+  end
+
+  def trade
+    other_item=Item.find_by(id: params[:other_item_id])
+    trade=Trade.new(buy_item_id: params[:my_item_id],buy_user_id: @current_user.id,sell_item_id: params[:other_item_id],sell_user_id: other_item.user.id)
+    if trade.save
+      flash[:notice]="物々交換リクエストできました"
+      redirect_to("/items/#{other_item.id}");
+    end
   end
 end
