@@ -4,6 +4,6 @@
 <% else %>
   <% @items.each do |item| %>
     <%= item.name %>
-    <%= link_to("この商品と物々交換する", "/items/#{item.id}/#{@other_item.id}/trade", data: { turbo_method: "post" }) %>
+    <%= link_to("この商品と物々交換する", "/items/#{@item_requested.id}/#{item.id}/trade", data: { turbo_method: "post" }) %>
   <% end %>
 <% end %>

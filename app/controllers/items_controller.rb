@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find_by(id: params[:id])
     @reviews=Review.where(item_id: @item.id)
-    @trades=Trade.where(sell_item_id: @item.id)
+    @trades=Trade.where(item_requested_id: @item.id)
   end
 
   def new
@@ -116,25 +116,40 @@ class ItemsController < ApplicationController
 
   def user_items
     @items=Item.where(user_id: @current_user.id);
-    @other_item=Item.find_by(id: params[:item_id])
+    @item_requested=Item.find_by(id: params[:item_id])
   end
 
   def trade
-    other_item=Item.find_by(id: params[:other_item_id])
-    trade=Trade.new(buy_item_id: params[:my_item_id],buy_user_id: @current_user.id,sell_item_id: params[:other_item_id],sell_user_id: other_item.user.id)
+    item_requested=Item.find_by(id: params[:item_requested_id]);
+    trade = Trade.new(
+      item_requested_id: params[:item_requested_id],
+      user_requested_id: item_requested.user.id,
+      item_offered_id: params[:item_offered_id],
+      user_offered_id: @current_user.id
+    )
     if trade.save
-      flash[:notice]="物々交換リクエストできました"
-      redirect_to("/items/#{other_item.id}");
+      flash[:notice] = "物々交換リクエストできました"
+      redirect_to("/items/#{item_requested.id}")
+    else
+      flash[:alert] = "物々交換リクエストに失敗しました"
+      redirect_to("/items/#{item_requested.id}/user_items")
     end
   end
 
   def detail
-    detail=Detail.new(buy_item_id: params[:my_item_id],buy_user_id: @current_user.id,sell_item_id: params[:other_item_id],sell_user_id: other_item.user.id)
+    item_requested=Item.find_by(id: params[:item_requested_id])
+    item_offered=Item.find_by(id: params[:item_offered_id])
+    detail = Detail.new(
+      item_requested_id: params[:item_requested_id],
+      user_requested_id: @current_user.id,
+      item_offered_id: params[:item_offered_id],
+      user_offered_id: item_offered.user.id
+    )
     if detail.save
-      my_item=Item.find_by(id: params[:my_item_id])
-      my_item.destroy
-      other_item=Item.find_by(id: params[:other_item_id])
-      other_item.destroy
+      item_requested.destroy
+      item_offered.destroy
+      flash[:notice]="物々交換できました"
+      redirect_to("/items/index")
     end
   end
 end

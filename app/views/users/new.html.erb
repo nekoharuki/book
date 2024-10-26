@@ -3,19 +3,19 @@
 <%=form_tag("/users/create",method: :post) do%>
     <p>
         <label for="name">名前:</label>
-        <input type="text" name="name" id="name" title="名前を入力してください" maxlength="10" value="<%=@name%>" placeholder="名前" required>
+        <input type="text" name="name" id="name" title="名前を入力してください"  value="<%=@name%>" placeholder="名前" required>
     </p>
     <p>
         <label for="email">Eメール:</label>
-        <input type="email" name="email" id="email" title="メールアドレスを入力してください" maxlength="20" value="<%=@email%>" placeholder="メールアドレス" required>
+        <input type="email" name="email" id="email" title="メールアドレスを入力してください"  value="<%=@email%>" placeholder="メールアドレス" required>
     </p>
     <p>
         <label for="password">パスワード:</label>
-        <input type="password" name="password" id="password" title="パスワードを入力してください" value="<%=@password%>" minlength="5" maxlength="10" placeholder="パスワード" required>
+        <input type="password" name="password" id="password" title="パスワードを入力してください" value="<%=@password%>"  placeholder="パスワード" required>
     </p>
     <p>
         <label for="address">住所:</label>
-        <input type="text" name="address" id="address" title="住所を入力してください" maxlength="50" value="<%=@address%>" placeholder="住所" required>
+        <input type="text" name="address" id="address" title="住所を入力してください"  value="<%=@address%>" placeholder="住所" required>
     </p>
     <input type="submit" value="登録">
 <% end %>
