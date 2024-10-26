@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   post "items/:id/update" => "items#update"
   get "items/:id/destroy" => "items#destroy_form"
   post "items/:id/destroy" => "items#destroy"
-  post "items/:my_item_id/:other_item_id/trade" => "items#trade"
+  post "items/:item_requested_id/:item_offered_id /trade" => "items#trade"
+  post "items/:item_requested_id/:item_offered_id /detail" => "items#detail"
 
 
   get "users/index" => "users#index"

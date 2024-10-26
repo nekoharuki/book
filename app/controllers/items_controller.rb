@@ -127,4 +127,14 @@ class ItemsController < ApplicationController
       redirect_to("/items/#{other_item.id}");
     end
   end
+
+  def detail
+    detail=Detail.new(buy_item_id: params[:my_item_id],buy_user_id: @current_user.id,sell_item_id: params[:other_item_id],sell_user_id: other_item.user.id)
+    if detail.save
+      my_item=Item.find_by(id: params[:my_item_id])
+      my_item.destroy
+      other_item=Item.find_by(id: params[:other_item_id])
+      other_item.destroy
+    end
+  end
 end

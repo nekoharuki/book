@@ -5,7 +5,8 @@
 <%= link_to(item.name,"/items/#{item.id}") %>
 
 <% if(@item.user.id==@current_user.id) %>
-<%= link_to("物々交換する","/items/#{item.id}/") %>
+<%= link_to("物々交換する", "/items/#{@item.id}/#{item.id}/detail", data: { turbo_method: "post" }) %>  
+
 <%end%>
 
 <% end %>
