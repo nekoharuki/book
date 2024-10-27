@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
       help_point: params[:help_point],
       recommend_point: params[:recommend_point],
       learn_point: params[:learn_point],
+      status: 0,
       user_id: @current_user.id
     )
 
@@ -57,7 +58,7 @@ class ItemsController < ApplicationController
     @item.help_point = params[:help_point],
     @item.recommend_point = params[:recommend_point],
     @item.learn_point = params[:learn_point]
-    
+
     image_url = @item.image.url
     @item.image = params[:image]
 
@@ -146,8 +147,8 @@ class ItemsController < ApplicationController
       user_offered_id: item_offered.user.id
     )
     if detail.save
-      item_requested.destroy
-      item_offered.destroy
+      item_requested.status=1;
+      item_offered.status=1;
       flash[:notice]="物々交換できました"
       redirect_to("/items/index")
     end
