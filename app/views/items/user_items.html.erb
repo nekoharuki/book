@@ -1,9 +1,13 @@
 <h1>自分の出品物</h1>
 <% if @items.blank? %>
   <p>出品物がありません</p>
+  <%=link_to("出品する","/items/new")%>
 <% else %>
   <% @items.each do |item| %>
-    <%= item.name %>
+    <%= link_to(item.name,"/items/#{item.id}") %>
+
     <%= link_to("この商品と物々交換する", "/items/#{@item_requested.id}/#{item.id}/trade", data: { turbo_method: "post" }) %>
+    
+    <br>
   <% end %>
 <% end %>
