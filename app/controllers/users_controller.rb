@@ -91,7 +91,7 @@ class UsersController < ApplicationController
   end
 
   def user_items
-    @items=Item.where(user_id: params[:id])
+    @items=Item.where(user_id: params[:id],status: 0)
     @user=User.find_by(id:params[:id])
   end
 

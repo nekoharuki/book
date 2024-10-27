@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :trades, dependent: :destroy
+  has_many :details, dependent: :destroy
 
   def items
     return Item.where(user_id: self.id)

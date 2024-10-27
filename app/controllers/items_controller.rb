@@ -5,11 +5,11 @@ class ItemsController < ApplicationController
   before_action :category_not, only: [:category]
 
   def index
-    @items = Item.all
+    @items = Item.where(status: 0);
   end
 
   def show
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find_by(id: params[:id],status: 0)
     @reviews=Review.where(item_id: @item.id)
     @trades=Trade.where(item_requested_id: @item.id)
   end
@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find_by(id: params[:id],status: 0)
   end
 
   def update
@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
     @item.help_point = params[:help_point],
     @item.recommend_point = params[:recommend_point],
     @item.learn_point = params[:learn_point]
-
+    @item.status=0
     image_url = @item.image.url
     @item.image = params[:image]
 
@@ -74,7 +74,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find_by(id: params[:id],status: 0)
     if @item.destroy
       flash[:notice] = "削除できました"
       redirect_to("/items/index")
@@ -85,16 +85,16 @@ class ItemsController < ApplicationController
   end
 
   def destroy_form
-    @item = Item.find_by(id: params[:id])
+    @item = Item.find_by(id: params[:id],status: 0)
   end
 
   def category
     @category_name = params[:category]
-    @items = Item.where(category: @category_name)
+    @items = Item.where(category: @category_name,status: 0)
   end
 
   def categorize
-    @categorize = Item.select(:category).distinct.pluck(:category)
+    @categorize = Item.where(status: 0).select(:category).distinct.pluck(:category)
   end
 
   def like
@@ -116,12 +116,12 @@ class ItemsController < ApplicationController
   end
 
   def user_items
-    @items=Item.where(user_id: @current_user.id);
-    @item_requested=Item.find_by(id: params[:item_id])
+    @items=Item.where(user_id: @current_user.id,status: 0)
+    @item_requested=Item.find_by(id: params[:item_id],status: 0)
   end
 
   def trade
-    item_requested=Item.find_by(id: params[:item_requested_id]);
+    item_requested=Item.find_by(id: params[:item_requested_id],status: 0)
     trade = Trade.new(
       item_requested_id: params[:item_requested_id],
       user_requested_id: item_requested.user.id,
@@ -138,8 +138,8 @@ class ItemsController < ApplicationController
   end
 
   def detail
-    item_requested=Item.find_by(id: params[:item_requested_id])
-    item_offered=Item.find_by(id: params[:item_offered_id])
+    item_requested=Item.find_by(id: params[:item_requested_id],status: 0)
+    item_offered=Item.find_by(id: params[:item_offered_id],status: 0)
     detail = Detail.new(
       item_requested_id: params[:item_requested_id],
       user_requested_id: @current_user.id,
@@ -149,6 +149,8 @@ class ItemsController < ApplicationController
     if detail.save
       item_requested.status=1;
       item_offered.status=1;
+      item_requested.save
+      item_offered.save
       flash[:notice]="物々交換できました"
       redirect_to("/items/index")
     end
