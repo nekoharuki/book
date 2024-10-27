@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   validates :author, {presence: true}
   validates :publisher, {presence: true}
   validates :content, {presence: true}
-  validates :situation, {presence: true}
+  validates :condition, {presence: true}
   validates :category, {presence: true}
   validates :user_id, {presence: true}
   validates :image, {presence: true}

@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
       author: params[:author],
       publisher: params[:publisher],
       content: params[:content],
-      situation: params[:situation],
+      condition: params[:condition],
       category: params[:category],
       image: params[:image],
       help_point: params[:help_point],
@@ -52,12 +52,12 @@ class ItemsController < ApplicationController
     @item.author = params[:author]
     @item.publisher = params[:publisher]
     @item.content = params[:content]
-    @item.situation = params[:situation]
+    @item.condition = params[:condition]
     @item.category = params[:category]
     @item.help_point = params[:help_point],
     @item.recommend_point = params[:recommend_point],
     @item.learn_point = params[:learn_point]
-
+    
     image_url = @item.image.url
     @item.image = params[:image]
 

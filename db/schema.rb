@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_26_062155) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_27_011848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,7 +28,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_26_062155) do
     t.string "author"
     t.string "publisher"
     t.text "content"
-    t.string "situation"
     t.string "category"
     t.integer "user_id"
     t.string "image"
@@ -37,6 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_26_062155) do
     t.integer "help_point"
     t.integer "recommend_point"
     t.integer "learn_point"
+    t.string "condition"
+    t.integer "status"
   end
 
   create_table "likes", force: :cascade do |t|
