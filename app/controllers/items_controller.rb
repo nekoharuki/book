@@ -117,11 +117,12 @@ class ItemsController < ApplicationController
 
   def user_items
     @items=Item.where(user_id: @current_user.id,status: 0)
-    @item_requested=Item.find_by(id: params[:item_id],status: 0)
+    @item_requested=Item.find_by(id: params[:item_id],status: [0,1])
   end
 
   def trade
-    item_requested=Item.find_by(id: params[:item_requested_id],status: [0, 1])
+    item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
+    item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
     trade = Trade.new(
       item_requested_id: params[:item_requested_id],
       user_requested_id: item_requested.user.id,
@@ -131,6 +132,8 @@ class ItemsController < ApplicationController
     if trade.save
       item_requested.status=1;
       item_offered.status=1;
+      item_requested.save
+      item_offered.save
       flash[:notice] = "物々交換リクエストできました"
       redirect_to("/items/#{item_requested.id}")
     else
