@@ -58,7 +58,6 @@ class ItemsController < ApplicationController
     @item.help_point = params[:help_point],
     @item.recommend_point = params[:recommend_point],
     @item.learn_point = params[:learn_point]
-    @item.status=0
     image_url = @item.image.url
     @item.image = params[:image]
 
@@ -74,7 +73,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find_by(id: params[:id],status: [0, 1])
+    @item = Item.find_by(id: params[:id],status: [0,1])
     if @item.destroy
       flash[:notice] = "削除できました"
       redirect_to("/items/index")
@@ -85,16 +84,16 @@ class ItemsController < ApplicationController
   end
 
   def destroy_form
-    @item = Item.find_by(id: params[:id],status: [0, 1])
+    @item = Item.find_by(id: params[:id],status: [0,1])
   end
 
   def category
     @category_name = params[:category]
-    @items = Item.where(category: @category_name,status: [0, 1])
+    @items = Item.where(category: @category_name,status: [0,1])
   end
 
   def categorize
-    @categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
+    @categorize = Item.where(status: [0,1]).select(:category).distinct.pluck(:category)
   end
 
   def like
@@ -130,8 +129,8 @@ class ItemsController < ApplicationController
       user_offered_id: @current_user.id
     )
     if trade.save
-      item_requested.status=1;
-      item_offered.status=1;
+      item_requested.status=1
+      item_offered.status=1
       item_requested.save
       item_offered.save
       flash[:notice] = "物々交換リクエストできました"
@@ -152,8 +151,8 @@ class ItemsController < ApplicationController
       user_offered_id: item_offered.user.id
     )
     if detail.save
-      item_requested.status=2;
-      item_offered.status=2;
+      item_requested.status=2
+      item_offered.status=2
       item_requested.save
       item_offered.save
       flash[:notice]="物々交換できました"
