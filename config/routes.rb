@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "items/new" => "items#new"
   post "items/create" => "items#create"
   get "items/categorize" => "items#categorize"
+  get "items/replaced" => "items#replaced"
   get "items/category/:category" => "items#category"
   get "items/:item_id/user_items" => "items#user_items"
   get "items/:id/edit" => "items#edit"

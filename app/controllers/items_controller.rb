@@ -159,4 +159,8 @@ class ItemsController < ApplicationController
       redirect_to("/items/index")
     end
   end
+  def replaced
+    @items_offered=Detail.where(user_offered_id: @current_user.id);
+    @items_requested=Detail.where(user_requested_id: @current_user.id);
+  end
 end
