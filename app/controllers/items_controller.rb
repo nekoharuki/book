@@ -155,6 +155,8 @@ class ItemsController < ApplicationController
       item_offered.status=2
       item_requested.save
       item_offered.save
+      trade=Trade.find_by(item_requested_id: detail.item_requested.id,item_offered_id: detail.item_offered_id,user_offered_id: detail.user_offered_id,user_requested_id: detail.user_requested_id)
+      trade.destory
       flash[:notice]="物々交換できました"
       redirect_to("/items/index")
     end
@@ -164,4 +166,3 @@ class ItemsController < ApplicationController
     @items_requested=Detail.where(user_requested_id: @current_user.id);
   end
 end
-

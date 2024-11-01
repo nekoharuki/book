@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   mount_uploader :image, ImageUploader
-  validates :name, {presence: true}
+  validates :title, {presence: true}
   validates :author, {presence: true}
   validates :publisher, {presence: true}
   validates :content, {presence: true}
