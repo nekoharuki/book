@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find_by(id: params[:id],status: [0, 1,2])
+    @item = Item.find_by(id: params[:id],status: [0,1,2])
     @reviews=Review.where(item_id: @item.id)
     @trades=Trade.where(item_requested_id: @item.id)
   end
@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(
-      name: params[:name],
+      title: params[:title],
       author: params[:author],
       publisher: params[:publisher],
       content: params[:content],
@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find_by(id: params[:id])
-    @item.name = params[:name]
+    @item.title = params[:title]
     @item.author = params[:author]
     @item.publisher = params[:publisher]
     @item.content = params[:content]
@@ -164,3 +164,4 @@ class ItemsController < ApplicationController
     @items_requested=Detail.where(user_requested_id: @current_user.id);
   end
 end
+

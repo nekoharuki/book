@@ -4,7 +4,7 @@
   <%=link_to("出品する","/items/new")%>
 <% else %>
   <% @items.each do |item| %>
-    <%= link_to(item.name,"/items/#{item.id}") %>
+    <%= link_to(item.title,"/items/#{item.id}") %>
     <%= link_to("この商品と物々交換する", "/items/#{@item_requested.id}/#{item.id}/trade", data: { turbo_method: "post" }) %>
 
   <% end %>

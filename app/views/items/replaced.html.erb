@@ -2,19 +2,19 @@
 <p>-----------------------------------</p>
 <%@items_offered.each do |item|%>
 <p>交換した自分の商品:
-<%=linK_to(item.item_offered.name,"/items/#{item.item_offered_id}")%>
+<%=linK_to(item.item_offered.title,"/items/#{item.item_offered_id}")%>
 </p>
 <p>交換した相手の商品:
-<%=link_to(item.item_requested.name,"/items/#{item.item_requested_id}")%>
+<%=link_to(item.item_requested.title,"/items/#{item.item_requested_id}")%>
 </p>
 <p>-----------------------------------</p>
 <%end%>
 <%@items_requested.each do |item|%>
 <p>交換した自分の商品:
-<%=link_to(item.item_requested.name,"/items/#{item.item_requested_id}")%>
+<%=link_to(item.item_requested.title,"/items/#{item.item_requested_id}")%>
 </p>
 <p>交換した相手の商品:
-<%=link_to(item.item_offered.name,"/items/#{item.item_offered_id}")%>
+<%=link_to(item.item_offered.title,"/items/#{item.item_offered_id}")%>
 </p>
 <p>-----------------------------------</p>
 <%end%>

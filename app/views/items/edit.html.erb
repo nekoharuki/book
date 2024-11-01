@@ -3,8 +3,8 @@
 <%= form_tag("/items/#{@item.id}/update",{multipart: true}) do %>
 
     <p>
-        <label for="name">タイトル:</label>
-        <input type="text" name="name" id="name" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%=@item.name%>"  required>
+        <label for="title">タイトル:</label>
+        <input type="text" name="title" id="title" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%=@item.name%>"  required>
     </p>
     <p>
         <label for="author">作者:</label>

@@ -2,7 +2,7 @@
 <%@likes.each do |like|%>
     <%item=Item.find_by(id: like.item_id)%>
 
-    <%=link_to(item.name,"/items/#{item.id}")%>
+    <%=link_to(item.title,"/items/#{item.id}")%>
 
     <br>
 <%end%>
