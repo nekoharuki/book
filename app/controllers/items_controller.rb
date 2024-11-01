@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find_by(id: params[:id],status: [0, 1])
+    @item = Item.find_by(id: params[:id],status: [0, 1,2])
     @reviews=Review.where(item_id: @item.id)
     @trades=Trade.where(item_requested_id: @item.id)
   end

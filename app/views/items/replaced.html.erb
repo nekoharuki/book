@@ -1,4 +1,23 @@
 <h1>自分が物々交換した商品</h1>
-<%@items_offered.each do |item_offered|%>
-<%=item_offered.name%>
+<p>-----------------------------------</p>
+<%@items_offered.each do |item|%>
+<p>交換した自分の商品:
+<%=item.item_offered.name%>
+<%=linK_to(item.item_offered.name,"/items/#{item.item_offered_id}")%>
+</p>
+<p>交換した相手の商品:
+<%=item.item_requested.name%>
+</p>
+<p>-----------------------------------</p>
+<%end%>
+<%@items_requested.each do |item|%>
+<p>交換した自分の商品:
+<%=item.item_requested.name%>
+<%=link_to(item.item_requested.name,"/items/#{item.item_requested_id}")%\]
+
+</p>
+<p>交換した相手の商品:
+<%=item.item_offered.name%>
+</p>
+<p>-----------------------------------</p>
 <%end%>

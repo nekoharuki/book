@@ -10,6 +10,7 @@
 
     <% if session[:user_id] %>
       <%= link_to("商品一覧", "/items/index") %>
+      <%= link_to("交換完了", "/items/replaced") %>
       <%= link_to("出品一覧", "/users/#{@current_user.id}/items") %>
       <%= link_to("いいねした商品", "/items/like") %>
       <%= link_to("出品", "/items/new") %>

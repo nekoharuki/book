@@ -5,23 +5,19 @@ class Detail < ApplicationRecord
   validates :user_requested_id, {presence: true}
 
   def user_offered
-    user_offered=User.find_by(id: user_offered_id)
-    return user_offered
+    return User.find_by(id: self.user_offered_id)
   end
 
   def item_offered
-    item_offered=Item.find_by(id: item_offered_id)
-    return item_offered
+    return Item.find_by(id: self.item_offered_id)
   end
 
   def user_requested
-    user_requested=User.find_by(id: user_requested_id)
-    return user_requested
+    return User.find_by(id: self.user_requested_id)
   end
 
   def item_requested
-    item_requested=Item.find_by(id: item_requested_id)
-    return item_requested
+    return Item.find_by(id: self.item_requested_id)
   end
 
 end
