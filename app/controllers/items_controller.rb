@@ -156,7 +156,7 @@ class ItemsController < ApplicationController
       item_requested.save
       item_offered.save
       trade=Trade.find_by(item_requested_id: detail.item_requested.id,item_offered_id: detail.item_offered_id,user_offered_id: detail.user_offered_id,user_requested_id: detail.user_requested_id)
-      trade.destory
+      trade.destroy
       flash[:notice]="物々交換できました"
       redirect_to("/items/index")
     end
