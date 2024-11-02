@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   before_action :category_not, only: [:category]
   before_action :author_not, only: [:author]
   before_action :publisher_not, only: [:publisher]
+  before_action :trade_not, only: [:trade,:detail]
 
   def index
     @items = Item.where(status: [0, 1])
@@ -220,6 +221,22 @@ class ItemsController < ApplicationController
     if flag==0
       flash[:notice]="その出版社のページはありません"
       redirect_to("/items/publishers")
+    end
+  end
+  def trade_not
+    item_requested=Item.find_by(id: params[item_requested_id])
+    item_offered=Item.find_by(id: params[item_offered_id])
+    if params[:user_offered_id]!=@current_user.id
+      flash[:alert]="その物々交換はできません"
+      redirect_to("/items/index")
+    end
+    if params[:user_offered_id]==@current_user.id && params[:user_offered_id]==@current_user
+      flash[:alert]="その物々交換はできません"
+      redirect_to("/items/index")
+    end
+    if item_requested.user.id==item_offered.user.id
+      flash[:alert]="その物々交換はできません"
+      redirect_to("/items/index")
     end
   end
 
