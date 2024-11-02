@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
   before_action :please_login, only: [:edit, :create, :new, :update, :destroy, :show, :index,:category,:categorize,:like]
   before_action :real_item, only: [:edit, :update, :destroy,:destroy_form]
   before_action :category_not, only: [:category]
+  before_action :author_not, only: [:author]
+  before_action :publisher_not, only: [:publisher]
 
   def index
     @items = Item.where(status: [0, 1])
@@ -102,8 +104,8 @@ class ItemsController < ApplicationController
 
   def category_not
     flag=0;
-    categories = Item.pluck(:category)
-    categories.each do |category|
+    categorize = Item.where(status: [0,1]).select(:category).distinct.pluck(:category)
+    categorize.each do |category|
       if category == params[:category]
         flag=1;
       end
@@ -182,5 +184,33 @@ class ItemsController < ApplicationController
   def authors
     @authors = Item.where(status: [0,1]).select(:author).distinct.pluck(:author)
   end
-  
+
+  def author_not
+    flag=0
+    authors = Item.where(status: [0,1]).select(:author).distinct.pluck(:author)
+    authors.each do |author|
+      if author==params[:author]
+        flag=1;
+      end
+    end
+    if flag==0
+      flash[:notice]="その作者のページはありません"
+      redirect_to("/items/authors")
+    end
+  end
+
+  def publisher_not
+    flag=0
+    publishers = Item.where(status: [0,1]).select(:publisher).distinct.pluck(:publisher)
+    publishers.each do |publisher|
+      if publisher==params[:publisher]
+        flag=1;
+      end
+    end
+    if flag==0
+      flash[:notice]="その出版社のページはありません"
+      redirect_to("/items/publishers")
+    end
+  end
+
 end
