@@ -230,7 +230,7 @@ class ItemsController < ApplicationController
       flash[:alert]="その物々交換はできません"
       redirect_to("/items/index")
     end
-    if params[:user_offered_id]==@current_user.id && params[:user_offered_id]==@current_user
+    if params[:user_offered_id]==@current_user.id && params[:item_requested_id]==@current_user.id
       flash[:alert]="その物々交換はできません"
       redirect_to("/items/index")
     end
