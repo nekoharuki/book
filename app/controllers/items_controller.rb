@@ -148,18 +148,28 @@ class ItemsController < ApplicationController
     item_offered=Item.find_by(id: params[:item_offered_id],status: 1)
     detail = Detail.new(
       item_requested_id: params[:item_requested_id],
-      user_requested_id: @current_user.id,
+      user_requested_id: item_requested.user.id,
       item_offered_id: params[:item_offered_id],
-      user_offered_id: item_offered.user.id
+      user_offered_id: @current_user.id
     )
     if detail.save
       item_requested.status=2
       item_offered.status=2
       item_requested.save
       item_offered.save
-      trade=Trade.find_by(item_requested_id: detail.item_requested.id,item_offered_id: detail.item_offered_id,user_offered_id: detail.user_offered_id,user_requested_id: detail.user_requested_id)
-      trade.destroy
-      flash[:notice]="物々交換できました"
+      trade=Trade.find_by(item_requested_id: detail.item_requested_id,
+      user_requested_id: detail.user_requested_id,
+      item_offered_id: detail.item_offered_id,
+      user_offered_id: detail.user_offered_id)
+      if trade.destroy
+        flash[:notice]="物々交換できました"
+        redirect_to("/items/index")
+      else
+        flash[:alert]="物々交換できませんでした"
+        redirect_to("/items/index")
+      end
+    else
+      flash[:alert]="物々交換できませんでした"
       redirect_to("/items/index")
     end
   end
