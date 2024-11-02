@@ -175,5 +175,12 @@ class ItemsController < ApplicationController
   def publishers
     @publishers = Item.where(status: [0,1]).select(:publisher).distinct.pluck(:publisher)
   end
+  def author
+    @author=params[:author]
+    @items=Item.where(author: params[:author],status: [0,1])
+  end
+  def authors
+    @authors = Item.where(status: [0,1]).select(:author).distinct.pluck(:author)
+  end
   
 end
