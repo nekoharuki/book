@@ -13,10 +13,13 @@ Rails.application.routes.draw do
   get "items/new" => "items#new"
   post "items/create" => "items#create"
   get "items/categorize" => "items#categorize"
+  get "items/publishers" => "items#publishers"
 
   get "items/details" => "items#details"
 
   get "items/category/:category" => "items#category"
+
+  get "items/publisher/:publisher" => "items#publisher"
 
   get "items/:item_id/trade_items" => "items#trade_items"
 

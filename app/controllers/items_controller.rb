@@ -168,4 +168,11 @@ class ItemsController < ApplicationController
   def traded
     @item=Item.find_by(id: params[:id],status: 2);
   end
+  def  publisher
+    @publisher=params[:publisher]
+    @items=Item.where(publisher: params[:publisher],status: [0,1])
+  end
+  def publishers
+    @publishers = Item.where(status: [0,1]).select(:publisher).distinct.pluck(:publisher)
+  end
 end
