@@ -5,11 +5,11 @@
 </p>
 
 <p>作者:
-  <%= @item.author %>
+  <%=link_to(@item.author,"/items/author/#{@item.author}")%>
 </p>
 
 <p>出版社:
-  <%= @item.publisher %>
+    <%=link_to(@item.publisher,"/items/publisher/#{@item.publisher}")%>
 </p>
 
 <p>内容:
