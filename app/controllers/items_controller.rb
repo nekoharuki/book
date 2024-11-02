@@ -224,18 +224,18 @@ class ItemsController < ApplicationController
     end
   end
   def trade_not
-    item_requested=Item.find_by(id: params[item_requested_id])
-    item_offered=Item.find_by(id: params[item_offered_id])
-    if params[:user_offered_id]!=@current_user.id
-      flash[:alert]="その物々交換はできません"
+    item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
+    item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
+    if item_offered.user.id!=@current_user.id
+      flash[:alert]="1その物々交換はできません"
       redirect_to("/items/index")
     end
-    if params[:user_offered_id]==@current_user.id && params[:item_requested_id]==@current_user.id
-      flash[:alert]="その物々交換はできません"
+    if item_offered.user.id==@current_user.id && item_requested.user.id==@current_user.id
+      flash[:alert]="2その物々交換はできません"
       redirect_to("/items/index")
     end
     if item_requested.user.id==item_offered.user.id
-      flash[:alert]="その物々交換はできません"
+      flash[:alert]="3その物々交換はできません"
       redirect_to("/items/index")
     end
   end
