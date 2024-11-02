@@ -14,7 +14,7 @@
       <%= link_to("いいねした商品", "/items/like") %>
       <%= link_to("出品", "/items/new") %>
       <%= link_to("カテゴリー", "/items/categorize") %>
-      <%= link_to("交換完了明細", "/items/replaced") %>
+      <%= link_to("交換完了明細", "/items/details") %>
       <%= link_to("ユーザー一覧", "/users/index") %>
       <%= link_to("ユーザー情報詳細", "/users/#{@current_user.id}") %>
       <%= link_to("ログアウト", "/logout", data: { turbo_method: "post" }) %>

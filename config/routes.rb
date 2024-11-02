@@ -13,13 +13,20 @@ Rails.application.routes.draw do
   get "items/new" => "items#new"
   post "items/create" => "items#create"
   get "items/categorize" => "items#categorize"
-  get "items/replaced" => "items#replaced"
+
+  get "items/details" => "items#details"
+
   get "items/category/:category" => "items#category"
-  get "items/:item_id/user_items" => "items#user_items"
+
+  get "items/:item_id/trade_items" => "items#trade_items"
+
   get "items/:id/edit" => "items#edit"
   post "items/:id/update" => "items#update"
   get "items/:id/destroy" => "items#destroy_form"
   post "items/:id/destroy" => "items#destroy"
+
+  get "items/:id/traded" => "items#traded"
+
   post "items/:item_requested_id/:item_offered_id/trade" => "items#trade"
   post "items/:item_requested_id/:item_offered_id/detail" => "items#detail"
 

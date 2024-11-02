@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find_by(id: params[:id],status: [0,1,2])
+    @item = Item.find_by(id: params[:id],status: [0,1])
     @reviews=Review.where(item_id: @item.id)
     @trades=Trade.where(item_requested_id: @item.id)
   end
@@ -114,7 +114,7 @@ class ItemsController < ApplicationController
       end
   end
 
-  def user_items
+  def trade_items
     @items=Item.where(user_id: @current_user.id,status: 0)
     @item_requested=Item.find_by(id: params[:item_id],status: [0,1])
   end
@@ -161,8 +161,11 @@ class ItemsController < ApplicationController
       redirect_to("/items/index")
     end
   end
-  def replaced
+  def details
     @items_offered=Detail.where(user_offered_id: @current_user.id);
     @items_requested=Detail.where(user_requested_id: @current_user.id);
+  end
+  def traded
+    @item=Item.find_by(id: params[:id],status: 2);
   end
 end

@@ -4,7 +4,7 @@
 
     <p>
         <label for="title">タイトル:</label>
-        <input type="text" name="title" id="title" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%=@item.name%>"  required>
+        <input type="text" name="title" id="title" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%=@item.title%>"  required>
     </p>
     <p>
         <label for="author">作者:</label>
@@ -51,7 +51,7 @@
         <label for="image">画像:</label>
         <%= image_tag @item.image.url if @item.image? %>
         <br>
-        <input type="file" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" required>
+        <input type="file" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" >
     </p>
     <br>
         <input type="submit" value="投稿" >
