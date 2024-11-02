@@ -14,22 +14,15 @@ Rails.application.routes.draw do
   post "items/create" => "items#create"
   get "items/categorize" => "items#categorize"
   get "items/publishers" => "items#publishers"
-
   get "items/details" => "items#details"
-
   get "items/category/:category" => "items#category"
-
   get "items/publisher/:publisher" => "items#publisher"
-
   get "items/:item_id/trade_items" => "items#trade_items"
-
   get "items/:id/edit" => "items#edit"
   post "items/:id/update" => "items#update"
   get "items/:id/destroy" => "items#destroy_form"
   post "items/:id/destroy" => "items#destroy"
-
   get "items/:id/traded" => "items#traded"
-
   post "items/:item_requested_id/:item_offered_id/trade" => "items#trade"
   post "items/:item_requested_id/:item_offered_id/detail" => "items#detail"
 

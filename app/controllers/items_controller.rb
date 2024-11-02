@@ -175,4 +175,5 @@ class ItemsController < ApplicationController
   def publishers
     @publishers = Item.where(status: [0,1]).select(:publisher).distinct.pluck(:publisher)
   end
+  
 end
