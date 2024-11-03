@@ -1,4 +1,8 @@
 class Item < ApplicationRecord
+
+  has_many :offered_trades, class_name: 'Trade', foreign_key: 'item_offered_id', dependent: :destroy
+  has_many :requested_trades, class_name: 'Trade', foreign_key: 'item_requested_id', dependent: :destroy
+
   mount_uploader :image, ImageUploader
   validates :title, {presence: true}
   validates :author, {presence: true}
