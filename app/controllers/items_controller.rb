@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
-  before_action :please_login, only: [:edit, :create, :new, :update, :destroy, :show, :index,:category,:categorize,:like]
-  before_action :real_item, only: [:edit, :update, :destroy,:destroy_form]
+  before_action :please_login
+  before_action :real_item, only: [:edit, :update, :destroy, :destroy_form]
   before_action :category_not, only: [:category]
   before_action :author_not, only: [:author]
   before_action :publisher_not, only: [:publisher]
@@ -13,9 +13,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find_by(id: params[:id],status: [0,1])
-    @reviews=Review.where(item_id: @item.id)
-    @trades=Trade.where(item_requested_id: @item.id)
+    @item = Item.find_by(id: params[:id], status: [0, 1])
+    @reviews = Review.where(item_id: @item.id)
+    @trades = Trade.where(item_requested_id: @item.id)
   end
 
   def new
@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find_by(id: params[:id],status: [0, 1])
+    @item = Item.find_by(id: params[:id], status: [0, 1])
   end
 
   def update
@@ -59,8 +59,8 @@ class ItemsController < ApplicationController
     @item.content = params[:content]
     @item.condition = params[:condition]
     @item.category = params[:category]
-    @item.help_point = params[:help_point],
-    @item.recommend_point = params[:recommend_point],
+    @item.help_point = params[:help_point]
+    @item.recommend_point = params[:recommend_point]
     @item.learn_point = params[:learn_point]
     image_url = @item.image.url
     @item.image = params[:image]
@@ -77,55 +77,55 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find_by(id: params[:id],status: [0,1])
+    @item = Item.find_by(id: params[:id], status: [0, 1])
     if @item.destroy
       flash[:notice] = "削除できました"
       redirect_to("/items/index")
     else
-      flash[:alert]="削除できませんでした"
+      flash[:alert] = "削除できませんでした"
       redirect_to("/items/destroy_form")
     end
   end
 
   def destroy_form
-    @item = Item.find_by(id: params[:id],status: [0,1])
+    @item = Item.find_by(id: params[:id], status: [0, 1])
   end
 
   def category
     @category_name = params[:category]
-    @items = Item.where(category: @category_name,status: [0,1])
+    @items = Item.where(category: @category_name, status: [0, 1])
   end
 
   def categorize
-    @categorize = Item.where(status: [0,1]).select(:category).distinct.pluck(:category)
+    @categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
   end
 
   def like
-    @likes=Like.where(user_id: @current_user.id)
+    @likes = Like.where(user_id: @current_user.id)
   end
 
   def category_not
-    flag=0;
-    categorize = Item.where(status: [0,1]).select(:category).distinct.pluck(:category)
+    flag = 0
+    categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
     categorize.each do |category|
       if category == params[:category]
-        flag=1;
+        flag = 1
       end
     end
-      if flag==0
-        flash[:notice] = "そのカテゴリーはありません"
-        redirect_to("/items/categorize");
-      end
+    if flag == 0
+      flash[:notice] = "そのカテゴリーはありません"
+      redirect_to("/items/categorize")
+    end
   end
 
   def trade_items
-    @items=Item.where(user_id: @current_user.id,status: 0)
-    @item_requested=Item.find_by(id: params[:item_id],status: [0,1])
+    @items = Item.where(user_id: @current_user.id, status: 0)
+    @item_requested = Item.find_by(id: params[:item_id], status: [0, 1])
   end
 
   def trade
-    item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
-    item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
+    item_requested = Item.find_by(id: params[:item_requested_id], status: [0, 1])
+    item_offered = Item.find_by(id: params[:item_offered_id], status: [0, 1])
     trade = Trade.new(
       item_requested_id: item_requested.id,
       user_requested_id: item_requested.user.id,
@@ -133,8 +133,8 @@ class ItemsController < ApplicationController
       user_offered_id: item_offered.user.id
     )
     if trade.save
-      item_requested.status=1
-      item_offered.status=1
+      item_requested.status = 1
+      item_offered.status = 1
       item_requested.save
       item_offered.save
       flash[:notice] = "物々交換リクエストできました"
@@ -146,129 +146,135 @@ class ItemsController < ApplicationController
   end
 
   def detail
-      item_requested=Item.find_by(id: params[:item_requested_id],status: 1)
-      item_offered=Item.find_by(id: params[:item_offered_id],status: 1)
+    item_requested = Item.find_by(id: params[:item_requested_id], status: 1)
+    item_offered = Item.find_by(id: params[:item_offered_id], status: 1)
 
-      detail = Detail.new(
-        item_requested_id: item_requested.id,
-        user_requested_id: item_requested.user.id,
-        item_offered_id: item_offered.id,
-        user_offered_id: item_offered.user.id
-      )
+    detail = Detail.new(
+      item_requested_id: item_requested.id,
+      user_requested_id: item_requested.user.id,
+      item_offered_id: item_offered.id,
+      user_offered_id: item_offered.user.id
+    )
 
-      if detail.save
-        item_requested.status=2
-        item_offered.status=2
-        item_requested.save
-        item_offered.save
+    if detail.save
+      item_requested.status = 2
+      item_offered.status = 2
+      item_requested.save
+      item_offered.save
 
-        trade=Trade.find_by(item_requested_id: detail.item_requested_id,
-        user_requested_id: detail.user_requested_id,
-        item_offered_id: detail.item_offered_id,
-        user_offered_id: detail.user_offered_id)
+      trade = Trade.find_by(item_requested_id: detail.item_requested_id,
+                            user_requested_id: detail.user_requested_id,
+                            item_offered_id: detail.item_offered_id,
+                            user_offered_id: detail.user_offered_id)
 
-        if trade.destroy
-          flash[:notice]="物々交換できました"
-          redirect_to("/items/index")
-        else
-          flash[:alert]="物々交換できませんでした"
-          redirect_to("/items/index")
-        end
+      if trade.destroy
+        flash[:notice] = "物々交換できました"
+        redirect_to("/items/index")
       else
-        flash[:alert]="物々交換できませんでした"
+        flash[:alert] = "物々交換できませんでした"
         redirect_to("/items/index")
       end
+    else
+      flash[:alert] = "物々交換できませんでした"
+      redirect_to("/items/index")
+    end
   end
 
   def details
-    @items_offered=Detail.where(user_offered_id: @current_user.id);
-    @items_requested=Detail.where(user_requested_id: @current_user.id);
+    @items_offered = Detail.where(user_offered_id: @current_user.id)
+    @items_requested = Detail.where(user_requested_id: @current_user.id)
   end
+
   def traded
-    @item=Item.find_by(id: params[:id],status: 2);
+    @item = Item.find_by(id: params[:id], status: 2)
   end
-  def  publisher
-    @publisher=params[:publisher]
-    @items=Item.where(publisher: params[:publisher],status: [0,1])
+
+  def publisher
+    @publisher = params[:publisher]
+    @items = Item.where(publisher: params[:publisher], status: [0, 1])
   end
+
   def publishers
-    @publishers = Item.where(status: [0,1]).select(:publisher).distinct.pluck(:publisher)
+    @publishers = Item.where(status: [0, 1]).select(:publisher).distinct.pluck(:publisher)
   end
+
   def author
-    @author=params[:author]
-    @items=Item.where(author: params[:author],status: [0,1])
+    @author = params[:author]
+    @items = Item.where(author: params[:author], status: [0, 1])
   end
+
   def authors
-    @authors = Item.where(status: [0,1]).select(:author).distinct.pluck(:author)
+    @authors = Item.where(status: [0, 1]).select(:author).distinct.pluck(:author)
   end
 
   def author_not
-    flag=0
-    authors = Item.where(status: [0,1]).select(:author).distinct.pluck(:author)
+    flag = 0
+    authors = Item.where(status: [0, 1]).select(:author).distinct.pluck(:author)
     authors.each do |author|
-      if author==params[:author]
-        flag=1;
+      if author == params[:author]
+        flag = 1
       end
     end
-    if flag==0
-      flash[:notice]="その作者のページはありません"
+    if flag == 0
+      flash[:notice] = "その作者のページはありません"
       redirect_to("/items/authors")
     end
   end
 
   def publisher_not
-    flag=0
-    publishers = Item.where(status: [0,1]).select(:publisher).distinct.pluck(:publisher)
+    flag = 0
+    publishers = Item.where(status: [0, 1]).select(:publisher).distinct.pluck(:publisher)
     publishers.each do |publisher|
-      if publisher==params[:publisher]
-        flag=1;
+      if publisher == params[:publisher]
+        flag = 1
       end
     end
-    if flag==0
-      flash[:notice]="その出版社のページはありません"
+    if flag == 0
+      flash[:notice] = "その出版社のページはありません"
       redirect_to("/items/publishers")
     end
   end
+
   def trade_not
-    item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
-    item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
-    if item_offered.user.id!=@current_user.id
-      flash[:alert]="物々交換はできませんでした"
+    item_requested = Item.find_by(id: params[:item_requested_id], status: [0, 1])
+    item_offered = Item.find_by(id: params[:item_offered_id], status: [0, 1])
+    if item_offered.user.id != @current_user.id
+      flash[:alert] = "物々交換リクエストに失敗しました"
       redirect_to("/items/index")
     end
-    if item_requested.user.id==item_offered.user.id
-      flash[:alert]="物々交換はできませんでした"
+    if item_requested.user.id == item_offered.user.id
+      flash[:alert] = "物々交換リクエストに失敗しました"
       redirect_to("/items/index")
     end
-    if item_requested.id==item_offered.id
-      flash[:alert]="物々交換はできませんでした"
+    if item_requested.id == item_offered.id
+      flash[:alert] = "物々交換リクエストに失敗しました"
       redirect_to("/items/index")
     end
   end
 
   def detail_not
-    item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
-    item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
+    item_requested = Item.find_by(id: params[:item_requested_id], status: [0, 1])
+    item_offered = Item.find_by(id: params[:item_offered_id], status: [0, 1])
 
-    trade=Trade.find_by(item_requested_id: item_requested.id,
-    user_requested_id: item_requested.user.id,
-    item_offered_id:  item_offered.id,
-    user_offered_id: item_offered.user.id)
+    trade = Trade.find_by(item_requested_id: item_requested.id,
+                          user_requested_id: item_requested.user.id,
+                          item_offered_id: item_offered.id,
+                          user_offered_id: item_offered.user.id)
 
     if !trade
-      flash[:alert]="物々交換はできませんでした"
+      flash[:alert] = "物々交換できませんでした"
       redirect_to("/items/index")
     end
-    if item_requested.user.id!=@current_user.id
-      flash[:alert]="物々交換はできませんでした"
+    if item_requested.user.id != @current_user.id
+      flash[:alert] = "物々交換できませんでした"
       redirect_to("/items/index")
     end
-    if item_requested.user.id==item_offered.user.id
-      flash[:alert]="物々交換はできませんでした"
+    if item_requested.user.id == item_offered.user.id
+      flash[:alert] = "物々交換できませんでした"
       redirect_to("/items/index")
     end
-    if item_requested.id==item_offered.id
-      flash[:alert]="物々交換はできませんでした"
+    if item_requested.id == item_offered.id
+      flash[:alert] = "物々交換できませんでした"
       redirect_to("/items/index")
     end
   end
