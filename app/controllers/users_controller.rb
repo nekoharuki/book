@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       @email=params[:email]
       @address=params[:address]
       @password=params[:password]
-      flash[:alert]="ユーザー登録できませんでした"
+      flash[:alert]="1ユーザー登録できませんでした"
       render("users/new")
     end
   end

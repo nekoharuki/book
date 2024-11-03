@@ -5,7 +5,8 @@ class ItemsController < ApplicationController
   before_action :category_not, only: [:category]
   before_action :author_not, only: [:author]
   before_action :publisher_not, only: [:publisher]
-  before_action :trade_not, only: [:trade,:detail]
+  before_action :trade_not, only: [:trade]
+  before_action :detail_not, only: [:detail]
 
   def index
     @items = Item.where(status: [0, 1])
@@ -126,10 +127,10 @@ class ItemsController < ApplicationController
     item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
     item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
     trade = Trade.new(
-      item_requested_id: params[:item_requested_id],
+      item_requested_id: item_requested.id,
       user_requested_id: item_requested.user.id,
-      item_offered_id: params[:item_offered_id],
-      user_offered_id: @current_user.id
+      item_offered_id: item_offered.id,
+      user_offered_id: item_offered.user.id
     )
     if trade.save
       item_requested.status=1
@@ -148,10 +149,10 @@ class ItemsController < ApplicationController
     item_requested=Item.find_by(id: params[:item_requested_id],status: 1)
     item_offered=Item.find_by(id: params[:item_offered_id],status: 1)
     detail = Detail.new(
-      item_requested_id: params[:item_requested_id],
+      item_requested_id: item_requested.id,
       user_requested_id: item_requested.user.id,
-      item_offered_id: params[:item_offered_id],
-      user_offered_id: @current_user.id
+      item_offered_id: item_offered.id,
+      user_offered_id: item_offered.user.id
     )
     if detail.save
       item_requested.status=2
@@ -236,6 +237,31 @@ class ItemsController < ApplicationController
     end
     if item_requested.user.id==item_offered.user.id
       flash[:alert]="3その物々交換はできません"
+      redirect_to("/items/index")
+    end
+    if item_requested.id==item_offered.id
+      flash[:alert]="4その物々交換はできません"
+      redirect_to("/items/index")
+    end
+  end
+
+  def detail_not
+    item_requested=Item.find_by(id: params[:item_requested_id],status: [0,1])
+    item_offered=Item.find_by(id: params[:item_offered_id],status: [0,1])
+    if item_requested.user.id!=@current_user.id
+      flash[:alert]="1その物々交換はできません"
+      redirect_to("/items/index")
+    end
+    if item_offered.user.id==@current_user.id && item_requested.user.id==@current_user.id
+      flash[:alert]="2その物々交換はできません"
+      redirect_to("/items/index")
+    end
+    if item_requested.user.id==item_offered.user.id
+      flash[:alert]="3その物々交換はできません"
+      redirect_to("/items/index")
+    end
+    if item_requested.id==item_offered.id
+      flash[:alert]="4その物々交換はできません"
       redirect_to("/items/index")
     end
   end
