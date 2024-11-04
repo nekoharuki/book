@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "ユーザー登録完了しました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     else
       @name = params[:name]
       @address = params[:address]
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     @user.address = params[:address]
     if @user.save
       flash[:notice] = "ユーザー情報編集できました"
-      redirect_to("/users/index")
+      redirect_to("/users")
     else
       flash[:alert] = "ユーザー情報編集できませんでした"
       render("users/edit")
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
       redirect_to("/login")
     else
       flash[:alert] = "ユーザー情報削除できませんでした"
-      redirect_to("/users/index")
+      redirect_to("/users")
     end
   end
 
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "ログインできました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     else
       flash[:alert] = "メールアドレスまたはパスワードが間違っています"
       @password = params[:password]

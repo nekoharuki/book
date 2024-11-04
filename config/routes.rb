@@ -41,9 +41,6 @@ Rails.application.routes.draw do
   post "login", to: "users#login"
   post "logout", to: "users#logout"
 
-  # get "users/:id", to: "users#show", as: :user
-  # get "items/:id", to: "items#show", as: :item
-
   get "/about", to: "home#about"
   root "home#top"
 end

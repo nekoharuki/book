@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
 
     if @item.save
       flash[:notice] = "登録できました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     else
       flash[:alert] = "登録できませんでした"
       render("items/new")
@@ -77,7 +77,7 @@ class ItemsController < ApplicationController
       public_id = image_url.split('/').last.split('.').first
       Cloudinary::Uploader.destroy(public_id)
       flash[:notice] = "編集できました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     else
       flash[:alert] = "編集できませんでした"
       render("items/edit")
@@ -89,7 +89,7 @@ class ItemsController < ApplicationController
     @item = Item.find_by(id: item_id, status: [0, 1])
     if @item.destroy
       flash[:notice] = "削除できました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     else
       flash[:alert] = "削除できませんでした"
       redirect_to("/items/destroy_form")
@@ -184,14 +184,14 @@ class ItemsController < ApplicationController
 
       if trade.destroy
         flash[:notice] = "物々交換できました"
-        redirect_to("/items/index")
+        redirect_to("/items")
       else
         flash[:alert] = "物々交換できませんでした"
-        redirect_to("/items/index")
+        redirect_to("/items")
       end
     else
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
   end
 
@@ -258,15 +258,15 @@ class ItemsController < ApplicationController
     item_offered = Item.find_by(id: item_offered_id, status: [0, 1])
     if item_offered.user.id != @current_user.id
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
     if item_requested.user.id == item_offered.user.id
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
     if item_requested.id == item_offered.id
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
   end
 
@@ -284,19 +284,19 @@ class ItemsController < ApplicationController
 
     if !trade
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
     if item_requested.user.id != @current_user.id
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
     if item_requested.user.id == item_offered.user.id
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
     if item_requested.id == item_offered.id
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
   end
 
