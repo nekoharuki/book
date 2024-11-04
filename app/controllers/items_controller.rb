@@ -19,8 +19,13 @@ class ItemsController < ApplicationController
   def show
     item_id = HASHIDS.decode(params[:id]).first
     @item = Item.find_by(id: item_id, status: [0, 1])
-    @reviews = Review.where(item_id: @item.id)
-    @trades = Trade.where(item_requested_id: @item.id)
+    if @item
+      @reviews = Review.where(item_id: @item.id)
+      @trades = Trade.where(item_requested_id: @item.id)
+    else
+      flash[:alert] = "アイテムが見つかりません"
+      redirect_to("/items/index")
+    end
   end
 
   def create
