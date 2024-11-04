@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
       redirect_to items_path
     end
   end
-  
+
   def create
     @item = Item.new(
       title: params[:title],
@@ -108,7 +108,7 @@ class ItemsController < ApplicationController
 
   def category
     @category_name = params[:category]
-    @items = Item.where(category: @category_name, status: [0, 1])
+    @items = Item.where(category: params[:category], status: [0, 1])
   end
 
   def categorize
@@ -220,6 +220,7 @@ class ItemsController < ApplicationController
   end
 
   def author
+    @author = params[:author]
     @items = Item.where(author: params[:author], status: [0, 1])
   end
 
@@ -283,7 +284,8 @@ class ItemsController < ApplicationController
     trade = Trade.find_by(item_requested_id: item_requested.id,
                           user_requested_id: item_requested.user.id,
                           item_offered_id: item_offered.id,
-                          user_offered_id: item_offered.user.id)
+                          user_offered_id: item_offered.user.id
+                          )
 
     if !trade
       flash[:alert] = "物々交換できませんでした"

@@ -2,10 +2,10 @@
 
 <% @trades.each do |trade| %>
 <% item=Item.find_by(id: trade.item_offered_id) %>
-<%= link_to(item.title,"/items/#{item.id}") %>
+<%= link_to(item.title,"/items/#{HASHIDS.encode(item.id)}") %>
 
 <% if(@item.user.id==@current_user.id) %>
-<%= link_to("物々交換する", "/items/#{@item.id}/#{item.id}/detail", data: { turbo_method: "post" }) %>  
+<%= link_to("物々交換する", "/items/#{HASHIDS.encode(@item.id)}/#{HASHIDS.encode(item.id)}/detail", data: { turbo_method: "post" }) %>  
 <%end%>
 <br>
 
