@@ -151,7 +151,7 @@ class ItemsController < ApplicationController
       item_requested.save
       item_offered.save
       flash[:notice] = "物々交換リクエストできました"
-      redirect_to(item_path(HASHIDS.encode(item_requested.id)))
+      redirect_to("items/#{HASHIDS.encode(item_requested.id)}")
     else
       flash[:alert] = "物々交換リクエストに失敗しました"
       redirect_to("/items/#{HASHIDS.encode(item_requested.id)}/user_items")
