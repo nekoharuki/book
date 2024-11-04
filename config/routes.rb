@@ -17,10 +17,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, param: :id do
-    collection do
-      get :index, :new
-    end
-
     member do
       get :edit, :destroy_form, :user_items
       post :update, :destroy
@@ -45,9 +41,9 @@ Rails.application.routes.draw do
   post "login", to: "users#login"
   post "logout", to: "users#logout"
 
-  get "users/:id", to: "users#show"
-  get "items/:id", to: "items#show"
+  # get "users/:id", to: "users#show", as: :user
+  # get "items/:id", to: "items#show", as: :item
 
   get "/about", to: "home#about"
-  get "/", to: "home#top"
+  root "home#top"
 end

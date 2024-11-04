@@ -1,7 +1,7 @@
 <h1>商品一覧</h1>
 <%@items.each do |item|%>
 
-  <%= link_to(item.title,"/items/{HASHIDS.encode(item.id)}") %>
+  <%= link_to(item.title,/items/(HASHIDS.encode(item.id))) %>
 <% if like=Like.find_by(item_id: item.id,user_id: @current_user.id)%>
     <%=link_to("いいね済み","/likes/#{HASHIDS.encode(item.id)}/#{HASHIDS.encode(@current_user.id)}/destroy",data: { turbo_method: "post" })%>
     <%elsif(@current_user.id!=item.user_id)%>

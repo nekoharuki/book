@@ -18,11 +18,6 @@ class ItemsController < ApplicationController
 
   def show
     item_id = HASHIDS.decode(params[:id]).first
-    if item_id.nil?
-      flash[:alert] = "無効なアイテムIDです"
-      redirect_to items_path and return
-    end
-
     @item = Item.find_by(id: item_id, status: [0, 1])
     if @item
       @reviews = Review.where(item_id: @item.id)
