@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_user
-  skip_before_action :verify_authenticity_token, only: [:login, :logout, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy, :create, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def set_current_user
     @current_user=User.find_by(id: session[:user_id]);

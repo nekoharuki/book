@@ -58,12 +58,13 @@ gem 'carrierwave'
 
 # Gemfile
 
-# 既存のgem定義の下に以下を追加
 gem 'mutex_m'
 
 gem 'bigdecimal'
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'hashids'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

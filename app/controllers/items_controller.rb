@@ -12,12 +12,6 @@ class ItemsController < ApplicationController
     @items = Item.where(status: [0, 1])
   end
 
-  def show
-    @item = Item.find_by(id: params[:id], status: [0, 1])
-    @reviews = Review.where(item_id: @item.id)
-    @trades = Trade.where(item_requested_id: @item.id)
-  end
-
   def new
     @item = Item.new
   end
@@ -278,4 +272,11 @@ class ItemsController < ApplicationController
       redirect_to("/items/index")
     end
   end
+
+  def show
+    @item = Item.find_by(id: params[:id], status: [0, 1])
+    @reviews = Review.where(item_id: @item.id)
+    @trades = Trade.where(item_requested_id: @item.id)
+  end
+
 end
