@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
 
+  resources :items, param: :id
+  resources :items, param: :item_requested_id
+  resources :items, param: :item_offered_id
+  resources :items, param: :item_id
+  resources :users, param: :id
+  resources :reviews, param: :item_id
+  resources :reviews, param: :id
+  resources :likes, param: :item_id
+  resources :likes, param: :user_id
+
+
   post "likes/:item_id/:user_id/create" => "likes#create"
   post "likes/:item_id/:user_id/destroy" => "likes#destroy"
 
