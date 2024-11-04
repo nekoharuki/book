@@ -5,11 +5,11 @@
 </p>
 
 <p>作者:        
-  <%=link_to(@item.author,"/items/author/#{HASHIDS.encode(@item.author)}")%>
+  <%=link_to(@item.author,"/items/author/#{@item.author}")%>
 </p>
 
 <p>出版社:
-    <%=link_to(@item.publisher,"/items/publisher/#{HASHIDS.encode(@item.publisher)}")%>
+    <%=link_to(@item.publisher,"/items/publisher/#{@item.publisher}")%>
 </p>
 
 <p>内容:
@@ -33,7 +33,7 @@
 </p>
 
 <p>カテゴリー:
-  <%= link_to(@item.category, "/items/category/#{HASHIDS.encode(@item.category)}") %>
+  <%= link_to(@item.category, "/items/category/#{@item.category}") %>
 </p>
 
 <p>出品者:

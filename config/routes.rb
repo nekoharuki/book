@@ -1,61 +1,51 @@
 Rails.application.routes.draw do
+  resources :items, param: :id do
+    collection do
+      get 'like'
+      get 'categorize'
+      get 'publishers'
+      get 'authors'
+      get 'details'
+    end
+    member do
+      get 'category/:category', action: :category, as: :category
+      get 'publisher/:publisher', action: :publisher, as: :publisher
+      get 'author/:author', action: :author, as: :author
+      get 'trade_items'
+      get 'traded'
+      post 'trade/:item_requested_id/:item_offered_id', action: :trade, as: :trade
+      post 'detail/:item_requested_id/:item_offered_id', action: :detail, as: :detail
+    end
+  end
 
-  resources :items, param: :id
-  resources :items, param: :item_requested_id
-  resources :items, param: :item_offered_id
-  resources :items, param: :item_id
-  resources :users, param: :id
-  resources :reviews, param: :item_id
-  resources :reviews, param: :id
-  resources :likes, param: :item_id
-  resources :likes, param: :user_id
+  resources :users, param: :id do
+    member do
+      get 'items', action: :user_items, as: :user_items
+    end
+  end
 
+  resources :reviews, param: :id do
+    collection do
+      post ':item_id/create', action: :create, as: :create
+    end
+    member do
+      get ':item_id/edit', action: :edit, as: :edit
+      post ':item_id/update', action: :update, as: :update
+      post ':item_id/destroy', action: :destroy, as: :destroy
+    end
+  end
 
-  post "likes/:item_id/:user_id/create" => "likes#create"
-  post "likes/:item_id/:user_id/destroy" => "likes#destroy"
+  resources :likes, param: :id do
+    collection do
+      post ':item_id/:user_id/create', action: :create, as: :create
+      post ':item_id/:user_id/destroy', action: :destroy, as: :destroy
+    end
+  end
 
-  post "reviews/:item_id/create" => "reviews#create"
-  get "reviews/:item_id/:id/edit" => "reviews#edit"
-  post "reviews/:item_id/:id/update" => "reviews#update"
-  post "reviews/:item_id/:id/destroy" => "reviews#destroy"
+  get 'login', to: 'users#login_form'
+  post 'login', to: 'users#login'
+  post 'logout', to: 'users#logout'
 
-  get "items/index" => "items#index"
-  get "items/like" => "items#like"
-  get "items/new" => "items#new"
-  post "items/create" => "items#create"
-  get "items/categorize" => "items#categorize"
-  get "items/publishers" => "items#publishers"
-  get "items/authors" => "items#authors"
-  get "items/details" => "items#details"
-  get "items/category/:category" => "items#category"
-  get "items/publisher/:publisher" => "items#publisher"
-  get "items/author/:author" => "items#author"
-  get "items/:item_id/trade_items" => "items#trade_items"
-  get "items/:id/edit" => "items#edit"
-  post "items/:id/update" => "items#update"
-  get "items/:id/destroy" => "items#destroy_form"
-  post "items/:id/destroy" => "items#destroy"
-  get "items/:id/traded" => "items#traded"
-  post "items/:item_requested_id/:item_offered_id/trade" => "items#trade"
-  post "items/:item_requested_id/:item_offered_id/detail" => "items#detail"
-
-
-  get "users/index" => "users#index"
-  get "users/new" => "users#new"
-  post "users/create" => "users#create"
-  get "users/:id/items" => "users#user_items"
-  get "users/:id/edit" => "users#edit"
-  post "users/:id/update" => "users#update"
-  get "users/:id/destroy" => "users#destroy_form"
-  post "users/:id/destroy" => "users#destroy"
-
-  get "login" => "users#login_form"
-  post "login" => "users#login"
-  post "logout" => "users#logout"
-
-  get "users/:id" => "users#show"
-  get "items/:id" => "items#show"
-
-  get "/about" => "home#about"
-  get "/" => "home#top"
+  get 'about', to: 'home#about'
+  root 'home#top'
 end

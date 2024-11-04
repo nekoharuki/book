@@ -10,7 +10,7 @@
 
     <% if session[:user_id] %>
       <%= link_to("商品一覧", "/items/index") %>
-      <%= link_to("出品一覧", "/users/#{@current_user.id}/items") %>
+      <%= link_to("出品一覧", "/users/#{HASHIDS.encode(@current_user.id)}/items") %>
       <%= link_to("いいねした商品", "/items/like") %>
       <%= link_to("出品", "/items/new") %>
       <%= link_to("カテゴリー", "/items/categorize") %>
@@ -18,7 +18,7 @@
       <%= link_to("作者", "/items/authors") %>
       <%= link_to("交換完了明細", "/items/details") %>
       <%= link_to("ユーザー一覧", "/users/index") %>
-      <%= link_to("ユーザー情報詳細", "/users/#{@current_user.id}") %>
+      <%= link_to("ユーザー情報詳細", "/users/#{HASHIDS.encode(@current_user.id)}") %>
       <%= link_to("ログアウト", "/logout", data: { turbo_method: "post" }) %>
       <% else %>
       <%= link_to("ホーム", "/") %>
