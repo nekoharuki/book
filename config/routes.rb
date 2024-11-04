@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :items, param: :id
 
   post "likes/:item_id/:user_id/create" => "likes#create"
   post "likes/:item_id/:user_id/destroy" => "likes#destroy"

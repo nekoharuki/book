@@ -15,6 +15,11 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
   end
+  def show
+    @item = Item.find_by(id: params[:id], status: [0, 1])
+    @reviews = Review.where(item_id: @item.id)
+    @trades = Trade.where(item_requested_id: @item.id)
+  end
 
   def create
     @item = Item.new(
@@ -273,10 +278,5 @@ class ItemsController < ApplicationController
     end
   end
 
-  def show
-    @item = Item.find_by(id: params[:id], status: [0, 1])
-    @reviews = Review.where(item_id: @item.id)
-    @trades = Trade.where(item_requested_id: @item.id)
-  end
 
 end
