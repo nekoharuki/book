@@ -32,6 +32,20 @@ Rails.application.routes.draw do
       get 'destroy_form', to: 'users#destroy_form'
     end
   end
+  post 'likes/:item_id/:user_id/create', to: 'likes#create'
+  post 'likes/:item_id/:user_id/destroy', to: 'likes#destroy'
+
+  resources :reviews, only: [:create, :edit, :update, :destroy] do
+    collection do
+      post ':item_id/create', to: 'reviews#create'
+    end
+    member do
+      get ':item_id/edit', to: 'reviews#edit'
+      post ':item_id/update', to: 'reviews#update'
+      post ':item_id/destroy', to: 'reviews#destroy'
+    end
+  end
+
   get '/about', to: 'home#about'
   get '/', to: 'home#top'
 end
