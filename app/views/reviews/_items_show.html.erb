@@ -2,20 +2,20 @@
 <% @reviews.each do |review| %>
   <p>
     評価: <%= review.point %> 点  
-    <%=link_to(review.user.name,"/users/#{review.user.id}/items")%>
+    <%=link_to(review.user.name,"/users/#{HASHIDS.encode(review.user.id)}/items")%>
   </p>
   <p>
     コメント:
     <%= review.comment %>
   </p>
   <% if review.user_id == @current_user.id %>
-    <%= link_to("編集", "/reviews/#{review.item_id}/#{review.id}/edit") %>
-    <%= link_to("削除", "/reviews/#{review.item_id}/#{review.id}/destroy", data: { turbo_method: "post" }) %>
+    <%= link_to("編集", "/reviews/#{HASHIDS.encode(review.id)}/#{HASHIDS.encode(review.item_id)}/edit") %>
+    <%= link_to("削除", "/reviews/#{HASHIDS.encode(review.id)}/#{HASHIDS.encode(review.item_id)}/destroy", data: { turbo_method: "delete" }) %>
   <% end %>
 <% end %>
 
 <% if @item.user_id != @current_user.id %>
-  <%= form_tag("/reviews/#{@item.id}/create", method: :post) do %>
+  <%= form_tag("/reviews/#{HASHIDS.encode(@item.id)}/create", method: :post) do %>
     <p>
       <label for="point">評価:</label>
       <input type="range" id="point" name="point" required max="5" min="1" value="<%= @point %>">

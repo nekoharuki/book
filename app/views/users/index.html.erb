@@ -1,6 +1,6 @@
 <h1>ユーザー一覧</h1>
 
 <%@users.each do |user|%>
-    <%=link_to(user.name,"/users/#{HASHIDS.encode(user.id)}/user_items")%>
+    <%=link_to(user.name,items_user_path(HASHIDS.encode(user.id)))%>
     <br>
 <%end%>

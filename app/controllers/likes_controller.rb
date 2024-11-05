@@ -8,15 +8,15 @@ class LikesController < ApplicationController
     like_check = Like.find_by(user_id: user_id, item_id: item_id)
     if like_check
       flash[:notice] = "もういいねされています"
-      redirect_to("/items/index") and return
+      redirect_to("/items") and return
     else
       @like = Like.new(item_id: item_id, user_id: user_id)
       if @like.save
         flash[:notice] = "いいねできました"
-        redirect_to("/items/index") and return
+        redirect_to("/items") and return
       else
         flash[:notice] = "いいねできませんでした"
-        redirect_to("/items/index") and return
+        redirect_to("/items") and return
       end
     end
   end
@@ -28,14 +28,14 @@ class LikesController < ApplicationController
     if @like
       if @like.destroy
         flash[:notice] = "いいねを削除できました"
-        redirect_to("/items/index") and return
+        redirect_to("/items") and return
       else
         flash[:notice] = "いいねを削除できませんでした"
-        redirect_to("/items/index") and return
+        redirect_to("/items") and return
       end
     else
       flash[:notice] = "まだいいねされていません"
-      redirect_to("/items/index") and return
+      redirect_to("/items") and return
     end
   end
 
@@ -44,13 +44,13 @@ class LikesController < ApplicationController
     user_id = HASHIDS.decode(params[:user_id]).first
     if @current_user.id != user_id
       flash[:notice] = "いいねできません"
-      redirect_to("/items/index") and return
+      redirect_to("/items") and return
     end
     @items = Item.where(user_id: user_id)
     @items.each do |item|
       if item.id == item_id
         flash[:notice] = "いいねできません"
-        redirect_to("/items/index") and return
+        redirect_to("/items") and return
       end
     end
   end

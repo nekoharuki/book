@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :initialize_hashids
   before_action :set_current_user
   skip_before_action :verify_authenticity_token
 
@@ -16,25 +17,30 @@ class ApplicationController < ActionController::Base
   def login_now
     if @current_user
       flash[:notice]="現在ログインしています"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
   end
 
   def real_user
     user_id=HASHIDS.decode(params[:id]).first
-    if @current_user.id!=user_id.to_i
+    if @current_user.id!=user_id
       flash[:notice]="あなたはそのページに行けません"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
   end
 
   def real_item
     item_id=HASHIDS.decode(params[:id]).first
     item=Item.find_by(id: item_id)
-    if @current_user.id!=item.user.id.to_i
+    if @current_user.id!=item.user.id
       flash[:notice]="あなたはそのページに行けません"
-      redirect_to("/items/index")
+      redirect_to("/items")
     end
   end
 
+  private
+
+  def initialize_hashids
+    @hashids = Hashids.new("your_salt")
+  end
 end

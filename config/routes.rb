@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :items, param: :hashed_id do
+  resources :items do
     collection do
       get 'like', to: 'items#like'
       get 'categorize', to: 'items#categorize'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post 'items/:item_requested_id/:item_offered_id/trade', to: 'items#trade'
   post 'items/:item_requested_id/:item_offered_id/detail', to: 'items#detail'
 
-  resources :users, param: :hashed_id do
+  resources :users do
     collection do
       get 'users/new', to: 'users#new'
       post 'users/create', to: 'users#create'
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   post 'likes/:item_id/:user_id/create', to: 'likes#create'
   post 'likes/:item_id/:user_id/destroy', to: 'likes#destroy'
 
-  resources :reviews, only: [:create, :edit, :update, :destroy], param: :hashed_id do
+  resources :reviews, only: [:create, :edit, :update, :destroy] do
     collection do
       post ':item_id/create', to: 'reviews#create'
     end
