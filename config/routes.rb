@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get 'traded', to: 'items#traded'
     end
   end
+  
   post 'items/:item_requested_id/:item_offered_id/trade', to: 'items#trade'
   post 'items/:item_requested_id/:item_offered_id/detail', to: 'items#detail'
 
