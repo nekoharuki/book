@@ -10,7 +10,7 @@
 
     <% if session[:user_id] %>
       <%= link_to("商品一覧", items_path) %>
-      <%= link_to("出品一覧", user_items_user_path(HASHIDS.encode(@current_user.id))) %>
+      <%= link_to("出品一覧", items_user_path(HASHIDS.encode(@current_user.id))) %>      
       <%= link_to("いいねした商品", like_items_path) %>
       <%= link_to("出品", new_item_path) %>
       <%= link_to("カテゴリー", categorize_items_path) %>

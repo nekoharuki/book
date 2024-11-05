@@ -1,7 +1,64 @@
 <h1>出品編集</h1>
 
-<%= form_tag("/items/#{@item.id}/update",{multipart: true}) do %>
+<h1>出品編集</h1>
 
+<%= form_tag("/items/#{@item.id}", { multipart: true, method: :put }) do %>
+
+    <p>
+        <label for="title">タイトル:</label>
+        <input type="text" name="title" id="title" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%=@item.title%>"  required>
+    </p>
+    <p>
+        <label for="author">作者:</label>
+        <input type="text" name="author" id="author" title="作者を入力してください" max="20" placeholder="作者" value="<%=@item.author%>"  required>
+    </p>
+    <p>
+        <label for="publisher">出版社:</label>
+        <input type="text" name="publisher" id="publisher" title="出版社を入力してください" max="20" placeholder="出版社" value="<%=@item.publisher%>" required>
+    </p>
+    <p>
+        <label for="content">内容:</label>
+        <textarea id="content" name="content" rows="4" cols="50" minlength="30" maxlength="500" placeholder="内容を入力してください" required><%=@item.content%></textarea>
+    </p>
+
+  <div>
+    <label for="condition">状態</label>
+    <select name="condition" id="condition">
+      <option <%= "selected" if @item.condition=="良い" %> value="良い">良い</option>
+      <option <%= "selected" if @item.condition=="普通" %> value="普通">普通</option>
+      <option <%= "selected" if @item.condition=="悪い" %> value="悪い">悪い</option>
+    </select>
+  </div> 
+
+  <p>
+    <label for="recommend_point">おすすめ度:</label>
+    <input type="range" name="recommend_point" id="recommend_point" min="1" max="5" value="<%= @item.recommend_point %>" required>
+  </p>
+
+  <p>
+    <label for="help_point">役に立つ度:</label>
+    <input type="range" name="help_point" id="help_point" min="1" max="5" value="<%= @item.help_point %>" required>
+  </p>
+
+  <p>
+    <label for="learn_point">学びになった度:</label>
+    <input type="range" name="learn_point" id="learn_point" min="1" max="5" value="<%= @item.learn_point %>" required>
+  </p>
+
+    <p>
+        <label for="category">カテゴリー:</label>
+        <input type="text" name="category" id="category" title="カテゴリーを入力してください" placeholder="状態" value="<%=@item.category%>" required>
+    </p>
+    <p>
+        <label for="image">画像:</label>
+        <%= image_tag @item.image.url if @item.image? %>
+        <br>
+        <input type="file" name="image" id="image" title="画像を入力してください" placeholder="画像" value="<%=@item.image%>" >
+    </p>
+    <br>
+        <input type="submit" value="投稿" >
+
+<% end %>
     <p>
         <label for="title">タイトル:</label>
         <input type="text" name="title" id="title" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%=@item.title%>"  required>

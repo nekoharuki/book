@@ -22,16 +22,15 @@ Rails.application.routes.draw do
 
   resources :users, param: :hashed_id do
     collection do
-      get 'login', to: 'users#login_form'
-      post 'login', to: 'users#login'
-      post 'logout', to: 'users#logout'
-      get 'signup', to: 'users#new'
+      get 'users/new', to: 'users#new'
+      post 'users/create', to: 'users#create'
     end
     member do
       get 'items', to: 'users#user_items'
       get 'destroy_form', to: 'users#destroy_form'
     end
   end
+
   post 'likes/:item_id/:user_id/create', to: 'likes#create'
   post 'likes/:item_id/:user_id/destroy', to: 'likes#destroy'
 
@@ -46,6 +45,10 @@ Rails.application.routes.draw do
     end
   end
 
+    get 'login', to: 'users#login_form'
+    post 'login', to: 'users#login'
+    post 'logout', to: 'users#logout'
+
   get '/about', to: 'home#about'
-  get '/', to: 'home#top'
+  root  'home#top'
 end

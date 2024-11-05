@@ -1,6 +1,7 @@
 <h1>出品登録</h1>
 
-<%= form_tag("/items/create",{multipart: true}) do %>
+<%= form_tag("/items", { multipart: true, method: :post }) do %>
+
   <p>
     <label for="title">タイトル:</label>
     <input type="text" name="title" id="title" title="タイトルを入力してください" placeholder="タイトル"   required>

@@ -1,6 +1,6 @@
 <h1>ユーザー情報登録</h1>
 
-<%=form_tag("/users/create",method: :post) do%>
+<%=form_tag("/users",method: :post) do%>
     <p>
         <label for="name">名前:</label>
         <input type="text" name="name" id="name" title="名前を入力してください"  value="<%=@name%>" placeholder="名前" required>

@@ -35,6 +35,6 @@
 <%= link_to("詳細へ", "/items/#{HASHIDS.encode(@item.id)}") %>
 <br>
 <br>
-<%= form_tag("/items/#{HASHIDS.encode(@item.id)}/destroy", method: :post) do %>
+<%= form_tag("/items/#{HASHIDS.encode(@item.id)}", method: :delete) do %>
   <input type="submit" value="削除する">
 <% end %>

@@ -44,8 +44,8 @@
 <%= image_tag @item.image.url if @item.image? %></p>
 
 <% if @current_user.id == @item.user.id %>
-  <%= link_to("編集", "/items/#{HASHIDS.encode(@item.id)}/edit") %>
-  <%= link_to("削除", "/items/#{HASHIDS.encode(@item.id)}/destroy") %>
+  <%= link_to("編集", "/items/#{HASHIDS.encode(@item.id)}") %>
+  <%= link_to("削除", "/items/#{HASHIDS.encode(@item.id)}/destroy_form") %>
 <%else%>
 <%=link_to("この商品と物々交換する","/items/#{HASHIDS.encode(@item.id)}/trade_items")%>
 <% end %>
