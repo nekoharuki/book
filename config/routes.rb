@@ -1,46 +1,37 @@
 Rails.application.routes.draw do
-  resources :items, param: :id do
+  resources :items do
     collection do
-      get :index, :like, :categorize, :publishers, :authors, :details
-      get "category/:category", action: :category, as: :category
-      get "publisher/:publisher", action: :publisher, as: :publisher
-      get "author/:author", action: :author, as: :author
+      get 'like', to: 'items#like'
+      get 'categorize', to: 'items#categorize'
+      get 'publishers', to: 'items#publishers'
+      get 'authors', to: 'items#authors'
+      get 'details', to: 'items#details'
+
+      get 'category/:category', to: 'items#category'
+      get 'publisher/:publisher', to: 'items#publisher'
+      get 'author/:author', to: 'items#author'
     end
-
     member do
-      get :edit, :destroy_form, :traded, :trade_items
-      post :update, :destroy
-    end
-
-    post ":item_requested_id/:item_offered_id/trade", action: :trade, as: :trade
-    post ":item_requested_id/:item_offered_id/detail", action: :detail, as: :detail
-  end
-
-  resources :users, param: :id do
-    member do
-      get :edit, :destroy_form, :user_items
-      post :update, :destroy
+      get 'trade_items', to: 'items#trade_items'
+      get 'destroy_form', to: 'items#destroy_form'
+      get 'traded', to: 'items#traded'
     end
   end
+  post 'items/:item_requested_id/:item_offered_id/trade', to: 'items#trade'
+  post 'items/:item_requested_id/:item_offered_id/detail', to: 'items#detail'
 
-  resources :reviews, only: [] do
-    member do
-      get :edit
-      post :create, :update, :destroy
-    end
-  end
-
-  resources :likes, only: [] do
+  resources :users do
     collection do
-      post ":item_id/:user_id/create", action: :create, as: :create
-      post ":item_id/:user_id/destroy", action: :destroy, as: :destroy
+      get 'login', to: 'users#login_form'
+      post 'login', to: 'users#login'
+      post 'logout', to: 'users#logout'
+      get 'signup', to: 'users#new'
+    end
+    member do
+      get 'items', to: 'users#user_items'
+      get 'destroy_form', to: 'users#destroy_form'
     end
   end
-
-  get "login", to: "users#login_form"
-  post "login", to: "users#login"
-  post "logout", to: "users#logout"
-
-  get "/about", to: "home#about"
-  root "home#top"
+  get '/about', to: 'home#about'
+  get '/', to: 'home#top'
 end
