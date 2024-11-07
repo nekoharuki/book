@@ -3,8 +3,8 @@ class LikesController < ApplicationController
   before_action :like_not, only: [:create, :destroy]
 
   def create
-    item_id = HASHIDS.decode(params[:item_id]).first
-    user_id = HASHIDS.decode(params[:user_id]).first
+    item_id = @hashids.decode(params[:item_id]).first
+    user_id = @hashids.decode(params[:user_id]).first
     like_check = Like.find_by(user_id: user_id, item_id: item_id)
     if like_check
       flash[:notice] = "もういいねされています"
@@ -22,8 +22,8 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    item_id = HASHIDS.decode(params[:item_id]).first
-    user_id = HASHIDS.decode(params[:user_id]).first
+    item_id = @hashids.decode(params[:item_id]).first
+    user_id = @hashids.decode(params[:user_id]).first
     @like = Like.find_by(item_id: item_id, user_id: user_id)
     if @like
       if @like.destroy
@@ -40,8 +40,8 @@ class LikesController < ApplicationController
   end
 
   def like_not
-    item_id = HASHIDS.decode(params[:item_id]).first
-    user_id = HASHIDS.decode(params[:user_id]).first
+    item_id = @hashids.decode(params[:item_id]).first
+    user_id = @hashids.decode(params[:user_id]).first
     if @current_user.id != user_id
       flash[:notice] = "いいねできません"
       redirect_to("/items") and return

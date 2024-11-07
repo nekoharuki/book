@@ -1,5 +1,5 @@
 <h1>出版社:<%=@publisher%></h1>
 <% @items.each do |item| %>
-    <%=link_to(item.title,"/items/#{HASHIDS.encode(item.id)}")%>
+    <%=link_to(item.title,"/items/#{@hashids.encode(item.id)}")%>
     <br>
 <% end %>

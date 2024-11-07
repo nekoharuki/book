@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item = Item.find_by(id: item_id, status: [0, 1])
     if @item
       @reviews = Review.where(item_id: @item.id)
@@ -54,12 +54,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item = Item.find_by(id: item_id, status: [0, 1])
   end
 
   def update
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item = Item.find_by(id: item_id)
     @item.title = params[:title]
     @item.author = params[:author]
@@ -85,7 +85,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item = Item.find_by(id: item_id, status: [0, 1])
     if @item.destroy
       flash[:notice] = "削除できました"
@@ -97,7 +97,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy_form
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item = Item.find_by(id: item_id, status: [0, 1])
   end
 
@@ -130,13 +130,13 @@ class ItemsController < ApplicationController
 
   def trade_items
     @items = Item.where(user_id: @current_user.id, status: 0)
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item_requested = Item.find_by(id: item_id, status: [0, 1])
   end
 
   def trade
-    item_requested_id = HASHIDS.decode(params[:item_requested_id]).first
-    item_offered_id = HASHIDS.decode(params[:item_offered_id]).first
+    item_requested_id = @hashids.decode(params[:item_requested_id]).first
+    item_offered_id = @hashids.decode(params[:item_offered_id]).first
     item_requested = Item.find_by(id: item_requested_id, status: [0, 1])
     item_offered = Item.find_by(id: item_offered_id, status: [0, 1])
     trade = Trade.new(
@@ -151,16 +151,16 @@ class ItemsController < ApplicationController
       item_requested.save
       item_offered.save
       flash[:notice] = "物々交換リクエストできました"
-      redirect_to("/items/#{HASHIDS.encode(item_requested.id)}")
+      redirect_to("/items/#{@hashids.encode(item_requested.id)}")
     else
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items/#{HASHIDS.encode(item_requested.id)}/user_items")
+      redirect_to("/items/#{@hashids.encode(item_requested.id)}/user_items")
     end
   end
 
   def detail
-    item_requested_id = HASHIDS.decode(params[:item_requested_id]).first
-    item_offered_id = HASHIDS.decode(params[:item_offered_id]).first
+    item_requested_id = @hashids.decode(params[:item_requested_id]).first
+    item_offered_id = @hashids.decode(params[:item_offered_id]).first
     item_requested = Item.find_by(id: item_requested_id, status: 1)
     item_offered = Item.find_by(id: item_offered_id, status: 1)
 
@@ -201,7 +201,7 @@ class ItemsController < ApplicationController
   end
 
   def traded
-    item_id = HASHIDS.decode(params[:id]).first
+    item_id = @hashids.decode(params[:id]).first
     @item = Item.find_by(id: item_id, status: 2)
   end
 
@@ -252,8 +252,8 @@ class ItemsController < ApplicationController
   end
 
   def trade_not
-    item_requested_id = HASHIDS.decode(params[:item_requested_id]).first
-    item_offered_id = HASHIDS.decode(params[:item_offered_id]).first
+    item_requested_id = @hashids.decode(params[:item_requested_id]).first
+    item_offered_id = @hashids.decode(params[:item_offered_id]).first
     item_requested = Item.find_by(id: item_requested_id, status: [0, 1])
     item_offered = Item.find_by(id: item_offered_id, status: [0, 1])
     if item_offered.user.id != @current_user.id
@@ -271,8 +271,8 @@ class ItemsController < ApplicationController
   end
 
   def detail_not
-    item_requested_id = HASHIDS.decode(params[:item_requested_id]).first
-    item_offered_id = HASHIDS.decode(params[:item_offered_id]).first
+    item_requested_id = @hashids.decode(params[:item_requested_id]).first
+    item_offered_id = @hashids.decode(params[:item_offered_id]).first
     item_requested = Item.find_by(id: item_requested_id, status: [0, 1])
     item_offered = Item.find_by(id: item_offered_id, status: [0, 1])
 
@@ -299,5 +299,10 @@ class ItemsController < ApplicationController
       redirect_to("/items")
     end
   end
+
+  def hashid
+    Hashids.new("your_salt").encode(self.id)
+  end
+
 
 end

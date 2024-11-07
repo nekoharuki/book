@@ -32,12 +32,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    user_id = HASHIDS.decode(params[:id]).first
+    user_id = @hashids.decode(params[:id]).first
     @user = User.find_by(id: user_id)
   end
 
   def update
-    user_id = HASHIDS.decode(params[:id]).first
+    user_id = @hashids.decode(params[:id]).first
     @user = User.find_by(id: user_id)
     @user.name = params[:name]
     @user.email = params[:email]
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user_id = HASHIDS.decode(params[:id]).first
+    user_id = @hashids.decode(params[:id]).first
     @user = User.find_by(id: user_id)
     if @user
       session[:user_id] = nil
@@ -67,12 +67,12 @@ class UsersController < ApplicationController
   end
 
   def destroy_form
-    user_id = HASHIDS.decode(params[:id]).first
+    user_id = @hashids.decode(params[:id]).first
     @user = User.find_by(id: user_id)
   end
 
   def show
-    user_id = HASHIDS.decode(params[:id]).first
+    user_id = @hashids.decode(params[:id]).first
     @user = User.find_by(id: user_id)
   end
 
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   end
 
   def user_items
-    user_id = HASHIDS.decode(params[:id]).first
+    user_id = @hashids.decode(params[:id]).first
     @items = Item.where(user_id: user_id, status: [0, 1])
     @user = User.find_by(id: user_id)
   end

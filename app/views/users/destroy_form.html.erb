@@ -12,6 +12,6 @@
   <%= @user.address %>
 </p>
 
-<%= form_tag("/users/#{HASHIDS.encode(@user.id)}", method: :delete) do %>
+<%= form_tag("/users/#{@hashids.encode(@user.id)}", method: :delete) do %>
   <input type="submit" value="削除する">
 <% end %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :items do
+  resources :items, param: :id do
     collection do
       get 'like', to: 'items#like'
       get 'categorize', to: 'items#categorize'
@@ -17,11 +17,11 @@ Rails.application.routes.draw do
       get 'traded', to: 'items#traded'
     end
   end
-  
+
   post 'items/:item_requested_id/:item_offered_id/trade', to: 'items#trade'
   post 'items/:item_requested_id/:item_offered_id/detail', to: 'items#detail'
 
-  resources :users do
+  resources :users, param: :id do
     collection do
       get 'users/new', to: 'users#new'
       post 'users/create', to: 'users#create'
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   post 'likes/:item_id/:user_id/create', to: 'likes#create'
   post 'likes/:item_id/:user_id/destroy', to: 'likes#destroy'
 
-  resources :reviews, only: [:create, :edit, :update, :destroy] do
+  resources :reviews, only: [:create, :edit, :update, :destroy], param: :id do
     collection do
       post ':item_id/create', to: 'reviews#create'
     end
@@ -46,10 +46,10 @@ Rails.application.routes.draw do
     end
   end
 
-    get 'login', to: 'users#login_form'
-    post 'login', to: 'users#login'
-    post 'logout', to: 'users#logout'
+  get 'login', to: 'users#login_form'
+  post 'login', to: 'users#login'
+  post 'logout', to: 'users#logout'
 
   get '/about', to: 'home#about'
-  root  'home#top'
+  root 'home#top'
 end

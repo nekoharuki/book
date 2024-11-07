@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def real_user
-    user_id=HASHIDS.decode(params[:id]).first
+    user_id=@hashids.decode(params[:id]).first
     if @current_user.id!=user_id
       flash[:notice]="あなたはそのページに行けません"
       redirect_to("/items")
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def real_item
-    item_id=HASHIDS.decode(params[:id]).first
+    item_id=@hashids.decode(params[:id]).first
     item=Item.find_by(id: item_id)
     if @current_user.id!=item.user.id
       flash[:notice]="あなたはそのページに行けません"

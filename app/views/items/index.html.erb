@@ -1,11 +1,11 @@
 <h1>商品一覧</h1>
 <%@items.each do |item|%>
 
-  <%= link_to(item.title, item_path(HASHIDS.encode(item.id))) %>
+   <%= link_to(item.title, item_path(@hashids.encode(item.id))) %>
 <% if like=Like.find_by(item_id: item.id,user_id: @current_user.id)%>
-    <%=link_to("いいね済み","/likes/#{HASHIDS.encode(item.id)}/#{HASHIDS.encode(@current_user.id)}/destroy",data: { turbo_method: "post" })%>
+    <%=link_to("いいね済み","/likes/#{@hashids.encode(item.id)}/#{@hashids.encode(@current_user.id)}/destroy",data: { turbo_method: "post" })%>
     <%elsif(@current_user.id!=item.user_id)%>
-    <%=link_to("いいね","/likes/#{HASHIDS.encode(item.id)}/#{HASHIDS.encode(@current_user.id)}/create",data: { turbo_method: "post" })%>
+    <%=link_to("いいね","/likes/#{@hashids.encode(item.id)}/#{@hashids.encode(@current_user.id)}/create",data: { turbo_method: "post" })%>
 <%end%>
 
 <%sum=Like.where(item_id: item.id).count%>

@@ -37,7 +37,7 @@
 </p>
 
 <p>出品者:
-  <%= link_to(@item.user.name, "/users/#{HASHIDS.encode(@item.user.id)}/items") %>
+  <%= link_to(@item.user.name, "/users/#{@hashids.encode(@item.user.id)}/items") %>
 </p>
 
 <p>画像:

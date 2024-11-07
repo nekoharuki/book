@@ -1,6 +1,6 @@
 <h1>評価編集</h1>
 
-<%=form_tag("/reviews/#{@review.item_id}/#{@review.id}/update",method: :post) do%>
+<%=form_tag("/reviews/#{@hashids.encode(@review.item_id)}/#{@hashids.encode(@review.id)}/update",method: :post) do%>
 <p>
     <label for="point">評価:</label>
     <input type="range" id="point" name="point" max="5" min="1" value="<%=@review.point%>" required>

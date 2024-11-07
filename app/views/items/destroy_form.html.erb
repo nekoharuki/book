@@ -25,16 +25,16 @@
 </p>
 
 <p>出品者:
-  <%= link_to(@item.user.name, "/users/#{HASHIDS.encode(@item.user.id)}/items") %>
+  <%= link_to(@item.user.name, "/users/#{@hashids.encode(@item.user.id)}/items") %>
 </p>
 
 <p>画像:
 <%= image_tag @item.image.url if @item.image? %></p>
 </p>
 
-<%= link_to("詳細へ", "/items/#{HASHIDS.encode(@item.id)}") %>
+<%= link_to("詳細へ", "/items/#{@hashids.encode(@item.id)}") %>
 <br>
 <br>
-<%= form_tag("/items/#{HASHIDS.encode(@item.id)}", method: :delete) do %>
+<%= form_tag("/items/#{@hashids.encode(@item.id)}", method: :delete) do %>
   <input type="submit" value="削除する">
 <% end %>

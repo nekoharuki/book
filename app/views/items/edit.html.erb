@@ -1,6 +1,6 @@
 <h1>出品編集</h1>
 
-<%= form_tag("/items/#{HASHIDS.encode(@item.id)}", { multipart: true, method: :put }) do %>
+<%= form_tag("/items/#{@hashids.encode(@item.id)}", { multipart: true, method: :put }) do %>
   <p>
     <label for="title">タイトル:</label>
     <input type="text" name="title" id="title" title="タイトルを入力してください" max="20" placeholder="タイトル" value="<%= @item.title %>" required>
