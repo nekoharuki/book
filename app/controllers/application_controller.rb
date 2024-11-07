@@ -41,6 +41,6 @@ class ApplicationController < ActionController::Base
   private
 
   def initialize_hashids
-    @hashids = Hashids.new("your_salt")
+    @hashids = Hashids.new("kikotixyannkawaii",20)
   end
 end
