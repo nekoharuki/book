@@ -300,9 +300,5 @@ class ItemsController < ApplicationController
     end
   end
 
-  def hashid
-    Hashids.new("your_salt").encode(self.id)
-  end
-
 
 end
