@@ -23,6 +23,7 @@
     <% else %>
       <%= link_to("ホーム", root_path) %>
       <%= link_to "Login with Google", "/auth/google_oauth2", method: :post %>
+      <%= link_to "Login with GitHub", "/auth/github", method: :post %>
       <%= link_to("アプリの説明", about_path) %>
       <%= link_to("新規登録", new_user_path) %>
     <% end %>

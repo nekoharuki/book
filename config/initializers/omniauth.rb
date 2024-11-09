@@ -13,8 +13,10 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     image_size: 50,
     access_type: 'offline'
   }
+  provider :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET'], {
+    scope: 'user:email'
+  }
 end
-
 # OmniAuthのログレベルをデバッグに設定
 OmniAuth.config.logger = Rails.logger
 Rails.logger.level = Logger::DEBUG
