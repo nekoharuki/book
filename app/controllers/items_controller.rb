@@ -129,6 +129,10 @@ class ItemsController < ApplicationController
   end
 
   def trade_items
+    if @current_user.address == nil
+      flash[:alert] = "住所を登録してください"
+      redirect_to("/users/#{@hashids.encode(@current_user.id)}/edit")
+    end
     @items = Item.where(user_id: @current_user.id, status: 0)
     item_id = @hashids.decode(params[:id]).first
     @item_requested = Item.find_by(id: item_id, status: [0, 1])

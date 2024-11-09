@@ -47,7 +47,7 @@
   <%= link_to("編集", "/items/#{@hashids.encode(@item.id)}/edit") %>
   <%= link_to("削除", "/items/#{@hashids.encode(@item.id)}/destroy_form") %>
 <%else%>
-<%=link_to("この商品と物々交換する","/items/#{@hashids.encode(@item.id)}/trade_items")%>
+<%=link_to("この商品に物々交換リクエストする","/items/#{@hashids.encode(@item.id)}/trade_items")%>
 <% end %>
 
 <%= render ("reviews/items_show") %>

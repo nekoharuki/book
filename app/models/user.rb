@@ -3,7 +3,7 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
       user.name = auth.info.name
-      user.password = SecureRandom.hex(10) # ダミーパスワードを設定
+      user.password = SecureRandom.hex(10) 
       user.save
     end
   end
