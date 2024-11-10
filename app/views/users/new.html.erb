@@ -1,4 +1,8 @@
 <h1>ユーザー情報登録</h1>
+      <%= link_to "Login with Google", "/auth/google_oauth2", method: :post %>
+      <br>
+      <br>
+      <%= link_to "Login with GitHub", "/auth/github", method: :post %>
 
 <%=form_tag("/users",method: :post) do%>
     <p>
