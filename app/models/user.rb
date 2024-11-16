@@ -1,11 +1,19 @@
 class User < ApplicationRecord
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
-      user.email = auth.info.email
-      user.name = auth.info.name
-      user.password = SecureRandom.hex(10) 
-      user.save
+    user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    if user.new_record?
+      existing_user = find_by(email: auth.info.email)
+      if existing_user
+        user = existing_user
+        user.update(provider: auth.provider, uid: auth.uid)
+      else
+        user.email = auth.info.email
+        user.name = auth.info.name
+        user.password = SecureRandom.hex(10)
+        user.save
+      end
     end
+    user
   end
 
   has_secure_password
@@ -18,7 +26,6 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
 
   def items
-    return Item.where(user_id: self.id)
+    Item.where(user_id: self.id)
   end
-
 end
