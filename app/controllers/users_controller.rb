@@ -106,8 +106,6 @@ class UsersController < ApplicationController
     @user = User.find_by(id: user_id)
   end
 
-  def
-
   def follows_create
     followed_user_id = @hashids.decode(params[:id]).first
     @follows=Follow.new
@@ -115,7 +113,7 @@ class UsersController < ApplicationController
     @follows.followed_user=followed_user_id
     if @follows.save
       flash[:notice]="フォローできました"
-      redirect_to("/users/#{@hashids.encode(followed_user_id)}/follows")
+      redirect_to("/items")
     end
   end
 
@@ -124,7 +122,7 @@ class UsersController < ApplicationController
     follow=Follow.find_by(follower_user: @current_user.id,followed_user: followed_user_id)
     if follow.destroy
       flash[:notice]="フォロー解除できました"
-      redirect_to("/users/#{@hashids.encode(followed_user_id)}/follows")
+      redirect_to("/items")
     end
   end
 
@@ -132,7 +130,7 @@ class UsersController < ApplicationController
     followed_user_id = @hashids.decode(params[:id]).first
     if follow=Follow.find_by(follower_user: @current_user.id,followed_user: followed_user_id)
       flash[:notice]="すでにフォローされています"
-      redirect_to("/users/#{@hashids.encode(followed_user_id)}/follows")
+      redirect_to("/items")
     end
   end
 
@@ -140,7 +138,7 @@ class UsersController < ApplicationController
     followed_user_id = @hashids.decode(params[:id]).first
     if followed_user_id==@current_user.id
       flash[:notice]="フォローできません"
-      redirect_to("/users/#{@hashids.encode(followed_user_id)}/follows")
+      redirect_to("/items")
     end
   end
 
