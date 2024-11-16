@@ -1,5 +1,14 @@
 <h1><%=@user.name%>様の投稿一覧</h1>
 
+<%if @user.id!=@current_user.id%>
+<% if Follow.find_by(follower_user: @current_user.id,followed_user: @user.id) %>
+<%=link_to("フォローを解除する","/users/#{@hashids.encode(@user.id)}/follows_destroy", data: { turbo_method: "post" }) %>  
+<%else%>
+<%=link_to("フォローする","/users/#{@hashids.encode(@user.id)}/follows_create", data: { turbo_method: "post" }) %>  
+<%end%>
+<%end%>
+
+<br>
 <%@items.each do |item|%>
     <%=link_to(item.title,"/items/#{@hashids.encode(item.id)}")%>
     <br>

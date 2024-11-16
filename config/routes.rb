@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     member do
       get 'items', to: 'users#user_items'
       get 'destroy_form', to: 'users#destroy_form'
+      post 'follows_create' ,to: 'users#follows_create'
+      post 'follows_destroy' ,to: 'users#follows_destroy'
     end
   end
 

@@ -1,1 +1,1 @@
-HASHIDS = Hashids.new("harukinekolove", 8)
+@hashids = Hashids.new("harukinekolove", 8)
