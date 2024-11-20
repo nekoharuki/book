@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :destroy_form, :user_items,:follows_create,:follows_destroy,:follows_find]
+  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :destroy_form, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
   before_action :login_now, only: [:login, :login_form, :create, :new]
-  before_action :real_user, only: [:edit, :update, :destroy, :show, :destroy_form]
+  # before_action :real_user, only: [:edit, :update, :destroy, :show, :destroy_form]
   before_action :follows_find, only: [:follows_create]
   before_action :follow_current, only: [:follows_create]
 
@@ -113,7 +113,7 @@ class UsersController < ApplicationController
     @follows.followed_user=followed_user_id
     if @follows.save
       flash[:notice]="フォローできました"
-      redirect_to("/items")
+      redirect_to("/users/#{@hashids.encode(followed_user_id)}/items")
     end
   end
 
@@ -122,7 +122,7 @@ class UsersController < ApplicationController
     follow=Follow.find_by(follower_user: @current_user.id,followed_user: followed_user_id)
     if follow.destroy
       flash[:notice]="フォロー解除できました"
-      redirect_to("/items")
+      redirect_to("/users/#{@hashids.encode(followed_user_id)}/items")
     end
   end
 
@@ -130,7 +130,7 @@ class UsersController < ApplicationController
     followed_user_id = @hashids.decode(params[:id]).first
     if follow=Follow.find_by(follower_user: @current_user.id,followed_user: followed_user_id)
       flash[:notice]="すでにフォローされています"
-      redirect_to("/items")
+      redirect_to("/users/#{@hashids.encode(followed_user_id)}/items")
     end
   end
 
@@ -138,8 +138,10 @@ class UsersController < ApplicationController
     followed_user_id = @hashids.decode(params[:id]).first
     if followed_user_id==@current_user.id
       flash[:notice]="フォローできません"
-      redirect_to("/items")
+      redirect_to("/users/#{@hashids.encode(followed_user_id)}/items")
     end
   end
-
+  def  follows
+    @followeds=Follow.where(follower_user: @current_user.id)
+  end
 end

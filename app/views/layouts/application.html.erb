@@ -16,6 +16,7 @@
       <%= link_to("カテゴリー", categorize_items_path) %>
       <%= link_to("出版社", publishers_items_path) %>
       <%= link_to("作者", authors_items_path) %>
+      <%= link_to("フォローした人の投稿", "/users/follows") %>
       <%= link_to("交換完了明細", details_items_path) %>
       <%= link_to("ユーザー一覧", users_path) %>
       <%= link_to("ユーザー情報詳細", user_path(@hashids.encode(@current_user.id))) %>

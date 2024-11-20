@@ -23,8 +23,9 @@ Rails.application.routes.draw do
 
   resources :users, param: :id do
     collection do
-      get 'users/new', to: 'users#new'
-      post 'users/create', to: 'users#create'
+      get 'follows', to: 'users#follows'
+      get 'new', to: 'users#new'
+      post 'create', to: 'users#create'
     end
     member do
       get 'items', to: 'users#user_items'
@@ -47,7 +48,6 @@ Rails.application.routes.draw do
       post ':item_id/destroy', to: 'reviews#destroy'
     end
   end
-
   get 'login', to: 'users#login_form'
   post 'login', to: 'users#login'
   post 'logout', to: 'users#logout'

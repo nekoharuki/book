@@ -1,0 +1,13 @@
+<h1>フォローした人の投稿</h1>
+
+<% @followeds.each do |followed| %>
+    <% items=Item.where(user_id: followed) %>
+    <% if items==nil %>
+        <%flash[:notice]="投稿がありません"%>
+    <%else%>
+        <% items.each do |item| %>
+            <%= item.title %>
+        <%end%>
+    <%end%>
+<% end %>
+
