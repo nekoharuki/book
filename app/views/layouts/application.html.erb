@@ -12,15 +12,9 @@
     <body class="d-flex flex-column vh-100">
 
     <%= render 'layouts/navbar' %>
+    <%= render 'layouts/flash' %>
 
-    <br>
-    <br>
-    <% if flash[:notice] %>
-      <%= flash[:notice] %>
-    <% end %>
-    <% if flash[:alert] %>
-      <%= flash[:alert] %>
-    <% end %>
+    
   <main class="container mt-5"">
       <%= yield %>
     </main>

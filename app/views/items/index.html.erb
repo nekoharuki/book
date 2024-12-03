@@ -1,14 +1,32 @@
 <h1>商品一覧</h1>
-<%@items.each do |item|%>
 
-   <%= link_to(item.title, item_path(@hashids.encode(item.id))) %>
-<% if like=Like.find_by(item_id: item.id,user_id: @current_user.id)%>
-    <%=link_to("いいね済み","/likes/#{@hashids.encode(item.id)}/#{@hashids.encode(@current_user.id)}/destroy",data: { turbo_method: "post" })%>
-    <%elsif(@current_user.id!=item.user_id)%>
-    <%=link_to("いいね","/likes/#{@hashids.encode(item.id)}/#{@hashids.encode(@current_user.id)}/create",data: { turbo_method: "post" })%>
-<%end%>
-
-<%sum=Like.where(item_id: item.id).count%>
-<%=sum%>
-<br>
-<%end%>
+<% @items.each do |item| %>
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img class="img-fluid rounded-start" src="<%= item.image %>" alt="商品画像">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= item.title %></h5>
+          <p class="card-text">
+            <small class="text-muted">作者: <%= item.author %></small>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">出版社: <%= item.publisher %></small>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">状態: <%= item.condition %></small>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">内容: <%= item.content %></small>
+          </p>
+          <p class="card-text">
+            <small class="text-muted">ジャンル: <%= item.category %></small>
+          </p>
+            <a class="btn btn-primary" href="<%= "/items/#{@hashids.encode(item.id)}" %>"><%= item.title %>の詳細</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
