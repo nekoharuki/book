@@ -16,7 +16,7 @@
           <%= link_to("作者", authors_items_path, class: "nav-link") %>
           <%= link_to("フォローした人の投稿", "/users/follows", class: "nav-link") %>
           <%= link_to("交換完了明細", details_items_path, class: "nav-link") %>
-          <%= link_to("ユーザー一覧", users_path, class: "nav-link") %>
+          <%= link_to("ユーザー一覧","/users", class: "nav-link") %>
           <%= link_to("ユーザー情報詳細", user_path(@hashids.encode(@current_user.id)), class: "nav-link") %>
           <%= link_to("ログアウト", logout_path, data: { turbo_method: "post" }, class: "nav-link") %>
         <% else %>
