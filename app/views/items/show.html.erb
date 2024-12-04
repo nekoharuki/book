@@ -1,55 +1,31 @@
-<h1><%= @item.title %>の詳細ページ</h1>
-
-<p>タイトル:
-  <%= @item.title %>
-</p>
-
-<p>作者:
-  <%=link_to(@item.author,"/items/author/#{@item.author}")%>
-</p>
-
-<p>出版社:
-    <%=link_to(@item.publisher,"/items/publisher/#{@item.publisher}")%>
-</p>
-
-<p>内容:
-  <%= @item.content %>
-</p>
-
-<p>状態:
-  <%= @item.condition %>
-</p>
-
-<p>おすすめ度:
-  <%= @item.recommend_point %>点
-</p>
-
-<p>役に立った度:
-  <%= @item.help_point %>点
-</p>
-
-<p>学びになった度:
-  <%= @item.learn_point %>点
-</p>
-
-<p>カテゴリー:
-  <%= link_to(@item.category, "/items/category/#{@item.category}") %>
-</p>
-
-<p>出品者:
-  <%= link_to(@item.user.name, "/users/#{@hashids.encode(@item.user.id)}/items") %>
-</p>
-
-<p>画像:
-<%= image_tag @item.image.url if @item.image? %></p>
-
-<% if @current_user.id == @item.user.id %>
-  <%= link_to("編集", "/items/#{@hashids.encode(@item.id)}/edit") %>
-  <%= link_to("削除", "/items/#{@hashids.encode(@item.id)}/destroy_form") %>
-<%else%>
-<%=link_to("この商品に物々交換リクエストする","/items/#{@hashids.encode(@item.id)}/trade_items")%>
-<% end %>
-
-<%= render ("reviews/items_show") %>
-
-<%= render ("items/trades") %>
+<div class="row">
+  <div class="col-6">
+    <img src="<%= @item.image.url %>" class="card-img-top" alt="本の画像">
+    <div class="card-body">
+      <h5 class="card-title"><%= @item.title %></h5>
+      <p class="card-text"><%= @item.content %></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= @item.author %></li>
+      <li class="list-group-item"><%= @item.publisher %></li>
+      <li class="list-group-item"><%= @item.condition %></li>
+      <li class="list-group-item"><%= @item.recommend_point %></li>
+      <li class="list-group-item"><%= @item.help_point %></li>
+      <li class="list-group-item"><%= @item.learn_point %></li>
+      <li class="list-group-item"><%= @item.category %></li>
+      <li class="list-group-item"><%= @item.user.name %></li>
+    </ul>
+    <div class="card-body">
+      <% if @current_user.id == @item.user.id %>
+        <%= link_to "編集", "/items/#{@hashids.encode(@item.id)}/edit", class: "btn btn-success" %>
+        <%= link_to "削除", "/items/#{@hashids.encode(@item.id)}/destroy_form", class: "btn btn-danger" %>
+      <% else %>
+        <%= link_to "この商品に物々交換リクエストする", "/items/#{@hashids.encode(@item.id)}/trade_items", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-6">
+    <%= render "reviews/items_show" %>
+    <%= render "items/trades" %>
+  </div>
+</div>
