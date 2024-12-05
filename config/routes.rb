@@ -2,9 +2,7 @@ Rails.application.routes.draw do
   resources :items, param: :id do
     collection do
       get 'like', to: 'items#like'
-      get 'categorize', to: 'items#categorize'
-      get 'publishers', to: 'items#publishers'
-      get 'authors', to: 'items#authors'
+      get 'search', to: 'items#search'
       get 'details', to: 'items#details'
 
       get 'category/:category', to: 'items#category'

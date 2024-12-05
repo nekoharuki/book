@@ -106,9 +106,6 @@ class ItemsController < ApplicationController
     @items = Item.where(category: params[:category], status: [0, 1])
   end
 
-  def categorize
-    @categorize = Item.select(:category).distinct.pluck(:category)
-  end
 
   def like
     @likes = Like.where(user_id: @current_user.id)
@@ -214,18 +211,11 @@ class ItemsController < ApplicationController
     @items = Item.where(publisher: params[:publisher], status: [0, 1])
   end
 
-  def publishers
-    @publishers = Item.select(:publisher).distinct.pluck(:publisher)
-  end
-
   def author
     @author = params[:author]
     @items = Item.where(author: params[:author], status: [0, 1])
   end
 
-  def authors
-    @authors = Item.select(:author).distinct.pluck(:author)
-  end
 
   def author_not
     flag = 0
@@ -304,5 +294,9 @@ class ItemsController < ApplicationController
     end
   end
 
-
+def search
+    @categorize = Item.select(:category).distinct.pluck(:category)
+    @publishers = Item.select(:publisher).distinct.pluck(:publisher)
+    @authors = Item.select(:author).distinct.pluck(:author)
+end
 end
