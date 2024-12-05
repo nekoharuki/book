@@ -33,7 +33,7 @@
           <% end %>
         <% end %>
         
-        <% sum = Like.where(item_id: item.id).count %>
+        いいねの数: <% sum = Like.where(item_id: item.id).count %>
         <%= sum %>
       </div>
     </div>

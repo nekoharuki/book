@@ -43,7 +43,6 @@ class UsersController < ApplicationController
     @user = User.find_by(id: user_id)
     @user.name = params[:name]
     @user.email = params[:email]
-    @user.password = params[:password]
     @user.address = params[:address]
     if @user.save
       flash[:notice] = "ユーザー情報編集できました"

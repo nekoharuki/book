@@ -107,7 +107,7 @@ class ItemsController < ApplicationController
   end
 
   def categorize
-    @categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
+    @categorize = Item.select(:category).distinct.pluck(:category)
   end
 
   def like
@@ -116,7 +116,7 @@ class ItemsController < ApplicationController
 
   def category_not
     flag = 0
-    categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
+    categorize = Item.select(:category).distinct.pluck(:category)
     categorize.each do |category|
       if category == params[:category]
         flag = 1
@@ -215,7 +215,7 @@ class ItemsController < ApplicationController
   end
 
   def publishers
-    @publishers = Item.where(status: [0, 1]).select(:publisher).distinct.pluck(:publisher)
+    @publishers = Item.select(:publisher).distinct.pluck(:publisher)
   end
 
   def author
@@ -224,12 +224,12 @@ class ItemsController < ApplicationController
   end
 
   def authors
-    @authors = Item.where(status: [0, 1]).select(:author).distinct.pluck(:author)
+    @authors = Item.select(:author).distinct.pluck(:author)
   end
 
   def author_not
     flag = 0
-    authors = Item.where(status: [0, 1]).select(:author).distinct.pluck(:author)
+    authors = Item.select(:author).distinct.pluck(:author)
     authors.each do |author|
       if author == params[:author]
         flag = 1
@@ -243,7 +243,7 @@ class ItemsController < ApplicationController
 
   def publisher_not
     flag = 0
-    publishers = Item.where(status: [0, 1]).select(:publisher).distinct.pluck(:publisher)
+    publishers = Item.select(:publisher).distinct.pluck(:publisher)
     publishers.each do |publisher|
       if publisher == params[:publisher]
         flag = 1

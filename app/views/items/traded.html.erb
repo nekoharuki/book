@@ -1,44 +1,25 @@
-<h1><%= @item.title %>の詳細ページ</h1>
-
-<p>タイトル:
-  <%= @item.title %>
-</p>
-
-<p>作者:
-  <%= @item.author %>
-</p>
-
-<p>出版社:
-  <%= @item.publisher %>
-</p>
-
-<p>内容:
-  <%= @item.content %>
-</p>
-
-<p>状態:
-  <%= @item.condition %>
-</p>
-
-<p>おすすめ度:
-  <%= @item.recommend_point %>点
-</p>
-
-<p>役に立った度:
-  <%= @item.help_point %>点
-</p>
-
-<p>学びになった度:
-  <%= @item.learn_point %>点
-</p>
-
-<p>カテゴリー:
-  <%= @item.category %>
-</p>
-
-<p>出品者:
-  <%= link_to(@item.user.name, "/users/#{@hashids.encode(@item.user.id)}/items") %>
-</p>
-
-<p>画像:
-<%= image_tag @item.image.url if @item.image? %></p>
+<div class="row">
+  <div class="col-md-6">
+    <img src="<%= @item.image.url %>" class="card-img-top" alt="本の画像">
+  </div>
+  <div class="col-md-6">
+    <div class="card-body">
+      <h5>タイトル: </h5>
+      <h4 class="card-title"><%= @item.title %></h4>
+      <p class="card-text"><h5>内容:</h5> <%= @item.content %></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><span class="fw-bold">作者: </span><%= link_to(@item.author, "/items/author/#{@item.author}") %></li>
+      <li class="list-group-item"><span class="fw-bold">出版社: </span><%= link_to(@item.publisher, "/items/publisher/#{@item.publisher}") %></li>
+      <li class="list-group-item"><span class="fw-bold">状態: </span><%= @item.condition %></li>
+      <li class="list-group-item"><span class="fw-bold">おすすめ度: </span><%= @item.recommend_point %></li>
+      <li class="list-group-item"><span class="fw-bold">仕事で役に立った度: </span><%= @item.help_point %></li>
+      <li class="list-group-item"><span class="fw-bold">学びになった度: </span><%= @item.learn_point %></li>
+      <li class="list-group-item"><span class="fw-bold">カテゴリー: </span><%= link_to(@item.category, "/items/category/#{@item.category}") %></li>
+      <li class="list-group-item"><span class="fw-bold">ユーザー: </span><%= link_to(@item.user.name, "/users/#{@hashids.encode(@item.user_id)}/items") %></li>
+    </ul>
+    <div class="card-body">
+    </div>
+  </div>
+</div>
+<br>
