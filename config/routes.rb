@@ -8,13 +8,12 @@ Rails.application.routes.draw do
       get 'category/:category', to: 'items#category'
       get 'publisher/:publisher', to: 'items#publisher'
       get 'author/:author', to: 'items#author'
-
+      get 'title_results/:title_name', to: 'items#title_results'
       post 'title_search', to: 'items#title_search'
 
     end
     member do
       get 'trade_items', to: 'items#trade_items'
-      get 'destroy_form', to: 'items#destroy_form'
       get 'traded', to: 'items#traded'
     end
   end
@@ -32,7 +31,6 @@ Rails.application.routes.draw do
     end
     member do
       get 'items', to: 'users#user_items'
-      get 'destroy_form', to: 'users#destroy_form'
       post 'follows_create' ,to: 'users#follows_create'
       post 'follows_destroy' ,to: 'users#follows_destroy'
     end

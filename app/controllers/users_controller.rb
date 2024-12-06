@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :destroy_form, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
+  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
   before_action :login_now, only: [:login, :login_form, :create, :new]
-  before_action :real_user, only: [:edit, :update, :destroy, :show, :destroy_form]
+  before_action :real_user, only: [:edit, :update, :destroy, :show]
   before_action :follows_find, only: [:follows_create]
   before_action :follow_current, only: [:follows_create]
 
@@ -11,8 +11,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @google_logo_url = Cloudinary::Uploader.upload("book/knglppdddmtjrbovkdow", resource_type: "image")["secure_url"]
-    @github_logo_url = Cloudinary::Uploader.upload("book/knglppdddmtjrbovkdow", resource_type: "image")["secure_url"]
   end
 
   def create
@@ -69,10 +67,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy_form
-    user_id = @hashids.decode(params[:id]).first
-    @user = User.find_by(id: user_id)
-  end
 
   def show
     user_id = @hashids.decode(params[:id]).first

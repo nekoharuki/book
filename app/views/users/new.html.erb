@@ -1,14 +1,10 @@
 <h1 class="mb-4">ユーザー情報登録</h1>
 
 <div class="mb-3">
-  <%= link_to "/auth/google_oauth2", method: :post, class: "btn btn-danger" do %>
-    <%= image_tag(@google_logo_url, alt: "Login with Google", style: "height: 20px;") %> Login with Google
-  <% end %>
+  <%= link_to "New with Google", "/auth/google_oauth2", method: :post, class: "btn btn-success" %>
 </div>
 <div class="mb-3">
-  <%= link_to "/auth/github", method: :post, class: "btn btn-dark" do %>
-    <%= image_tag(@github_logo_url, alt: "Login with GitHub", style: "height: 20px;") %> Login with GitHub
-  <% end %>
+  <%= link_to "New with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
 </div>
 
 <%= form_tag("/users", method: :post, class: "needs-validation", novalidate: true) do %>
@@ -42,3 +38,4 @@
   </div>
   <button type="submit" class="btn btn-primary">登録</button>
 <% end %>
+<br>

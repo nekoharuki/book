@@ -1,12 +1,15 @@
 <h1>自分の出品物</h1>
+
 <% if @items.blank? %>
   <p>出品物がありません</p>
-  <%=link_to("出品する","/items/new")%>
+  <%= link_to "出品する", "/items/new", class: "btn btn-primary" %>
 <% else %>
   <% @items.each do |item| %>
-  <%= render "items/card", item: item %>
-    <%= link_to("この商品と物々交換する", "/items/#{@hashids.encode(@item_requested.id)}/#{@hashids.encode(item.id)}/trade", data: { turbo_method: "post" }) %>
+  <br>
+    <%= render "items/card", item: item %>
+        <%= link_to "この商品と物々交換する", "/items/#{@hashids.encode(@item_requested.id)}/#{@hashids.encode(item.id)}/trade", class: "btn btn-success mt-2", data: { turbo_method: "post" } %>
     <br>
   <% end %>
-
 <% end %>
+<br>
+

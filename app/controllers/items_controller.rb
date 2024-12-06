@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :please_login
-  before_action :real_item, only: [:edit, :update, :destroy, :destroy_form]
+  before_action :real_item, only: [:edit, :update, :destroy]
   before_action :category_not, only: [:category]
   before_action :author_not, only: [:author]
   before_action :publisher_not, only: [:publisher]
@@ -92,14 +92,10 @@ class ItemsController < ApplicationController
       redirect_to("/items")
     else
       flash[:alert] = "削除できませんでした"
-      redirect_to("/items/destroy_form")
+      redirect_to("/items")
     end
   end
 
-  def destroy_form
-    item_id = @hashids.decode(params[:id]).first
-    @item = Item.find_by(id: item_id, status: [0, 1])
-  end
 
   def category
     @category_name = params[:category]

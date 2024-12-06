@@ -1,18 +1,22 @@
-<h1><%= @user.name %>様の詳細情報</h1>
+<h1 class="mb-4"><%= @user.name %>様のユーザー情報</h1>
 
-<p>ユーザー名:
-  <%= @user.name %>
-</p>
+<div class="mb-3">
+  <p><strong>ユーザー名:</strong> <%= @user.name %></p>
+</div>
 
-<p>Eメール:
-  <%= @user.email %>
-</p>
+<div class="mb-3">
+  <p><strong>Eメール:</strong> <%= @user.email %></p>
+</div>
 
-<p>住所:
-  <%= @user.address %>
-</p>
+<div class="mb-3">
+  <p><strong>住所:</strong> <%= @user.address %></p>
+</div>
 
 <% if @current_user.id == @user.id %>
-  <%= link_to("編集", "/users/#{@hashids.encode(@user.id)}/edit") %>
-  <%= link_to("削除", "/users/#{@hashids.encode(@user.id)}/destroy_form") %>
+  <div class="d-flex">
+    <%= link_to "編集", "/users/#{@hashids.encode(@user.id)}/edit", class: "btn btn-success me-2" %>
+    <%= form_tag("/users/#{@hashids.encode(@user.id)}", method: :delete, class: "d-inline") do %>
+      <input type="submit" value="削除" class="btn btn-danger">
+    <% end %>
+  </div>
 <% end %>

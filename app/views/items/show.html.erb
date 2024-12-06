@@ -20,8 +20,10 @@
     <br>
     <div class="card-body">
       <% if @current_user.id == @item.user.id %>
-        <%= link_to "編集", "/items/#{@hashids.encode(@item.id)}/edit", class: "btn btn-success" %>
-        <%= link_to "削除", "/items/#{@hashids.encode(@item.id)}/destroy_form", class: "btn btn-danger" %>
+        <%= link_to "編集", "/items/#{@hashids.encode(@item.id)}/edit", class: "btn btn-success me-2" %>
+        <%= form_tag("/items/#{@hashids.encode(@item.id)}", method: :delete, class: "d-inline") do %>
+          <input type="submit" value="削除" class="btn btn-danger">
+        <% end %>
       <% else %>
         <%= link_to "この商品に物々交換リクエストする", "/items/#{@hashids.encode(@item.id)}/trade_items", class: "btn btn-success" %>
         <%= render "items/good", item: @item %>

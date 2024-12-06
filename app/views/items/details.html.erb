@@ -1,28 +1,23 @@
-<h1>自分が物々交換した商品</h1>
-<%@items_offered.each do |item|%>
-<p>交換した
-    <%=link_to(item.user_offered.name,"/users/#{@hashids.encode(item.user_offered_id)}/items")%>
-    商品:
-<%=link_to(item.item_offered.title,"/items/#{@hashids.encode(item.item_offered_id)}/traded")%>
-</p>
-<p>交換した
-    <%=link_to(item.user_requested.name,"/users/#{@hashids.encode(item.user_requested_id)}/items")%>
-    様の商品:
-<%=link_to(item.item_requested.title,"/items/#{@hashids.encode(item.item_requested_id)}/traded")%>
-</p>
-<p>-----------------------------------</p>
-<%end%>
+<h1 class="mb-4">自分が物々交換した商品</h1>
 
-<%@items_requested.each do |item|%>
-<p>交換した
-    <%=link_to(item.user_requested.name,"/users/#{@hashids.encode(item.user_requested_id)}/items")%>
-    様の商品:
-<%=link_to(item.item_requested.title,"/items/#{@hashids.encode(item.item_requested_id)}/traded")%>
-</p>
-<p>交換した
-    <%=link_to(item.user_offered.name,"/users/#{@hashids.encode(item.user_offered_id)}/items")%>
-    様の商品:
-<%=link_to(item.item_offered.title,"/items/#{@hashids.encode(item.item_offered_id)}/traded")%>
-</p>
-<p>-----------------------------------</p>
-<%end%>
+<div class="list-group mb-4">
+  <% @items_offered.each do |item| %>
+    <div class="list-group-item">
+      <p>交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 商品:</p>
+      <p><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
+      <p>交換した <%= link_to item.user_requested.name, "/users/#{@hashids.encode(item.user_requested_id)}/items" %> 様の商品:</p>
+      <p><%= link_to item.item_requested.title, "/items/#{@hashids.encode(item.item_requested_id)}/traded" %></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="list-group">
+  <% @items_requested.each do |item| %>
+    <div class="list-group-item">
+      <p>交換した <%= link_to item.user_requested.name, "/users/#{@hashids.encode(item.user_requested_id)}/items" %> 様の商品:</p>
+      <p><%= link_to item.item_requested.title, "/items/#{@hashids.encode(item.item_requested_id)}/traded" %></p>
+      <p>交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 様の商品:</p>
+      <p><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
+    </div>
+  <% end %>
+</div>

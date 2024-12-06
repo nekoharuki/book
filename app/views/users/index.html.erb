@@ -1,6 +1,7 @@
-<h1>ユーザー一覧</h1>
+<h1 class="mb-4">ユーザー一覧</h1>
 
-<%@users.each do |user|%>
-    <%=link_to(user.name,items_user_path(@hashids.encode(user.id)))%>
-    <br>
-<%end%>
+<div class="list-group">
+  <% @users.each do |user| %>
+    <%= link_to user.name, items_user_path(@hashids.encode(user.id)), class: "list-group-item list-group-item-action" %>
+  <% end %>
+</div>

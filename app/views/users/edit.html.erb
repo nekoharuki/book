@@ -1,21 +1,26 @@
-<h1>ユーザー情報編集</h1>
+<h1 class="mb-4">ユーザー情報編集</h1>
 
-<%=form_tag("/users/#{@hashids.encode(@user.id)}",method: :put) do%>
-
-    <p>
-        <label for="name">名前:</label>
-        <input type="text" name="name" id="name" title="名前を入力してください" maxlength="20" placeholder="名前" value="<%=@user.name%>" required>
-    </p>
-    <p>
-        <label for="email">Eメール:</label>
-        <input type="email" name="email" id="email" title="メールアドレスを入力してください" max="20" placeholder="メールアドレス" value="<%=@user.email%>" required>
-    </p>
-    <p>
-        <label for="address">住所:</label>
-        <input type="text" name="address" id="address" title="住所を入力してください" maxlength="20" placeholder="住所" value="<%=@user.address%>" required>
-    </p>
-
-    <input type="submit" value="登録">
-<%end%>
-<br>
-<%=link_to("ユーザー情報へ","/users/#{@hashids.encode(@user.id)}")%>
+<%= form_tag("/users/#{@hashids.encode(@user.id)}", method: :put, class: "needs-validation", novalidate: true) do %>
+  <div class="mb-3">
+    <label for="name" class="form-label">名前:</label>
+    <input type="text" class="form-control" name="name" id="name" title="名前を入力してください" maxlength="20" placeholder="名前" value="<%= @user.name %>" required>
+    <div class="invalid-feedback">
+      名前を入力してください。
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Eメール:</label>
+    <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" maxlength="20" placeholder="メールアドレス" value="<%= @user.email %>" required>
+    <div class="invalid-feedback">
+      メールアドレスを入力してください。
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">住所:</label>
+    <input type="text" class="form-control" name="address" id="address" title="住所を入力してください" maxlength="20" placeholder="住所" value="<%= @user.address %>" required>
+    <div class="invalid-feedback">
+      住所を入力してください。
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">登録</button>
+<% end %>
