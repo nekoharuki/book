@@ -1,42 +1,11 @@
 <div class="d-flex justify-content-between align-items-center">
-  <h1><%= @user.name %>様の投稿一覧</h1>
-  <% if @user.id != @current_user.id %>
-    <% if Follow.find_by(follower_user: @current_user.id, followed_user: @user.id) %>
-      <%= link_to "フォローを解除する", "/users/#{@hashids.encode(@user.id)}/follows_destroy", data: { turbo_method: "post" }, class: "btn btn-danger" %>
-    <% else %>
-      <%= link_to "フォローする", "/users/#{@hashids.encode(@user.id)}/follows_create", data: { turbo_method: "post" }, class: "btn btn-primary" %>
-    <% end %>
-  <% end %>
-</div>
+  <h1><%= @user.name %>様の出品一覧</h1>
+
+  <%= render "users/follow", user: @user %>
+
 <br>
 <br>
 <% @items.each do |item| %>
-  <div class="card mb-3">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img class="img-fluid rounded-start" src="<%= item.image %>" alt="商品画像">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title"><%= item.title %></h5>
-          <p class="card-text">
-            <small class="text-muted">作者: <%= item.author %></small>
-          </p>
-          <p class="card-text">
-            <small class="text-muted">出版社: <%= item.publisher %></small>
-          </p>
-          <p class="card-text">
-            <small class="text-muted">状態: <%= item.condition %></small>
-          </p>
-          <p class="card-text">
-            <small class="text-muted">内容: <%= item.content %></small>
-          </p>
-          <p class="card-text">
-            <small class="text-muted">ジャンル: <%= item.category %></small>
-          </p>
-          <a class="btn btn-primary" href="<%= "/items/#{@hashids.encode(item.id)}" %>"><%= item.title %>の詳細</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render "items/card", item: item %>
+
 <% end %>

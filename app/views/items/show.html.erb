@@ -24,6 +24,7 @@
         <%= link_to "削除", "/items/#{@hashids.encode(@item.id)}/destroy_form", class: "btn btn-danger" %>
       <% else %>
         <%= link_to "この商品に物々交換リクエストする", "/items/#{@hashids.encode(@item.id)}/trade_items", class: "btn btn-success" %>
+        <%= render "items/good", item: @item %>
       <% end %>
     </div>
   </div>

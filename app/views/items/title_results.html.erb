@@ -1,5 +1,10 @@
 <h1>商品一覧</h1>
-
-<% @items.each do |item| %>
-  <%= render "items/card", item: item %>
+<% if @items.empty? %>
+<br>
+<br>
+  <h5>検索結果がありません</h5>
+<% else %>
+  <% @items.each do |item| %>
+    <%= render "items/card", item: item %>
+  <% end %>
 <% end %>

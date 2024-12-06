@@ -1,17 +1,17 @@
 <div class="d-flex flex-column align-items-center">
   <%= form_tag("/items/title_search", { method: :post }) do %>
-    <div class="mb-3">
+    <div class="text-center">
       <label for="title_name" class="form-label"><h3>タイトル検索</h3></label>
-      <div class="d-flex">
-        <input type="text" class="form-control me-2" name="title_name" id="title_name" placeholder="検索" required style="width: 300px;">
-        <input type="submit" class="btn btn-success" value="検索">
-      </div>
+    </div>
+    <div class="d-flex">
+      <input type="text" class="form-control me-2" name="title_name" id="title_name" placeholder="検索" required style="width: 300px;">
+      <input type="submit" class="btn btn-success" value="検索">
     </div>
   <% end %>
 </div>
 
-<h3>カテゴリー一覧</h3>
-<div class="list-container">
+<h3 class="text-left">カテゴリー一覧</h3>
+<div class="list-container d-flex justify-content-start">
   <% @categorize.each_slice(2) do |categories| %>
     <div class="list-row">
       <% categories.each do |category| %>
@@ -23,8 +23,8 @@
   <% end %>
 </div>
 
-<h3>作家一覧</h3>
-<div class="list-container">
+<h3 class="text-left">作家一覧</h3>
+<div class="list-container d-flex justify-content-start">
   <% @authors.each_slice(2) do |authors| %>
     <div class="list-row">
       <% authors.each do |author| %>
@@ -36,8 +36,8 @@
   <% end %>
 </div>
 
-<h3>出版社一覧</h3>
-<div class="list-container">
+<h3 class="text-left">出版社一覧</h3>
+<div class="list-container d-flex justify-content-start">
   <% @publishers.each_slice(2) do |publishers| %>
     <div class="list-row">
       <% publishers.each do |publisher| %>

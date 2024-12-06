@@ -1,0 +1,12 @@
+        <% if like = Like.find_by(item_id: item.id, user_id: @current_user.id) %>
+          <%= link_to "/likes/#{@hashids.encode(item.id)}/#{@hashids.encode(@current_user.id)}/destroy", data: { turbo_method: "post" }, class: "btn btn-danger custom-like-btn" do %>
+            <i class="fa fa-heart unliked-btn"></i> いいね済み
+          <% end %>
+        <% elsif @current_user.id != item.user_id %>
+          <%= link_to "/likes/#{@hashids.encode(item.id)}/#{@hashids.encode(@current_user.id)}/create", data: { turbo_method: "post" }, class: "btn btn-primary custom-like-btn" do %>
+            <i class="fa fa-heart liked-btn"></i> いいね
+          <% end %>
+        <% end %>
+        
+        いいねの数: <% sum = Like.where(item_id: item.id).count %>
+        <%= sum %>

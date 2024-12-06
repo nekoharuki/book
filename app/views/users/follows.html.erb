@@ -1,4 +1,4 @@
-<h1>フォローした人の投稿一覧</h1>
+<h1>フォローした人の出品一覧</h1>
 <br>
 <% @followeds.each do |followed| %>
   <% items = Item.where(user_id: followed.followed_user) %>
