@@ -1,25 +1,40 @@
-<h1>ユーザー情報登録</h1>
-      <%= link_to "Login with Google", "/auth/google_oauth2", method: :post %>
-      <br>
-      <br>
-      <%= link_to "Login with GitHub", "/auth/github", method: :post %>
+<h1 class="mb-4">ユーザー情報登録</h1>
 
-<%=form_tag("/users",method: :post) do%>
-    <p>
-        <label for="name">名前:</label>
-        <input type="text" name="name" id="name" title="名前を入力してください"  value="<%=@name%>" placeholder="名前" required>
-    </p>
-    <p>
-        <label for="email">Eメール:</label>
-        <input type="email" name="email" id="email" title="メールアドレスを入力してください"  value="<%=@email%>" placeholder="メールアドレス" required>
-    </p>
-    <p>
-        <label for="password">パスワード:</label>
-        <input type="password" name="password" id="password" title="パスワードを入力してください" value="<%=@password%>"  placeholder="パスワード" required>
-    </p>
-    <p>
-        <label for="address">住所:</label>
-        <input type="text" name="address" id="address" title="住所を入力してください"  value="<%=@address%>" placeholder="住所" required>
-    </p>
-    <input type="submit" value="登録">
+<div class="mb-3">
+  <%= link_to "Login with Google", "/auth/google_oauth2", method: :post, class: "btn btn-danger" %>
+</div>
+<div class="mb-3">
+  <%= link_to "Login with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
+</div>
+
+<%= form_tag("/users", method: :post, class: "needs-validation", novalidate: true) do %>
+  <div class="mb-3">
+    <label for="name" class="form-label">名前:</label>
+    <input type="text" class="form-control" name="name" id="name" title="名前を入力してください" value="<%= @name %>" placeholder="名前" required>
+    <div class="invalid-feedback">
+      名前を入力してください。
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Eメール:</label>
+    <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" value="<%= @email %>" placeholder="メールアドレス" required>
+    <div class="invalid-feedback">
+      メールアドレスを入力してください。
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">パスワード:</label>
+    <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" value="<%= @password %>" placeholder="パスワード" required>
+    <div class="invalid-feedback">
+      パスワードを入力してください。
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">住所:</label>
+    <input type="text" class="form-control" name="address" id="address" title="住所を入力してください" value="<%= @address %>" placeholder="住所" required>
+    <div class="invalid-feedback">
+      住所を入力してください。
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">登録</button>
 <% end %>
