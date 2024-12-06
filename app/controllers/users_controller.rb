@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @google_logo_url = Cloudinary::Uploader.upload("book/knglppdddmtjrbovkdow", resource_type: "image")["secure_url"]
+    @github_logo_url = Cloudinary::Uploader.upload("book/knglppdddmtjrbovkdow", resource_type: "image")["secure_url"]
   end
 
   def create
