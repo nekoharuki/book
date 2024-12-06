@@ -15,7 +15,7 @@
       <li class="list-group-item"><span class="fw-bold">仕事で役に立った度: </span><%= @item.help_point %></li>
       <li class="list-group-item"><span class="fw-bold">学びになった度: </span><%= @item.learn_point %></li>
       <li class="list-group-item"><span class="fw-bold">カテゴリー: </span><%= link_to(@item.category,"/items/category/#{@item.category}") %></li>
-      <li class="list-group-item"><span class="fw-bold">ユーザー: </span><%= link_to(@item.user.name,"/users/#{@hashids.encode(@item.user_id)}/items") %></li>
+      <li class="list-group-item"><span class="fw-bold">出品者: </span><%= link_to(@item.user.name,"/users/#{@hashids.encode(@item.user_id)}/items") %></li>
     </ul>
     <br>
     <div class="card-body">
