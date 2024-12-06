@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get 'category/:category', to: 'items#category'
       get 'publisher/:publisher', to: 'items#publisher'
       get 'author/:author', to: 'items#author'
+
+      post 'title_search', to: 'items#title_search'
     end
     member do
       get 'trade_items', to: 'items#trade_items'

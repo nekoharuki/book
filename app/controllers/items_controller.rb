@@ -299,4 +299,9 @@ def search
     @publishers = Item.select(:publisher).distinct.pluck(:publisher)
     @authors = Item.select(:author).distinct.pluck(:author)
 end
+def title_search
+  @title_name = params[:title_search]
+  @items = Item.where(title: params[:title_search], status: [0, 1])
+  redirect_to("/items/results")
+end
 end
