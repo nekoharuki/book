@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
 
-  # before_action :please_login
-  # before_action :real_item, only: [:edit, :update, :destroy, :destroy_form]
-  # before_action :category_not, only: [:category]
-  # before_action :author_not, only: [:author]
-  # before_action :publisher_not, only: [:publisher]
-  # before_action :trade_not, only: [:trade]
-  # before_action :detail_not, only: [:detail]
+  before_action :please_login
+  before_action :real_item, only: [:edit, :update, :destroy, :destroy_form]
+  before_action :category_not, only: [:category]
+  before_action :author_not, only: [:author]
+  before_action :publisher_not, only: [:publisher]
+  before_action :trade_not, only: [:trade]
+  before_action :detail_not, only: [:detail]
 
   def index
     @items = Item.where(status: [0, 1])
