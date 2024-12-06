@@ -301,7 +301,10 @@ def search
 end
 def title_search
   @title_name = params[:title_search]
-  @items = Item.where(title: params[:title_search], status: [0, 1])
-  redirect_to("/items/results")
+  redirect_to("/items/title_results/#{@title_name}")
 end
+  def title_results
+    @title_name=params[:title_name]
+    @items = Item.where(title: params[:title_name], status: [0, 1])
+  end
 end

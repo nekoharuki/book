@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get 'author/:author', to: 'items#author'
 
       post 'title_search', to: 'items#title_search'
+
     end
     member do
       get 'trade_items', to: 'items#trade_items'
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
       get 'traded', to: 'items#traded'
     end
   end
+
+  get "/items/title_results/:title_name", to: "items#title_results"
 
   post 'items/:item_requested_id/:item_offered_id/trade', to: 'items#trade'
   post 'items/:item_requested_id/:item_offered_id/detail', to: 'items#detail'
