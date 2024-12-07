@@ -25,7 +25,7 @@
           <input type="submit" value="削除" class="btn btn-danger">
         <% end %>
       <% else %>
-        <%= link_to "この商品に物々交換リクエストする", "/items/#{@hashids.encode(@item.id)}/trade_items", class: "btn btn-success" %>
+        <%= link_to "#{@item.title}に物々交換リクエストする", "/items/#{@hashids.encode(@item.id)}/trade_items", class: "btn btn-success" %>
         <%= render "items/good", item: @item %>
       <% end %>
     </div>

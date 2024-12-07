@@ -311,4 +311,17 @@ def title_results
   @title_name = params[:title_name]
   @items = Item.where("title LIKE ? AND status IN (?)", "%#{@title_name}%", [0, 1])
 end
+
+def delivery
+  my_id = @hashids.decode(params[:myitem]).first
+  you_id = @hashids.decode(params[:youitem]).first
+  @myitem = Item.find_by(id: my_id)
+  @youitem = Item.find_by(id: you_id)
+  if @myitem.user.id != @current_user.id
+    flash[:alert]="そのページには行けません"
+    redirect_to("/items")
+  end
+end
+
+
 end

@@ -6,7 +6,7 @@
   <%= render "items/card", item: item %>
 
   <% if @item.user.id == @current_user.id %>
-        <%= link_to "この商品と物々交換する", "/items/#{@hashids.encode(@item.id)}/#{@hashids.encode(item.id)}/detail", class: "btn btn-success mt-2", data: { turbo_method: "post" } %>
+        <%= link_to "#{item.title}と物々交換する", "/items/#{@hashids.encode(@item.id)}/#{@hashids.encode(item.id)}/detail", class: "btn btn-success mt-2", data: { turbo_method: "post" } %>
   <% end %>
   <br>
 <% end %>

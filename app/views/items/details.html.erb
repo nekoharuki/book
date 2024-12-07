@@ -3,11 +3,12 @@
 <div class="list-group mb-4">
   <% @items_offered.each do |item| %>
     <div class="list-group-item">
-      <p>交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 商品:</p>
+      <p>交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 様:の商品</p>
       <p><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
       <p>交換した <%= link_to item.user_requested.name, "/users/#{@hashids.encode(item.user_requested_id)}/items" %> 様の商品:</p>
       <p><%= link_to item.item_requested.title, "/items/#{@hashids.encode(item.item_requested_id)}/traded" %></p>
     </div>
+            <%= link_to "#{item.item_offered.title}を配送してください","/items/delivery/#{@hashids.encode(item.item_offered.id)}/#{@hashids.encode(item.item_requested.id)}" , class: "btn btn-success" %>
   <% end %>
 </div>
 
@@ -19,5 +20,8 @@
       <p>交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 様の商品:</p>
       <p><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
     </div>
+                <%= link_to "#{item.item_requested.title}を配送してください","/items/delivery/#{@hashids.encode(item.item_requested.id)}/#{@hashids.encode(item.item_offered.id)}",  class: "btn btn-success" %>
   <% end %>
 </div>
+<br>
+
