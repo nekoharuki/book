@@ -11,16 +11,10 @@
   <div class="mb-3">
     <label for="email" class="form-label">Eメール:</label>
     <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%= @flash_email %>" required>
-    <div class="invalid-feedback">
-      メールアドレスを入力してください。
-    </div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">パスワード:</label>
     <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード"  required>
-    <div class="invalid-feedback">
-      パスワードを入力してください。
-    </div>
   </div>
   <button type="submit" class="btn btn-primary">ログイン</button>
 <% end %>
