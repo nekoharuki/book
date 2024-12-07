@@ -7,7 +7,7 @@
   <%= link_to "New with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
 </div>
 
-<%= form_tag("/users", method: :post, class: "needs-validation", novalidate: true) do %>
+<%= form_tag("/users", method: :post, class: "needs-validation") do %>
   <div class="mb-3">
     <label for="name" class="form-label">名前:</label>
     <input type="text" class="form-control" name="name" id="name" title="名前を入力してください" value="<%= @name %>" placeholder="名前" required>

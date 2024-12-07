@@ -7,17 +7,17 @@
   <%= link_to "Login with GitHub", "/auth/github", method: :post, class: "btn btn-dark" %>
 </div>
 
-<%= form_tag("/login", method: :post, class: "needs-validation", novalidate: true) do %>
+<%= form_tag("/login", method: :post, class: "needs-validation") do %>
   <div class="mb-3">
     <label for="email" class="form-label">Eメール:</label>
-    <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%= @email %>" required>
+    <input type="email" class="form-control" name="email" id="email" title="メールアドレスを入力してください" placeholder="メールアドレス" value="<%= @flash_email %>" required>
     <div class="invalid-feedback">
       メールアドレスを入力してください。
     </div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">パスワード:</label>
-    <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード" value="<%= @password %>" required>
+    <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" placeholder="パスワード"  required>
     <div class="invalid-feedback">
       パスワードを入力してください。
     </div>

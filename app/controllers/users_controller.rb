@@ -81,8 +81,8 @@ class UsersController < ApplicationController
       redirect_to("/items")
     else
       flash[:alert] = "メールアドレスまたはパスワードが間違っています"
-      @password = params[:password]
-      render("users/login_form")
+      flash[:email] = params[:email]
+      redirect_to("/login")
     end
   end
 
@@ -93,6 +93,7 @@ class UsersController < ApplicationController
   end
 
   def login_form
+    @flash_email = flash[:email]
   end
 
   def user_items
