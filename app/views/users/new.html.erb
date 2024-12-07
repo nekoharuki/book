@@ -18,37 +18,12 @@
   </div>
 <div class="mb-3">
   <label for="password" class="form-label">パスワード:</label>
-  <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" value="<%= @password %>" placeholder="パスワード" required>
-  <div class="invalid-feedback" id="passwordError">
-    パスワードは英数の大文字と小文字、数字、記号を含む7文字以上である必要があります。
-  </div>
+  <input type="password" class="form-control" name="password" id="password" title="パスワードを入力してください" value="<%= @password %>" placeholder="パスワード"  minlength="5" required>
 </div>
   <div class="mb-3">
     <label for="address" class="form-label">住所:</label>
-    <input type="text" class="form-control" name="address" id="address" title="住所を入力してください" value="<%= @address %>" placeholder="住所" required>
+    <input type="text" class="form-control" name="address" id="address" title="住所を入力してください" value="<%= @address %>" placeholder="住所"  required>
   </div>
   <button type="submit" class="btn btn-primary">登録</button>
 <% end %>
 <br>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var passwordInput = document.getElementById("password");
-    var passwordError = document.getElementById("passwordError");
-    var form = passwordInput.closest("form");
-
-    form.addEventListener("submit", function(event) {
-      var password = passwordInput.value;
-      var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
-
-      if (!passwordPattern.test(password)) {
-        event.preventDefault();
-        event.stopPropagation();
-        passwordInput.classList.add("is-invalid");
-        passwordError.style.display = "block";
-      } else {
-        passwordInput.classList.remove("is-invalid");
-        passwordError.style.display = "none";
-      }
-    }, false);
-  });
-</script>
