@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def please_login
     if @current_user.nil?
-      flash[:notice] = "ログインしてください"
+      flash[:alert] = "ログインしてください"
       redirect_to("/login")
     end
   end

@@ -2,7 +2,7 @@
 <%@likes.each do |like|%>
     <%item=Item.find_by(id: like.item_id)%>
 
-    <%=link_to(item.title,"/items/#{@hashids.encode(item.id)}")%>
+  <%= render "items/card", item: item %>
 
     <br>
 <%end%>

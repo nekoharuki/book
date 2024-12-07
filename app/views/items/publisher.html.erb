@@ -1,5 +1,6 @@
-<h1>出版社:<%=@publisher%></h1>
+<h1>出版社:<%=@publisher%>の商品一覧</h1>
+<br>
 <% @items.each do |item| %>
-    <%=link_to(item.title,"/items/#{@hashids.encode(item.id)}")%>
+  <%= render "items/card", item: item %>
     <br>
 <% end %>

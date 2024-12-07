@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :destroy_form, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
+  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
   before_action :login_now, only: [:login, :login_form, :create, :new]
-  # before_action :real_user, only: [:edit, :update, :destroy, :show, :destroy_form]
+  before_action :real_user, only: [:edit, :update, :destroy, :show,:password_chage,:password_form]
   before_action :follows_find, only: [:follows_create]
   before_action :follow_current, only: [:follows_create]
 
@@ -27,7 +27,6 @@ class UsersController < ApplicationController
     else
       @name = params[:name]
       @address = params[:address]
-      @password = params[:password]
       flash[:alert] = "ユーザー登録できませんでした"
       render("users/new")
     end
@@ -43,11 +42,10 @@ class UsersController < ApplicationController
     @user = User.find_by(id: user_id)
     @user.name = params[:name]
     @user.email = params[:email]
-    @user.password = params[:password]
     @user.address = params[:address]
     if @user.save
       flash[:notice] = "ユーザー情報編集できました"
-      redirect_to("/users")
+      redirect_to("/users/#{@hashids.encode(user_id)}")
     else
       flash[:alert] = "ユーザー情報編集できませんでした"
       render("users/edit")
@@ -64,14 +62,10 @@ class UsersController < ApplicationController
       redirect_to("/login")
     else
       flash[:alert] = "ユーザー情報削除できませんでした"
-      redirect_to("/users")
+      redirect_to("/users/#{@hashids.encode(user_id)}")
     end
   end
 
-  def destroy_form
-    user_id = @hashids.decode(params[:id]).first
-    @user = User.find_by(id: user_id)
-  end
 
   def show
     user_id = @hashids.decode(params[:id]).first
@@ -86,8 +80,8 @@ class UsersController < ApplicationController
       redirect_to("/items")
     else
       flash[:alert] = "メールアドレスまたはパスワードが間違っています"
-      @password = params[:password]
-      render("users/login_form")
+      flash[:email] = params[:email]
+      redirect_to("/login")
     end
   end
 
@@ -98,6 +92,7 @@ class UsersController < ApplicationController
   end
 
   def login_form
+    @flash_email = flash[:email]
   end
 
   def user_items
@@ -144,4 +139,28 @@ class UsersController < ApplicationController
   def  follows
     @followeds=Follow.where(follower_user: @current_user.id)
   end
+  def password_form
+  end
+
+  def password_chage
+    user_id = @hashids.decode(params[:id]).first
+    @user = User.find_by(id: user_id)
+
+    if @user.authenticate(params[:password_now]) && @current_user
+      @password_new = params[:password_new]
+      @current_user.password = @password_new
+      if @current_user.save
+        flash[:notice]="パスワード変更できました"
+        redirect_to("/users/#{@hashids.encode(@current_user.id)}")
+      else
+        flash[:alert]="パスワード変更できませんでした"
+        render("users/password_form")
+      end
+    else
+      flash[:alert]="パスワード変更できませんでした"
+      render("users/password_form")
+    end
+  end
+
+
 end

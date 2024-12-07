@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   before_action :please_login
-  before_action :real_item, only: [:edit, :update, :destroy, :destroy_form]
+  before_action :real_item, only: [:edit, :update, :destroy]
   before_action :category_not, only: [:category]
   before_action :author_not, only: [:author]
   before_action :publisher_not, only: [:publisher]
@@ -70,12 +70,18 @@ class ItemsController < ApplicationController
     @item.help_point = params[:help_point]
     @item.recommend_point = params[:recommend_point]
     @item.learn_point = params[:learn_point]
+
     image_url = @item.image.url
-    @item.image = params[:image]
+
+    if params[:image].present?
+      @item.image = params[:image]
+    end
 
     if @item.save
-      public_id = image_url.split('/').last.split('.').first
-      Cloudinary::Uploader.destroy(public_id)
+      if params[:image].present?
+        public_id = image_url.split('/').last.split('.').first
+        Cloudinary::Uploader.destroy(public_id)
+      end
       flash[:notice] = "編集できました"
       redirect_to("/items")
     else
@@ -92,23 +98,16 @@ class ItemsController < ApplicationController
       redirect_to("/items")
     else
       flash[:alert] = "削除できませんでした"
-      redirect_to("/items/destroy_form")
+      redirect_to("/items")
     end
   end
 
-  def destroy_form
-    item_id = @hashids.decode(params[:id]).first
-    @item = Item.find_by(id: item_id, status: [0, 1])
-  end
 
   def category
     @category_name = params[:category]
     @items = Item.where(category: params[:category], status: [0, 1])
   end
 
-  def categorize
-    @categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
-  end
 
   def like
     @likes = Like.where(user_id: @current_user.id)
@@ -116,7 +115,7 @@ class ItemsController < ApplicationController
 
   def category_not
     flag = 0
-    categorize = Item.where(status: [0, 1]).select(:category).distinct.pluck(:category)
+    categorize = Item.select(:category).distinct.pluck(:category)
     categorize.each do |category|
       if category == params[:category]
         flag = 1
@@ -214,22 +213,15 @@ class ItemsController < ApplicationController
     @items = Item.where(publisher: params[:publisher], status: [0, 1])
   end
 
-  def publishers
-    @publishers = Item.where(status: [0, 1]).select(:publisher).distinct.pluck(:publisher)
-  end
-
   def author
     @author = params[:author]
     @items = Item.where(author: params[:author], status: [0, 1])
   end
 
-  def authors
-    @authors = Item.where(status: [0, 1]).select(:author).distinct.pluck(:author)
-  end
 
   def author_not
     flag = 0
-    authors = Item.where(status: [0, 1]).select(:author).distinct.pluck(:author)
+    authors = Item.select(:author).distinct.pluck(:author)
     authors.each do |author|
       if author == params[:author]
         flag = 1
@@ -243,7 +235,7 @@ class ItemsController < ApplicationController
 
   def publisher_not
     flag = 0
-    publishers = Item.where(status: [0, 1]).select(:publisher).distinct.pluck(:publisher)
+    publishers = Item.select(:publisher).distinct.pluck(:publisher)
     publishers.each do |publisher|
       if publisher == params[:publisher]
         flag = 1
@@ -303,6 +295,33 @@ class ItemsController < ApplicationController
       redirect_to("/items")
     end
   end
+
+def search
+    @categorize = Item.select(:category).distinct.pluck(:category)
+    @publishers = Item.select(:publisher).distinct.pluck(:publisher)
+    @authors = Item.select(:author).distinct.pluck(:author)
+end
+
+def title_search
+  @title_name = params[:title_name]
+  redirect_to url_for(controller: 'items', action: 'title_results', title_name: @title_name)
+end
+
+def title_results
+  @title_name = params[:title_name]
+  @items = Item.where("title LIKE ? AND status IN (?)", "%#{@title_name}%", [0, 1])
+end
+
+def delivery
+  my_id = @hashids.decode(params[:myitem]).first
+  you_id = @hashids.decode(params[:youitem]).first
+  @myitem = Item.find_by(id: my_id)
+  @youitem = Item.find_by(id: you_id)
+  if @myitem.user.id != @current_user.id
+    flash[:alert]="そのページには行けません"
+    redirect_to("/items")
+  end
+end
 
 
 end

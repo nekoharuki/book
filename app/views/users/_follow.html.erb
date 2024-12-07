@@ -1,0 +1,8 @@
+  <% if @user.id != @current_user.id %>
+    <% if Follow.find_by(follower_user: @current_user.id, followed_user: @user.id) %>
+      <%= link_to "フォローを解除する", "/users/#{@hashids.encode(@user.id)}/follows_destroy", data: { turbo_method: "post" }, class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to "フォローする", "/users/#{@hashids.encode(@user.id)}/follows_create", data: { turbo_method: "post" }, class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+</div>
