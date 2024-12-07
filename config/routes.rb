@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       post 'create', to: 'users#create'
     end
     member do
+      post 'password_chage', to: 'users#password_chage'
+      get 'password_form', to: 'users#password_form'
       get 'items', to: 'users#user_items'
       post 'follows_create' ,to: 'users#follows_create'
       post 'follows_destroy' ,to: 'users#follows_destroy'

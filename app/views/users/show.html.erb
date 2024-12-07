@@ -14,9 +14,11 @@
 
 <% if @current_user.id == @user.id %>
   <div class="d-flex">
-    <%= link_to "編集", "/users/#{@hashids.encode(@user.id)}/edit", class: "btn btn-success me-2" %>
+    <%= link_to "編集", "#{@hashids.encode(@user.id)}/edit", class: "btn btn-success me-2" %>
     <%= form_tag("/users/#{@hashids.encode(@user.id)}", method: :delete, class: "d-inline") do %>
       <input type="submit" value="削除" class="btn btn-danger">
     <% end %>
   </div>
+        <br>
+        <%= link_to "パスワードを変更する", "#{@hashids.encode(@user.id)}/password_form", class: "btn btn-success me-2" %>
 <% end %>

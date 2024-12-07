@@ -42,10 +42,14 @@
     <label for="category" class="form-label">カテゴリー</label>
     <input type="text" class="form-control" name="category" id="category" title="カテゴリーを入力してください" placeholder="カテゴリー" value="<%= @item.category %>" required>
   </div>
-  <div class="mb-3">
-    <label for="image" class="form-label">画像</label>
-    <input type="file" class="form-control" name="image" id="image" title="画像を入力してください" placeholder="画像" required>
-  </div>
+
+<div class="mb-3">
+  <label for="image" class="form-label">画像</label>
+  <img src="<%= @item.image.url %>" class="card-img-top mb-2" alt="本の画像" style="width: 150px; height: auto;">
+      <p>画像を変更する場合はファイルを選択してください</p>
+  <input type="file" class="form-control mt-2" name="image" id="image" title="画像を入力してください" placeholder="画像">
+</div>
+
   <input type="submit" class="btn btn-success" value="更新">
 <% end %>
 <br>

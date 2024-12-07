@@ -70,12 +70,18 @@ class ItemsController < ApplicationController
     @item.help_point = params[:help_point]
     @item.recommend_point = params[:recommend_point]
     @item.learn_point = params[:learn_point]
+
     image_url = @item.image.url
-    @item.image = params[:image]
+
+    if params[:image].present?
+      @item.image = params[:image]
+    end
 
     if @item.save
-      public_id = image_url.split('/').last.split('.').first
-      Cloudinary::Uploader.destroy(public_id)
+      if params[:image].present?
+        public_id = image_url.split('/').last.split('.').first
+        Cloudinary::Uploader.destroy(public_id)
+      end
       flash[:notice] = "編集できました"
       redirect_to("/items")
     else
