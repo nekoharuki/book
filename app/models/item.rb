@@ -7,11 +7,12 @@ class Item < ApplicationRecord
   validates :title, {presence: true}
   validates :author, {presence: true}
   validates :publisher, {presence: true}
-  validates :content, {presence: true}
+  validates :content, presence: true, length: { minimum: 100 }
   validates :condition, {presence: true}
   validates :category, {presence: true}
   validates :user_id, {presence: true}
   validates :status, {presence: true}
+  validates :image, {presence: true}
 
   has_many :likes, dependent: :destroy
   has_many :reviews, dependent: :destroy

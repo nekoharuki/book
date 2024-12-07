@@ -15,11 +15,11 @@
     <input type="text" class="form-control" name="publisher" id="publisher" title="出版社を入力してください" placeholder="出版社"   required>
   </div>
   <div class="mb-3">
-    <label for="content" class="form-label">内容</label>
-    <textarea id="content" class="form-control" name="content" rows="4" cols="50" title="内容を入力してください" placeholder="内容"  required></textarea>
+    <label for="content" class="form-label">本の内容や感想</label>
+    <textarea id="content" class="form-control" name="content" rows="4" cols="50" title="内容や感想を入力してください" placeholder="内容や感想" minlength="100" required></textarea>
   </div>
   <div class="mb-3">
-    <label for="condition" class="form-label">状態</label>
+    <label for="condition" class="form-label">本の状態</label>
     <select name="condition" class="form-select" id="condition">
       <option value="良い">良い</option>
       <option value="普通">普通</option>
@@ -50,7 +50,7 @@
   </div>
   <div class="mb-3">
     <label for="image" class="form-label">画像</label>
-    <input type="file" class="form-control" name="image" id="image" title="画像を入力してください" placeholder="画像"  >
+    <input type="file" class="form-control" name="image" id="image" title="画像を入力してください" placeholder="画像" required>
   </div>
   <input type="submit" class="btn btn-success" value="投稿">
 <% end %>

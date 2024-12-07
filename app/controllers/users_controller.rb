@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     @user.address = params[:address]
     if @user.save
       flash[:notice] = "ユーザー情報編集できました"
-      redirect_to("/users")
+      redirect_to("/users/#{@hashids.encode(user_id)}")
     else
       flash[:alert] = "ユーザー情報編集できませんでした"
       render("users/edit")
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
       redirect_to("/login")
     else
       flash[:alert] = "ユーザー情報削除できませんでした"
-      redirect_to("/users")
+      redirect_to("/users/#{@hashids.encode(user_id)}")
     end
   end
 
