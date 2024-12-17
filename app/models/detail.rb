@@ -3,6 +3,8 @@ class Detail < ApplicationRecord
   validates :user_offered_id, {presence: true}
   validates :item_requested_id, {presence: true}
   validates :user_requested_id, {presence: true}
+  validates :user_offered_status, {presence: true}
+  validates :user_requested_status, {presence: true}
 
   def user_offered
     return User.find_by(id: self.user_offered_id)

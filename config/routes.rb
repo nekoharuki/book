@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     member do
       get 'trade_items', to: 'items#trade_items'
       get 'traded', to: 'items#traded'
+      post 'delivery_success', to: 'items#delivery_success'
     end
   end
 

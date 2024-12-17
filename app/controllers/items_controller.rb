@@ -322,6 +322,8 @@ def delivery
     redirect_to("/items")
   end
 end
-
+def delivery_success
+  
+end
 
 end
