@@ -47,5 +47,4 @@ class ApplicationController < ActionController::Base
   end
 end
 
-
-ママッマ
+nhgbvgbhjnkm hg
