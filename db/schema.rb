@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_16_091212) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_17_074546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_091212) do
     t.integer "item_requested_id"
     t.integer "user_offered_id"
     t.integer "user_requested_id"
+    t.integer "user_offered_status"
+    t.integer "user_requested_status"
   end
 
   create_table "follows", force: :cascade do |t|

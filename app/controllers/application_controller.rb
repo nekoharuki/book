@@ -47,4 +47,3 @@ class ApplicationController < ActionController::Base
   end
 end
 
-nhgbvgbhjnkm hg
