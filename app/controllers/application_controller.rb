@@ -46,3 +46,6 @@ class ApplicationController < ActionController::Base
     @hashids = Hashids.new("kikotixyannkawaii", 20)
   end
 end
+
+
+ママッマ
