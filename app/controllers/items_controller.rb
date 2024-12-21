@@ -315,15 +315,24 @@ end
 def delivery
   my_id = @hashids.decode(params[:myitem]).first
   you_id = @hashids.decode(params[:youitem]).first
+  @number = @hashids.decode(params[:number]).first
   @myitem = Item.find_by(id: my_id)
   @youitem = Item.find_by(id: you_id)
-  if @myitem.user.id != @current_user.id
-    flash[:alert]="そのページには行けません"
-    redirect_to("/items")
-  end
 end
+
 def delivery_success
-  
+  @number = @hashids.decode(params[:number]).first
+  @myitem_id = @hashids.decode(params[:myitem_id]).first
+  if @number==1
+    @detail=Detail.find_by(item_offered_id: @myitem_id)
+    @detail.user_offered_status=1
+    @detail.save
+  elsif @number==2
+    @detail=Detail.find_by(item_requested_id: @myitem_id)
+    @detail.user_requested_status=1
+    @detail.save
+  end
+  redirect_to("/items")
 end
 
 end

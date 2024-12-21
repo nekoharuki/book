@@ -15,11 +15,12 @@ Rails.application.routes.draw do
     member do
       get 'trade_items', to: 'items#trade_items'
       get 'traded', to: 'items#traded'
-      post 'delivery_success', to: 'items#delivery_success'
     end
   end
+  get "/items/delivery/:number/:myitem/:youitem", to: "items#delivery"
 
-  get "/items/delivery/:myitem/:youitem", to: "items#delivery"
+  post 'items/:number/myitem_id', to: 'items#delivery_success'
+
 
   get "/items/title_results/:title_name", to: "items#title_results"
 
