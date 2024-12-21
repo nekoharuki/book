@@ -1,7 +1,6 @@
 <h1 class="mb-4">発送するためのやり方</h1>
-    <h2 class="card-title mt-4"><%=@myitem.title%>を住所: <%= @youitem.user.address %>に発送してください</h2>
+<h2 class="card-title mt-4"><%= @myitem.title %>を住所: <%= @youitem.user.address %>に発送してください</h2>
 <br>
-  <div class="card-body">
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4">
@@ -26,17 +25,14 @@
           <small class="text-muted"><span class="fw-bold">ジャンル: </span><%= @myitem.category %></small>
         </p>
         <a class="btn btn-primary" href="<%= "/items/#{@hashids.encode(@myitem.id)}/traded" %>"><%= @myitem.title %>の詳細</a>
-
-
       </div>
     </div>
   </div>
 </div>
 
-  </div>
 
-<div class="text-center">
-  <%= link_to "#{@myitem.title}を配送できた", "/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}",data: { turbo_method: "post" }, class: "btn btn-success mt-2" %>
-</div>
+        <%= form_tag("/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}", method: :post) do %>
+          <input type="submit" value="発送">
+        <% end %>
 <br>
 <br>

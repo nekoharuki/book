@@ -102,12 +102,10 @@ class ItemsController < ApplicationController
     end
   end
 
-
   def category
     @category_name = params[:category]
     @items = Item.where(category: params[:category], status: [0, 1])
   end
-
 
   def like
     @likes = Like.where(user_id: @current_user.id)
@@ -218,7 +216,6 @@ class ItemsController < ApplicationController
     @items = Item.where(author: params[:author], status: [0, 1])
   end
 
-
   def author_not
     flag = 0
     authors = Item.select(:author).distinct.pluck(:author)
@@ -254,15 +251,15 @@ class ItemsController < ApplicationController
     item_offered = Item.find_by(id: item_offered_id, status: [0, 1])
     if item_offered.user.id != @current_user.id
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
     if item_requested.user.id == item_offered.user.id
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
     if item_requested.id == item_offered.id
       flash[:alert] = "物々交換リクエストに失敗しました"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
   end
 
@@ -275,81 +272,86 @@ class ItemsController < ApplicationController
     trade = Trade.find_by(item_requested_id: item_requested.id,
                           user_requested_id: item_requested.user.id,
                           item_offered_id: item_offered.id,
-                          user_offered_id: item_offered.user.id
-                          )
+                          user_offered_id: item_offered.user.id)
 
     if !trade
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
     if item_requested.user.id != @current_user.id
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
     if item_requested.user.id == item_offered.user.id
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
     if item_requested.id == item_offered.id
       flash[:alert] = "物々交換できませんでした"
-      redirect_to("/items")
+      redirect_to("/items") and return
     end
   end
 
-def search
+  def search
     @categorize = Item.select(:category).distinct.pluck(:category)
     @publishers = Item.select(:publisher).distinct.pluck(:publisher)
     @authors = Item.select(:author).distinct.pluck(:author)
-end
-
-def title_search
-  @title_name = params[:title_name]
-  redirect_to url_for(controller: 'items', action: 'title_results', title_name: @title_name)
-end
-
-def title_results
-  @title_name = params[:title_name]
-  @items = Item.where("title LIKE ? AND status IN (?)", "%#{@title_name}%", [0, 1])
-end
-
-def delivery
-  my_id = @hashids.decode(params[:myitem]).first
-  you_id = @hashids.decode(params[:youitem]).first
-  @number = @hashids.decode(params[:number]).first
-  @myitem = Item.find_by(id: my_id)
-  @youitem = Item.find_by(id: you_id)
-end
-
-def delivery_success
-  @number = @hashids.decode(params[:number]).first
-  if !(@number == 1 || @number == 2)
-        flash[:notice] = "無効な番号です"
-  end
-  @myitem_id = @hashids.decode(params[:myitem_id]).first
-  if !@myitem_id
-    flash[:notice] = "アイテムが見つかりません"
   end
 
-  if @number == 1
-    @detail = Detail.find_by(item_offered_id: @myitem_id)
-    if @detail
-      @detail.user_offered_status = 1
-      @detail.save
-    else
-      flash[:notice] = "詳細が見つかりませんでした"
+  def title_search
+    @title_name = params[:title_name]
+    redirect_to url_for(controller: 'items', action: 'title_results', title_name: @title_name)
+  end
+
+  def title_results
+    @title_name = params[:title_name]
+    @items = Item.where("title LIKE ? AND status IN (?)", "%#{@title_name}%", [0, 1])
+  end
+
+  def delivery
+    my_id = @hashids.decode(params[:myitem]).first
+    you_id = @hashids.decode(params[:youitem]).first
+    @number = @hashids.decode(params[:number]).first
+    @myitem = Item.find_by(id: my_id)
+    @youitem = Item.find_by(id: you_id)
+  end
+
+  def delivery_success
+    @number = @hashids.decode(params[:number]).first
+    if !(@number == 1 || @number == 2)
+      flash[:alert] = "無効な番号です"
+      redirect_to("/items") and return
     end
-  elsif @number == 2
-    @detail = Detail.find_by(item_requested_id: @myitem_id)
-    if @detail
-      @detail.user_requested_status = 1
-      @detail.save
-    else
-      flash[:notice] = "詳細が見つかりませんでした"
+    @myitem_id = @hashids.decode(params[:myitem_id]).first
+    if !@myitem_id
+      flash[:alert] = "アイテムが見つかりません"
+      redirect_to("/items") and return
     end
-  else
-    flash[:notice] = "無効な番号です"
+
+    if @number == 1
+      @detail = Detail.find_by(item_offered_id: @myitem_id)
+      if @detail
+        @detail.user_offered_status = 1
+        @detail.save
+      else
+        flash[:alert] = "詳細が見つかりませんでした"
+        redirect_to("/items") and return
+      end
+    elsif @number == 2
+      @detail = Detail.find_by(item_requested_id: @myitem_id)
+      if @detail
+        @detail.user_requested_status = 1
+        @detail.save
+      else
+        flash[:alert] = "詳細が見つかりませんでした"
+        redirect_to("/items") and return
+      end
+    else
+      flash[:alert] = "無効な番号です"
+      redirect_to("/items") and return
+    end
+    flash[:notice] = "配送完了しました"
+    redirect_to("/items")
   end
-  redirect_to("/items")
-end
 
 end
