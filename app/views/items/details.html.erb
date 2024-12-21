@@ -23,7 +23,7 @@
         <p class="card-text">交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 様の商品:</p>
         <p class="card-text"><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
         <%= link_to "#{item.item_requested.title}を配送してください", "/items/delivery/#{@hashids.encode(2)}/#{@hashids.encode(item.item_requested.id)}/#{@hashids.encode(item.item_offered.id)}", class: "btn btn-success mt-2" %>
-     </div>
+      </div>
     </div>
   <% end %>
 </div>

@@ -36,7 +36,7 @@
   </div>
 
 <div class="text-center">
-  <%= link_to "#{@myitem.title}を配送できた", "/items/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}/#{@hashids.encode(@number)}/delivery_success",data: { turbo_method: "post" }, class: "btn btn-success mt-2" %>
+  <%= link_to "#{@myitem.title}を配送できた", "/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}",data: { turbo_method: "post" }, class: "btn btn-success mt-2" %>
 </div>
 <br>
 <br>

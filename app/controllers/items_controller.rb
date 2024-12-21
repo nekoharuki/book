@@ -322,15 +322,32 @@ end
 
 def delivery_success
   @number = @hashids.decode(params[:number]).first
+  if !(@number == 1 || @number == 2)
+        flash[:notice] = "無効な番号です"
+  end
   @myitem_id = @hashids.decode(params[:myitem_id]).first
-  if @number==1
-    @detail=Detail.find_by(item_offered_id: @myitem_id)
-    @detail.user_offered_status=1
-    @detail.save
-  elsif @number==2
-    @detail=Detail.find_by(item_requested_id: @myitem_id)
-    @detail.user_requested_status=1
-    @detail.save
+  if !@myitem_id
+    flash[:notice] = "アイテムが見つかりません"
+  end
+
+  if @number == 1
+    @detail = Detail.find_by(item_offered_id: @myitem_id)
+    if @detail
+      @detail.user_offered_status = 1
+      @detail.save
+    else
+      flash[:notice] = "詳細が見つかりませんでした"
+    end
+  elsif @number == 2
+    @detail = Detail.find_by(item_requested_id: @myitem_id)
+    if @detail
+      @detail.user_requested_status = 1
+      @detail.save
+    else
+      flash[:notice] = "詳細が見つかりませんでした"
+    end
+  else
+    flash[:notice] = "無効な番号です"
   end
   redirect_to("/items")
 end

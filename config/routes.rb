@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
   get "/items/delivery/:number/:myitem/:youitem", to: "items#delivery"
 
-  post 'items/:number/myitem_id', to: 'items#delivery_success'
+  post '/items/delivery_success/:number/myitem_id', to: 'items#delivery_success'
 
 
   get "/items/title_results/:title_name", to: "items#title_results"
