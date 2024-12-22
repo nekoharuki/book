@@ -315,6 +315,7 @@ class ItemsController < ApplicationController
     my_id = @hashids.decode(params[:myitem]).first
     you_id = @hashids.decode(params[:youitem]).first
     @number = @hashids.decode(params[:number]).first
+
     if !(@number == 1 || @number == 2)
       flash[:alert] = "無効な番号です"
       redirect_to("/items")
@@ -325,6 +326,12 @@ class ItemsController < ApplicationController
       redirect_to("/items")
     end
     @youitem = Item.find_by(id: you_id)
+
+    if @number == 1
+      @detail = Detail.find_by(item_offered_id: @myitem.id)
+    elsif @number == 2
+      @detail = Detail.find_by(item_requested_id: @myitem.id)
+    end
 
   end
 
@@ -348,7 +355,7 @@ class ItemsController < ApplicationController
       flash[:alert] = "無効な番号です"
       redirect_to("/items") and return
     end
-    flash[:notice] = "配送完了しました"
+    flash[:notice] = "発送完了しました"
     redirect_to("/items/delivery/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem_id)}/#{@hashids.encode(@youitem_id)}")
   end
 
