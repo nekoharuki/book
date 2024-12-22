@@ -31,7 +31,7 @@
 </div>
 
 
-        <%= form_tag("/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}", method: :post) do %>
+        <%= form_tag("/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}/#{@hashids.encode(@youitem.id)}", method: :post) do %>
           <input type="submit" value="発送">
         <% end %>
 <br>

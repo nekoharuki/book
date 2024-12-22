@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   get "/items/delivery/:number/:myitem/:youitem", to: "items#delivery"
-  post '/items/delivery_success/:number/:myitem_id', to: 'items#delivery_success'
+  post '/items/delivery_success/:number/:myitem_id/:youitem_id', to: 'items#delivery_success'
 
   get "/items/title_results/:title_name", to: "items#title_results"
 
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       post 'create', to: 'users#create'
     end
     member do
-      post 'password_change', to: 'users#password_change'  
+      post 'password_change', to: 'users#password_change'
       get 'password_form', to: 'users#password_form'
       get 'items', to: 'users#user_items'
       post 'follows_create', to: 'users#follows_create'

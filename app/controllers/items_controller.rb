@@ -169,7 +169,9 @@ class ItemsController < ApplicationController
       item_requested_id: item_requested.id,
       user_requested_id: item_requested.user.id,
       item_offered_id: item_offered.id,
-      user_offered_id: item_offered.user.id
+      user_offered_id: item_offered.user.id,
+      user_offered_status: 0,
+      user_requested_status: 0
     )
 
     if detail.save
@@ -181,7 +183,8 @@ class ItemsController < ApplicationController
       trade = Trade.find_by(item_requested_id: detail.item_requested_id,
                             user_requested_id: detail.user_requested_id,
                             item_offered_id: detail.item_offered_id,
-                            user_offered_id: detail.user_offered_id)
+                            user_offered_id: detail.user_offered_id
+                            )
 
       if trade.destroy
         flash[:notice] = "物々交換できました"
@@ -312,46 +315,41 @@ class ItemsController < ApplicationController
     my_id = @hashids.decode(params[:myitem]).first
     you_id = @hashids.decode(params[:youitem]).first
     @number = @hashids.decode(params[:number]).first
+    if !(@number == 1 || @number == 2)
+      flash[:alert] = "無効な番号です"
+      redirect_to("/items")
+    end
     @myitem = Item.find_by(id: my_id)
+    if @myitem.user.id!=@current_user.id
+      flash[:alert] = "そのページには行けません"
+      redirect_to("/items")
+    end
     @youitem = Item.find_by(id: you_id)
+
   end
 
   def delivery_success
     @number = @hashids.decode(params[:number]).first
-    if !(@number == 1 || @number == 2)
-      flash[:alert] = "無効な番号です"
-      redirect_to("/items") and return
-    end
     @myitem_id = @hashids.decode(params[:myitem_id]).first
-    if !@myitem_id
-      flash[:alert] = "アイテムが見つかりません"
-      redirect_to("/items") and return
-    end
-
+    @youitem_id = @hashids.decode(params[:youitem_id]).first
     if @number == 1
       @detail = Detail.find_by(item_offered_id: @myitem_id)
       if @detail
         @detail.user_offered_status = 1
         @detail.save
-      else
-        flash[:alert] = "詳細が見つかりませんでした"
-        redirect_to("/items") and return
       end
     elsif @number == 2
       @detail = Detail.find_by(item_requested_id: @myitem_id)
       if @detail
         @detail.user_requested_status = 1
         @detail.save
-      else
-        flash[:alert] = "詳細が見つかりませんでした"
-        redirect_to("/items") and return
       end
     else
       flash[:alert] = "無効な番号です"
       redirect_to("/items") and return
     end
     flash[:notice] = "配送完了しました"
-    redirect_to("/items")
+    redirect_to("/items/delivery/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem_id)}/#{@hashids.encode(@youitem_id)}")
   end
 
 end
