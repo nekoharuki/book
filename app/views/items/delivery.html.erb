@@ -32,9 +32,7 @@
 <%=@number%>
 
   <% if @number == 1 %>
-    <%if  @detail.user_offered_status == 1 %>
-    <h3>発送完了しました</h3>
-    <%else%>
+    <%if  @detail.user_offered_status != 1 %>
     <div class="d-flex justify-content-center">
       <%= form_tag("/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}/#{@hashids.encode(@youitem.id)}", method: :post, class: "form-inline") do %>
         <input type="submit" value="発送できた" class="btn btn-success btn-lg">
@@ -44,9 +42,7 @@
   <%end%>
 
   <% if @number == 2 %>
-    <%if  @detail.user_requested_status == 1 %>
-    <h3>発送完了しました</h3>
-    <%else%>
+    <%if  @detail.user_requested_status != 1 %>
     <div class="d-flex justify-content-center">
       <%= form_tag("/items/delivery_success/#{@hashids.encode(@number)}/#{@hashids.encode(@myitem.id)}/#{@hashids.encode(@youitem.id)}", method: :post, class: "form-inline") do %>
         <input type="submit" value="発送できた" class="btn btn-success btn-lg">
