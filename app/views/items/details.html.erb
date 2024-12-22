@@ -8,8 +8,7 @@
         <p class="card-text"><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
         <p class="card-text">交換した <%= link_to item.user_requested.name, "/users/#{@hashids.encode(item.user_requested_id)}/items" %> 様の商品:</p>
         <p class="card-text"><%= link_to item.item_requested.title, "/items/#{@hashids.encode(item.item_requested_id)}/traded" %></p>
-        <%@detail_1=Detail.find_by(item_offered_id: item.item_offered_id)%>
-          <%if  @detail_1.user_offered_status == 1 %>
+          <%if item.user_offered_status == 1 %>
             <h3>発送完了しました</h3>
           <%else%>
           <%= link_to "#{item.item_offered.title}を配送してください", "/items/delivery/#{@hashids.encode(1)}/#{@hashids.encode(item.item_offered.id)}/#{@hashids.encode(item.item_requested.id)}", class: "btn btn-success mt-2" %>
@@ -27,8 +26,7 @@
         <p class="card-text"><%= link_to item.item_requested.title, "/items/#{@hashids.encode(item.item_requested_id)}/traded" %></p>
         <p class="card-text">交換した <%= link_to item.user_offered.name, "/users/#{@hashids.encode(item.user_offered_id)}/items" %> 様の商品:</p>
         <p class="card-text"><%= link_to item.item_offered.title, "/items/#{@hashids.encode(item.item_offered_id)}/traded" %></p>
-                    <%@detail_2=Detail.find_by(item_requested_id: item.item_requested_id)%>
-            <%if  @detail_2.user_requested_status == 1 %>
+            <%if  item.user_requested_status == 1 %>
               <h3>発送完了しました</h3>
             <%else%>
               <%= link_to "#{item.item_requested.title}を配送してください", "/items/delivery/#{@hashids.encode(2)}/#{@hashids.encode(item.item_requested.id)}/#{@hashids.encode(item.item_offered.id)}", class: "btn btn-success mt-2" %>
