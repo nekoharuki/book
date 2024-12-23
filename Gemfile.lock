@@ -118,6 +118,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-x64-mingw-ucrt)
+    ffi (1.17.0-x86_64-linux-gnu)
     ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -305,6 +306,7 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
