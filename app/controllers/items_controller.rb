@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
 
-  before_action :please_login
-  before_action :real_item, only: [:edit, :update, :destroy]
-  before_action :category_not, only: [:category]
-  before_action :author_not, only: [:author]
-  before_action :publisher_not, only: [:publisher]
-  before_action :trade_not, only: [:trade]
-  before_action :detail_not, only: [:detail]
+  # before_action :please_login
+  # before_action :real_item, only: [:edit, :update, :destroy]
+  # before_action :category_not, only: [:category]
+  # before_action :author_not, only: [:author]
+  # before_action :publisher_not, only: [:publisher]
+  # before_action :trade_not, only: [:trade]
+  # before_action :detail_not, only: [:detail]
 
   def index
     @items = Item.where(status: [0, 1])
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
 
     if @item.save
       flash[:notice] = "登録できました"
-      redirect_to("/items")
+      redirect_to items_path
     else
       flash[:alert] = "登録できませんでした"
       render("items/new")
