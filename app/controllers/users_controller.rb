@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  # before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
-  # before_action :login_now, only: [:login, :login_form, :create, :new]
-  # before_action :real_user, only: [:edit, :update, :destroy, :show,:password_change,:password_form]
-  # before_action :follows_find, only: [:follows_create]
-  # before_action :follow_current, only: [:follows_create]
+  before_action :please_login, only: [:edit, :logout, :update, :destroy, :show, :index, :user_items,:follows_create,:follows_destroy,:follows_find,:follows]
+  before_action :login_now, only: [:login, :login_form, :create, :new]
+  before_action :real_user, only: [:edit, :update, :destroy, :show,:password_change,:password_form]
+  before_action :follows_find, only: [:follows_create]
+  before_action :follow_current, only: [:follows_create]
 
   def index
     @users = User.all

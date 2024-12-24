@@ -1,4 +1,3 @@
-# app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, unless: -> { request.format.json? }
   skip_before_action :verify_authenticity_token, only: [:create]
@@ -46,4 +45,3 @@ class ApplicationController < ActionController::Base
     @hashids = Hashids.new("kikotixyannkawaii", 20)
   end
 end
-
