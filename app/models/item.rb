@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   validates :title, {presence: true}
   validates :author, {presence: true}
   validates :publisher, {presence: true}
-  validates :content, presence: true, length: { minimum: 100 }
+  validates :content, presence: true}
   validates :condition, {presence: true}
   validates :category, {presence: true}
   validates :user_id, {presence: true}
